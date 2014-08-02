@@ -8,9 +8,9 @@ namespace XMLParser.Data
 {
     public enum AmountType
     {
-        Credit,
-        Debit,
-        NotDefined
+        Credit = 1,
+        Debit = 2,
+        NotDefined = 3
     }
 
     public class AmountInfo

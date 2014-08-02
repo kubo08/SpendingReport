@@ -77,6 +77,9 @@ namespace XMLParser
             //    default:
             //        throw new Exception("Aplication does not support parser for this report");
             //}
+            
+            
+            
             ReadXmlFile(path);
         }
 

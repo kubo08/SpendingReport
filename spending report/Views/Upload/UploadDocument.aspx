@@ -1,6 +1,7 @@
-﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<XMLParser.Data.Bank>" %>
+﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<spending_report.Models.BankPayments>" %>
 <%@ Import Namespace="System.Activities.Statements" %>
 <%@ Import Namespace="Microsoft.Ajax.Utilities" %>
+<%@ Import Namespace="PagedList.Mvc" %>
 <%@ Import Namespace="spending_report.L10n" %>
 <%@ Import Namespace="spending_report.Support" %>
 <%@ Import Namespace="XMLParser.Data" %>
@@ -15,58 +16,58 @@
         <meta name="description" content="The description of my page" />
 </head>
     <body>
-        <%= Html.Label("Počet spracovaných transakcií: ") %>
-        <%= ViewData["count"] %>
+<%--        <%= Html.Label("Počet spracovaných transakcií: ") %>
+        <%= ViewData["count"] %>--%>
         
         
         
         <table >
             <tr>
                 <td>
-                    <%# BankPaymentsL10n.Amount %>
+                    <%=  Html.Label(BankPaymentsL10n.Amount) %>
                 </td>
                 <td>
-                    <%# BankPaymentsL10n.BankAccount %>
+                    <%= Html.Label(BankPaymentsL10n.BankAccount) %>
                 </td>
                 <td>
-                    <%# BankPaymentsL10n.TransactionType %>
+                    <%= Html.Label(BankPaymentsL10n.TransactionType) %>
                 </td>
                 <td>
-                    <%# BankPaymentsL10n.TransactionPurpose %>
+                    <%= Html.Label(BankPaymentsL10n.TransactionPurpose) %>
                 </td>
                 <td>
-                    <%# BankPaymentsL10n.Currency %>
+                    <%= Html.Label(BankPaymentsL10n.Currency) %>
                 </td>
                 <td>
-                    <%# BankPaymentsL10n.Description %>
+                    <%= Html.Label(BankPaymentsL10n.Description) %>
                 </td>
             </tr>
-        <tr>
-            
-            <%
-                foreach (var item in Model.Payments)
-                {
-                %>
-            <td>
-                <%= item.TransactionAmount.Amount %>
-            </td>
-            <td>
-                <%= item.BankAccount.AccountID %>        
-            </td>
-            <td>
-                <%= item.PaymentType %>
-            </td>
-            <td>
-                <%= item.Purpose%>
-            </td>
-            <td>
-                <%= item.TransactionAmount.Currency %>
-            </td>
-            <td>
-                <%= item.Description %>
-            </td>
-        </tr>
+            <tr>
+                <%
+                    foreach (var item in Model.Bank.Payments)
+                    {
+                    %>
+                <td>
+                    <%= item.TransactionAmount.Amount %>
+                </td>
+                <td>
+                    <%= item.BankAccount.AccountID %>        
+                </td>
+                <td>
+                    <%= item.PaymentType %>
+                </td>
+                <td>
+                    <%= item.Purpose%>
+                </td>
+                <td>
+                    <%= item.TransactionAmount.Currency %>
+                </td>
+                <td>
+                    <%= item.Description %>
+                </td>
+            </tr>
             <% } ;%>
-                </table>
+        </table>
+        Page <%# Model.pager.CurrentPageIndex %>
     </body>
 </html>

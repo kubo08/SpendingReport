@@ -51,9 +51,9 @@ namespace XMLParser.Data
 
         public long SpecificSymbol { get; set; }
 
-        public TypeOfPayment PaymentType { get; set; }
+        public TypeOfPayment? PaymentType { get; set; }
 
-        public string Purpose { get; set; }
+        public List<string> Purpose { get; set; }
 
         #endregion
     }

@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
+using Microsoft.Ajax.Utilities;
 using XmlObjects;
 using SpendingReportEntity;
 using XMLParser.Data;
@@ -173,36 +174,40 @@ namespace Support
             {
                 var bank = context.Banks.FirstOrDefault(t => t.BankCode == bankNumber);
 
-                return ((Bank) bank).Payments;
+                return bank != null ? FillBankTransactions(bank.Entries) : null;
             }
         }
 
-        private IEnumerable<Payment> FillBankTransactions(IEnumerable<Payment> transactions)
+        private static IEnumerable<Payment> FillBankTransactions(IEnumerable<SpendingReportEntity.Entry> transactions)
         {
-            List<Payment> newTransactions=new List<Payment>();   
-            foreach(var transaction in transactions)
+            return transactions.Select(transaction => new Payment
             {
-                var newTransaction = new Payment
+                DateAvailable = transaction.DateAvailable, ConstantSymbol = transaction.ConstantSymbol.HasValue ? transaction.ConstantSymbol.Value : (short) 0, DatePosted = transaction.DatePosted, Description = transaction.Memo, Reference = transaction.Reference, SpecificSymbol = transaction.SpecificSymbol.HasValue ? transaction.SpecificSymbol.Value : (long) 0, TransactionName = transaction.Name, VariableSymbol = transaction.VariableSymbol.HasValue ? transaction.VariableSymbol.Value : (long) 0, BankAccount = new XMLParser.Data.BankAccount
                 {
-                    DateAvailable = transaction.DateAvailable,
-                    ConstantSymbol = transaction.ConstantSymbol,
-                    DatePosted = transaction.DatePosted,
-                    Description = transaction.Description,
-                    Reference=transaction.Reference,
-                    SpecificSymbol=transaction.SpecificSymbol,
-                    TransactionName=transaction.TransactionName,
-                    VariableSymbol=transaction.VariableSymbol,
-                    BankAccount=new XMLParser.Data.BankAccount
+                    AccountID = transaction.BankAccount.AccountNumber.HasValue ? (ulong) transaction.BankAccount.AccountNumber.Value : (ulong) 0, IBan = transaction.BankAccount.IBAN, Bank = new Bank
                     {
-                        AccountID=transaction.BankAccount.AccountID,
-                        IBan=transaction.BankAccount.IBan,
-                        Bank=new Bank
-                        {
-                            Name = transaction.BankAccount.Bank.nam
-                        }
+                        Name = transaction.BankAccount.BankId.HasValue ? ((Bank.bank?) transaction.BankAccount.BankId.Value) : null,
+                        BankID = (ushort) transaction.BankAccount.Bank.BankCode
                     }
-                }
+                },
+                TransactionAmount = new XMLParser.Data.AmountInfo
+                {
+                    Amount = transaction.AmountInfo.Amount, Currency = transaction.AmountInfo.Currency, Type = (XMLParser.Data.AmountType) transaction.AmountInfo.TypeId
+                },
+                PaymentType = transaction.PaymentTypeId.HasValue ? (Payment.TypeOfPayment?) transaction.PaymentTypeId : null,
+                Purpose = GetTransactionPurposes(transaction.EntryId)
+            }).ToList();
+        }
+
+        private static List<string> GetTransactionPurposes(int id)
+        {
+            using (var context = new SpendingContext())
+            {
+                var firstOrDefault = context.Entries.FirstOrDefault(t => t.EntryId == id);
+                if (firstOrDefault != null)
+                    return firstOrDefault.Purposes.ToList().Select(t=>t.Name).ToList();
             }
+            return null;
         }
     }
 }

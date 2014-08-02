@@ -19,7 +19,7 @@ namespace XMLParser.Data
 
         #region Properties
 
-        public bank Name { get; set; }
+        public bank? Name { get; set; }
 
         public ushort? BankID { get; set; }
 
