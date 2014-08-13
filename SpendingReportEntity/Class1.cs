@@ -7,5 +7,6 @@ namespace SpendingReportEntity
 {
     class Class1
     {
+
     }
 }
