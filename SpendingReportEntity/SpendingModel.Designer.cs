@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Kubo.kubo-nb\Documents\Visual Studio 2013\Projects\spending report\CodeFirstNewDatabaseSample\SpendingModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Kubo.kubo-nb\Documents\Visual Studio 2013\Projects\SpendingReport\SpendingReportEntity\SpendingModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

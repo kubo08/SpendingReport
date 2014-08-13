@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace spending_report.Controllers
 {
-    public class IndexController : Controller
+    public class HomeController : Controller
     {
         //
         // GET: /Index/
@@ -16,8 +16,5 @@ namespace spending_report.Controllers
         {
             return View();
         }
-
-        
-
     }
 }

@@ -68,6 +68,7 @@
       <DependentUpon>SpendingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Class1.cs" />
+    <Compile Include="Converters\TransactionConverter.cs" />
     <Compile Include="Entry.cs">
       <DependentUpon>SpendingModel.tt</DependentUpon>
     </Compile>
@@ -128,6 +129,12 @@
   <ItemGroup>
     <Content Include="data backup.sql" />
     <Content Include="SpendingModel.edmx.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XMLParser\XMLParser.csproj">
+      <Project>{449c6283-cdff-4083-94b5-7b7b199d1ee6}</Project>
+      <Name>XMLParser</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

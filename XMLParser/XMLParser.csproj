@@ -39,11 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\TBConverter.cs" />
     <Compile Include="Data\AmountInfo.cs" />
     <Compile Include="Data\Bank.cs" />
     <Compile Include="Data\BankAccount.cs" />
+    <Compile Include="Data\Constants.cs" />
+    <Compile Include="Data\Import.cs" />
     <Compile Include="Data\Payment.cs" />
     <Compile Include="Helpers\ParseHelpers.cs" />
+    <Compile Include="Parser\AbstractFactoryParser.cs" />
     <Compile Include="Parser\Deserializer.cs" />
     <Compile Include="Parser\IParser.cs" />
     <Compile Include="Parser\Parser.cs" />

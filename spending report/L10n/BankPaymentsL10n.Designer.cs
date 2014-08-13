@@ -70,11 +70,20 @@ namespace spending_report.L10n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Banka.
+        /// </summary>
+        public static string Bank {
+            get {
+                return ResourceManager.GetString("Bank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Číslo účtu.
         /// </summary>
-        public static string BankAccount {
+        public static string BankAccountID {
             get {
-                return ResourceManager.GetString("BankAccount", resourceCulture);
+                return ResourceManager.GetString("BankAccountID", resourceCulture);
             }
         }
         
@@ -97,6 +106,33 @@ namespace spending_report.L10n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Importované transakcie od:.
+        /// </summary>
+        public static string From {
+            get {
+                return ResourceManager.GetString("From", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importované transakcie do:.
+        /// </summary>
+        public static string To {
+            get {
+                return ResourceManager.GetString("To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prehľad transakcií.
+        /// </summary>
+        public static string TransactionList {
+            get {
+                return ResourceManager.GetString("TransactionList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Účel transakcie.
         /// </summary>
         public static string TransactionPurpose {
@@ -111,6 +147,15 @@ namespace spending_report.L10n {
         public static string TransactionType {
             get {
                 return ResourceManager.GetString("TransactionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importovať nové transakcie.
+        /// </summary>
+        public static string UploadNewTransactions {
+            get {
+                return ResourceManager.GetString("UploadNewTransactions", resourceCulture);
             }
         }
     }
