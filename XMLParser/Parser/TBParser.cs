@@ -24,7 +24,7 @@ namespace XMLParser
 
         #region Constructor
 
-        private readonly Bank _currentBankAccount;
+        private readonly BankAccount _currentBankAccount;
         public TBParser(OFX report)
         {
             _report = report;
@@ -70,7 +70,7 @@ namespace XMLParser
         /// Gets the payments.
         /// </summary>
         /// <returns></returns>
-        public Bank GetBankAccountWithNewPayments()
+        public BankAccount GetBankAccountWithNewPayments()
         {
             List<Payment> payments = _report.STMTRS.BANKTRANLIST.STMTTRN.Select(transaction => new Payment
             {
@@ -113,20 +113,31 @@ namespace XMLParser
         /// </summary>
         /// <param name="report">The report.</param>
         /// <returns></returns>
-        private Bank GetCurrentBankAccount(OFX report)
+        private BankAccount GetCurrentBankAccount(OFX report)
         {
-            Bank bank = new Bank
+            //Bank bank = new Bank
+            //{
+            //    Name = Bank.bank.TatraBanka,
+            //    BankID=report.STMTRS.BANKACCTFROM.BANKID,
+            //    Account = new BankAccount
+            //    {
+            //        AccountID = report.STMTRS.BANKACCTFROM.ACCTID,
+            //        //BankID = report.STMTRS.BANKACCTFROM.BANKID,
+            //        IBan = report.STMTRS.BANKACCTFROM.IBAN
+            //    }
+            //};
+
+            BankAccount account = new BankAccount
             {
-                Name = Bank.bank.TatraBanka,
-                BankID=report.STMTRS.BANKACCTFROM.BANKID,
-                Account = new BankAccount
+                AccountID = report.STMTRS.BANKACCTFROM.ACCTID,
+                IBan = report.STMTRS.BANKACCTFROM.IBAN,
+                Bank = new Bank
                 {
-                    AccountID = report.STMTRS.BANKACCTFROM.ACCTID,
-                    //BankID = report.STMTRS.BANKACCTFROM.BANKID,
-                    IBan = report.STMTRS.BANKACCTFROM.IBAN
+                    Name = Bank.bank.TatraBanka,
+                    BankID = report.STMTRS.BANKACCTFROM.BANKID
                 }
             };
-            return bank;
+            return account;
         }
 
         #endregion

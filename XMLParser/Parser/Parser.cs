@@ -108,7 +108,7 @@ namespace XMLParser
             }
         }
 
-        public Bank GetBankAccountWithNewPayments()
+        public BankAccount GetBankAccountWithNewPayments()
         {
             return _paymentParser.GetBankAccountWithNewPayments();
         }

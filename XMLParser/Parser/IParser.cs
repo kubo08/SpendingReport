@@ -17,7 +17,7 @@ namespace XMLParser
 
         IEnumerable<Payment> ParseXML();
 
-        Bank GetBankAccountWithNewPayments();
+        BankAccount GetBankAccountWithNewPayments();
 
     }
 }

@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -50,6 +53,12 @@
     <Compile Include="Parser\TBParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="xml objects\tatra banka.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SpendingReportEntity\SpendingReportEntity.csproj">
+      <Project>{32aabc0b-40f7-4486-89a5-b8813fd809e8}</Project>
+      <Name>SpendingReportEntity</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

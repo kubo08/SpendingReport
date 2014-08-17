@@ -1,10 +1,12 @@
 ﻿
+using System.Collections.Generic;
 using XmlObjects;
 
 namespace XMLParser.Data
 {
     public class BankAccount
     {
+        private List<Payment> _payments = new List<Payment>(); 
 
         #region Properties
 
@@ -14,6 +16,10 @@ namespace XMLParser.Data
         public ulong? AccountID { get; set; }
         public string IBan { get; set; }
         public Bank Bank { get; set; }
+        public List<Payment> Payments {
+            get { return _payments; }
+            set { _payments = value; }
+        } 
 
         #endregion
 

@@ -36,7 +36,6 @@ namespace SpendingReportEntity
         public virtual BankAccount BankAccount { get; set; }
         public virtual AmountInfo AmountInfo { get; set; }
         public virtual PaymentType PaymentType { get; set; }
-        public virtual Bank Bank { get; set; }
         public virtual ICollection<Purpose> Purposes { get; set; }
     }
 }

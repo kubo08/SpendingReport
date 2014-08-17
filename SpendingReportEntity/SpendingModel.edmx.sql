@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 07/20/2014 23:03:59
--- Generated from EDMX file: C:\Users\Kubo.kubo-nb\Documents\Visual Studio 2013\Projects\spending report\CodeFirstNewDatabaseSample\SpendingModel.edmx
+-- Date Created: 08/18/2014 01:44:36
+-- Generated from EDMX file: C:\Users\Kubo.kubo-nb\Documents\Visual Studio 2013\Projects\SpendingReport\SpendingReportEntity\SpendingModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -41,6 +41,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_PurposeEntry_Entry]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PurposeEntry] DROP CONSTRAINT [FK_PurposeEntry_Entry];
 GO
+IF OBJECT_ID(N'[dbo].[FK_UserBankAccount]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[BankAccounts] DROP CONSTRAINT [FK_UserBankAccount];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -66,6 +69,9 @@ IF OBJECT_ID(N'[dbo].[Purposes]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[PaymentTypes]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PaymentTypes];
+GO
+IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Users];
 GO
 IF OBJECT_ID(N'[dbo].[PurposeEntry]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PurposeEntry];
@@ -107,7 +113,8 @@ CREATE TABLE [dbo].[BankAccounts] (
     [AccountNumber] bigint  NULL,
     [IBAN] nvarchar(max)  NULL,
     [Name] nvarchar(max)  NULL,
-    [BankId] int  NULL
+    [BankId] int  NULL,
+    [UserId] int  NOT NULL
 );
 GO
 
@@ -139,6 +146,12 @@ GO
 CREATE TABLE [dbo].[PaymentTypes] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'Users'
+CREATE TABLE [dbo].[Users] (
+    [Id] int IDENTITY(1,1) NOT NULL
 );
 GO
 
@@ -192,6 +205,12 @@ GO
 -- Creating primary key on [Id] in table 'PaymentTypes'
 ALTER TABLE [dbo].[PaymentTypes]
 ADD CONSTRAINT [PK_PaymentTypes]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Users'
+ALTER TABLE [dbo].[Users]
+ADD CONSTRAINT [PK_Users]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -250,21 +269,6 @@ ON [dbo].[Entries]
     ([PaymentTypeId]);
 GO
 
--- Creating foreign key on [BankId] in table 'Entries'
-ALTER TABLE [dbo].[Entries]
-ADD CONSTRAINT [FK_BankEntry]
-    FOREIGN KEY ([BankId])
-    REFERENCES [dbo].[Banks]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_BankEntry'
-CREATE INDEX [IX_FK_BankEntry]
-ON [dbo].[Entries]
-    ([BankId]);
-GO
-
 -- Creating foreign key on [BankId] in table 'BankAccounts'
 ALTER TABLE [dbo].[BankAccounts]
 ADD CONSTRAINT [FK_BankBankAccount]
@@ -317,6 +321,21 @@ GO
 CREATE INDEX [IX_FK_PurposeEntry_Entry]
 ON [dbo].[PurposeEntry]
     ([Entries_EntryId]);
+GO
+
+-- Creating foreign key on [UserId] in table 'BankAccounts'
+ALTER TABLE [dbo].[BankAccounts]
+ADD CONSTRAINT [FK_UserBankAccount]
+    FOREIGN KEY ([UserId])
+    REFERENCES [dbo].[Users]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserBankAccount'
+CREATE INDEX [IX_FK_UserBankAccount]
+ON [dbo].[BankAccounts]
+    ([UserId]);
 GO
 
 -- --------------------------------------------------

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<spending_report.Models.BankPayments>" %>
+﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<spending_report.Models.BankAccountPayments>" %>
 <%@ Import Namespace="System.Activities.Statements" %>
 <%@ Import Namespace="Microsoft.Ajax.Utilities" %>
 <%@ Import Namespace="PagedList.Mvc" %>
@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <%
-                    foreach (var item in Model.Bank.Payments)
+                    foreach (var item in Model.Account.Payments)
                     {
                     %>
                 <td>

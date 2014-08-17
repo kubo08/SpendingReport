@@ -96,6 +96,9 @@
     <Compile Include="Type.cs">
       <DependentUpon>SpendingModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>SpendingModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="SpendingModel.edmx">

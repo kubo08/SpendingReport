@@ -14,6 +14,7 @@
     <EntitySet Name="Banks" EntityType="SpendingModel.Store.Banks" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Purposes" EntityType="SpendingModel.Store.Purposes" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PaymentTypes" EntityType="SpendingModel.Store.PaymentTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="SpendingModel.Store.Users" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PurposeEntry" EntityType="SpendingModel.Store.PurposeEntry" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="BankAccountEntry" Association="SpendingModel.Store.BankAccountEntry">
       <End Role="BankAccount" EntitySet="BankAccounts" />
@@ -25,10 +26,6 @@
     </AssociationSet>
     <AssociationSet Name="PaymentTypeEntry" Association="SpendingModel.Store.PaymentTypeEntry">
       <End Role="PaymentType" EntitySet="PaymentTypes" />
-      <End Role="Entry" EntitySet="Entries" />
-    </AssociationSet>
-    <AssociationSet Name="BankEntry" Association="SpendingModel.Store.BankEntry">
-      <End Role="Bank" EntitySet="Banks" />
       <End Role="Entry" EntitySet="Entries" />
     </AssociationSet>
     <AssociationSet Name="BankBankAccount" Association="SpendingModel.Store.BankBankAccount">
@@ -46,6 +43,10 @@
     <AssociationSet Name="FK_PurposeEntry_Entry" Association="SpendingModel.Store.FK_PurposeEntry_Entry">
       <End Role="Entry" EntitySet="Entries" />
       <End Role="PurposeEntry" EntitySet="PurposeEntry" />
+    </AssociationSet>
+    <AssociationSet Name="UserBankAccount" Association="SpendingModel.Store.UserBankAccount">
+      <End Role="User" EntitySet="Users" />
+      <End Role="BankAccount" EntitySet="BankAccounts" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Entries">
@@ -83,6 +84,7 @@
     <Property Name="IBAN" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
     <Property Name="BankId" Type="int" Nullable="true" />
+    <Property Name="UserId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="AmountInfos">
     <Key>
@@ -114,6 +116,12 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="PurposeEntry">
     <Key>
@@ -159,18 +167,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="BankEntry">
-    <End Role="Bank" Type="SpendingModel.Store.Banks" Multiplicity="1" />
-    <End Role="Entry" Type="SpendingModel.Store.Entries" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Bank">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Entry">
-        <PropertyRef Name="BankId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="BankBankAccount">
     <End Role="Bank" Type="SpendingModel.Store.Banks" Multiplicity="0..1" />
     <End Role="BankAccount" Type="SpendingModel.Store.BankAccounts" Multiplicity="*" />
@@ -192,6 +188,18 @@
       </Principal>
       <Dependent Role="AmountInfo">
         <PropertyRef Name="TypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserBankAccount">
+    <End Role="User" Type="SpendingModel.Store.Users" Multiplicity="1" />
+    <End Role="BankAccount" Type="SpendingModel.Store.BankAccounts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BankAccount">
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -243,10 +251,6 @@
             <End Role="PaymentType" EntitySet="PaymentTypes" />
             <End Role="Entry" EntitySet="Entries" />
           </AssociationSet>
-          <AssociationSet Name="BankEntry" Association="SpendingModel.BankEntry">
-            <End Role="Bank" EntitySet="Banks" />
-            <End Role="Entry" EntitySet="Entries" />
-          </AssociationSet>
           <AssociationSet Name="BankBankAccount" Association="SpendingModel.BankBankAccount">
             <End Role="Bank" EntitySet="Banks" />
             <End Role="BankAccount" EntitySet="BankAccounts" />
@@ -258,6 +262,11 @@
           <AssociationSet Name="PurposeEntry" Association="SpendingModel.PurposeEntry">
             <End Role="Purpose" EntitySet="Purposes" />
             <End Role="Entry" EntitySet="Entries" />
+          </AssociationSet>
+          <EntitySet Name="Users" EntityType="SpendingModel.User" />
+          <AssociationSet Name="UserBankAccount" Association="SpendingModel.UserBankAccount">
+            <End Role="User" EntitySet="Users" />
+            <End Role="BankAccount" EntitySet="BankAccounts" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Entry">
@@ -278,7 +287,6 @@
           <Property Name="Reference" Type="String" Nullable="true" />
           <NavigationProperty Name="PaymentType" Relationship="SpendingModel.PaymentTypeEntry" FromRole="Entry" ToRole="PaymentType" />
           <Property Name="PaymentTypeId" Type="Int32" Nullable="true" />
-          <NavigationProperty Name="Bank" Relationship="SpendingModel.BankEntry" FromRole="Entry" ToRole="Bank" />
           <Property Name="BankId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Purposes" Relationship="SpendingModel.PurposeEntry" FromRole="Entry" ToRole="Purpose" />
           <Property Name="DateAdded" Type="DateTime" Nullable="false" />
@@ -302,6 +310,8 @@
           <Property Name="Name" Type="String" Nullable="true" />
           <NavigationProperty Name="Bank" Relationship="SpendingModel.BankBankAccount" FromRole="BankAccount" ToRole="Bank" />
           <Property Name="BankId" Type="Int32" Nullable="true" />
+          <NavigationProperty Name="User" Relationship="SpendingModel.UserBankAccount" FromRole="BankAccount" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
           </EntityType>
         <Association Name="BankAccountEntry">
           <End Type="SpendingModel.BankAccount" Role="BankAccount" Multiplicity="1" />
@@ -336,7 +346,6 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
-          <NavigationProperty Name="Entries" Relationship="SpendingModel.BankEntry" FromRole="Bank" ToRole="Entry" />
           <Property Name="BankCode" Type="Int16" Nullable="false" />
           <NavigationProperty Name="BankAccounts" Relationship="SpendingModel.BankBankAccount" FromRole="Bank" ToRole="BankAccount" />
         </EntityType>
@@ -365,18 +374,6 @@
             </Principal>
             <Dependent Role="Entry">
               <PropertyRef Name="PaymentTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="BankEntry">
-          <End Type="SpendingModel.Bank" Role="Bank" Multiplicity="1" />
-          <End Type="SpendingModel.Entry" Role="Entry" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Bank">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Entry">
-              <PropertyRef Name="BankId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -412,6 +409,25 @@
         <Association Name="PurposeEntry">
           <End Type="SpendingModel.Purpose" Role="Purpose" Multiplicity="*" />
           <End Type="SpendingModel.Entry" Role="Entry" Multiplicity="*" />
+        </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="BankAccounts" Relationship="SpendingModel.UserBankAccount" FromRole="User" ToRole="BankAccount" />
+        </EntityType>
+        <Association Name="UserBankAccount">
+          <End Type="SpendingModel.User" Role="User" Multiplicity="1" />
+          <End Type="SpendingModel.BankAccount" Role="BankAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BankAccount">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -455,6 +471,7 @@
           <ScalarProperty Name="IBAN" ColumnName="IBAN" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="BankId" ColumnName="BankId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -490,6 +507,13 @@
         <MappingFragment StoreEntitySet="PaymentTypes">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(SpendingModel.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

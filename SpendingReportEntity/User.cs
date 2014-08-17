@@ -12,22 +12,15 @@ namespace SpendingReportEntity
     using System;
     using System.Collections.Generic;
     
-    public partial class BankAccount
+    public partial class User
     {
-        public BankAccount()
+        public User()
         {
-            this.Entry = new HashSet<Entry>();
+            this.BankAccounts = new HashSet<BankAccount>();
         }
     
         public int Id { get; set; }
-        public Nullable<long> AccountNumber { get; set; }
-        public string IBAN { get; set; }
-        public string Name { get; set; }
-        public Nullable<int> BankId { get; set; }
-        public int UserId { get; set; }
     
-        public virtual ICollection<Entry> Entry { get; set; }
-        public virtual Bank Bank { get; set; }
-        public virtual User User { get; set; }
+        public virtual ICollection<BankAccount> BankAccounts { get; set; }
     }
 }

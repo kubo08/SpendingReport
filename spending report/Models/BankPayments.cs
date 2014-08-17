@@ -6,14 +6,14 @@ using XMLParser.Data;
 
 namespace spending_report.Models
 {
-    public class BankPayments
+    public class BankAccountPayments
     {
-        private Bank _bank;
+        private BankAccount _account;
         
-        public Bank Bank
+        public BankAccount Account
         {
-            get { return _bank; }
-            set { _bank = value; }
+            get { return _account; }
+            set { _account = value; }
         }
 
         public Pager pager { get; set; }

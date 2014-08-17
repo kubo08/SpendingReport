@@ -32,5 +32,6 @@ namespace SpendingReportEntity
         public virtual DbSet<Bank> Banks { get; set; }
         public virtual DbSet<Purpose> Purposes { get; set; }
         public virtual DbSet<PaymentType> PaymentTypes { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

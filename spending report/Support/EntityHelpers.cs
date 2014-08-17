@@ -17,19 +17,44 @@ namespace Support
 {
     public static class EntityHelpers
     {
-        public static int SaveData(data.Bank bankPayments)
+        public static int SaveData(data.BankAccount bankPayments,int UserId)
         {            
             int processed = 0; 
             try
             {
                 using (var context = new SpendingContext())
                 {
-                    if (!bankPayments.BankID.HasValue)
-                    {
-                        return -1;
-                    }
+                    //if (!bankPayments.Bank.BankID.HasValue)
+                    //{
+                    //    return -1;
+                    //}
 
-                    entity.Bank bank = context.Banks.FirstOrDefault(t => t.BankCode == bankPayments.BankID);
+                    //entity.Bank bank = context.Banks.FirstOrDefault(t => t.BankCode == bankPayments.Bank.BankID);
+                    var currentUser = context.Users.FirstOrDefault(t => t.Id == UserId);
+                    entity.BankAccount SourceAccount;
+                    if (currentUser != null)
+                    {
+                        SourceAccount = currentUser.BankAccounts.FirstOrDefault(t => t.IBAN == bankPayments.IBan);
+                        if (SourceAccount == null)
+                        {
+                            SourceAccount = new entity.BankAccount
+                            {
+                                IBAN = bankPayments.IBan,
+                                AccountNumber = (long) bankPayments.AccountID
+                            };
+                            SourceAccount.Bank =
+                                context.Banks.FirstOrDefault(t => t.BankCode == bankPayments.Bank.BankID) ?? new entity.Bank
+                                {
+                                   BankCode=(short)bankPayments.Bank.BankID
+                                };
+                            currentUser.BankAccounts.Add(SourceAccount);
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Používateľ nebol nájdený");
+                    }                    
+
                     foreach (var transaction in bankPayments.Payments)
                     {
                         if (IsTransactionExist(context, transaction))
@@ -52,15 +77,26 @@ namespace Support
                                 Amount = Math.Abs(transaction.TransactionAmount.Amount),
                                 Currency = transaction.TransactionAmount.Currency,
                             },
-                            BankAccount = new entity.BankAccount
+                            //Bank = GetBank(context, transaction.BankName.Localise())
+                        };
+                        var account = context.BankAccounts.FirstOrDefault(t => t.IBAN == transaction.BankAccount.IBan);
+                        if (account != null)
+                        {
+                            newTransaction.BankAccountId = account.Id;
+                        }
+                        else
+                        {
+                            newTransaction.BankAccount = new entity.BankAccount
                             {
                                 AccountNumber = (long?) transaction.BankAccount.AccountID,
                                 //BankCode = (short?) transaction.BankAccount.BankID,
                                 IBAN = transaction.BankAccount.IBan,
-                                Bank = transaction.BankAccount.Bank.BankID.HasValue ? GetBank(context, transaction.BankAccount.Bank.BankID.Value) : null
-                            },
-                            //Bank = GetBank(context, transaction.BankName.Localise())
-                        };
+                                Bank =
+                                    transaction.BankAccount.Bank.BankID.HasValue
+                                        ? GetBank(context, transaction.BankAccount.Bank.BankID.Value)
+                                        : null
+                            };
+                        }
                         if (transaction.TransactionAmount.Type != XMLParser.Data.AmountType.NotDefined)
                         {
                             newTransaction.AmountInfo.Type = transaction.TransactionAmount.Type == XMLParser.Data.AmountType.Credit
@@ -73,7 +109,7 @@ namespace Support
                                 ? GetTransactionType(context, "Debit")
                                 : GetTransactionType(context, "Credit");
                         }
-                        bank.Entries.Add(newTransaction);
+                        SourceAccount.Entry.Add(newTransaction);
                         //context.Entries.Add(newTransaction);
                         processed++;
                     }
