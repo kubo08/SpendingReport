@@ -17,13 +17,13 @@ namespace XMLParser
     //public  class ParserBase<T> where T : class
     //{
 
-    //    #region Properties
+    //#region Properties
 
-    //    public IParser<T> Parser { get; set; }
+    ////    public IParser<T> Parser { get; set; }
 
-    //    private T _xml;
+    ////    private T _xml;
 
-    //    #endregion
+    //#endregion
 
     //    public ParserBase(string report)
     //    {
@@ -31,25 +31,27 @@ namespace XMLParser
     //        {typeof(OFX),1}
     //    };
 
-    //        _xml = report.ToXML<T>();
+    ////        _xml = report.ToXML<T>();
 
     //        int type = @switch[typeof(T)]();
 
-    //        switch (type)
-    //        {
-    //            case 1:
-    //                Parser = new TBParser<T>(_xml);
-    //                break;
-    //            default:
-    //                throw new Exception("Aplication does not support parser for this report");
-    //        }
+    ////        switch (type)
+    ////        {
+    ////            case 1:
+    ////                Parser = new TBParser<T>(_xml);
+    ////                break;
+    ////            default:
+    ////                throw new Exception("Aplication does not support parser for this report");
+    ////        }
     //    }        
     //}
+
     public class Parser
     {
+        private XmlDocument _report;
         #region Properties
 
-        private IParser _paymentParser;
+        private AbstractFactoryParser _parser;
         //public IParser PaymentsParser { private get; private set; }
 
         #endregion        
@@ -60,27 +62,29 @@ namespace XMLParser
         /// <param name="path">The path.</param>
         public Parser(string path)
         {
-            //var @switch = new Dictionary<Type, int>
+            //var @switch = new Dictionary<string, int>
             //{
-            //    {typeof (OFX), 1}
+            //    {typeof (OFX).Name.ToLower().Trim(), 1}
             //};
+            _report = ReadXmlFile(path);
+            var root = GetRootNode(_report);
 
             //_xml = report.ToXML<T>();
 
-            //int type = @switch[typeof (T)]();
+            //int type = @switch[typeof(OFX).Name]();
+            var type = getType(root.Name.Trim().ToLower());
 
-            //switch (type)
-            //{
-            //    case 1:
-            //        Parser = new TBParser<T>(_xml);
-            //        break;
-            //    default:
-            //        throw new Exception("Aplication does not support parser for this report");
-            //}
+            switch (type)
+            {
+                case 1:
+                    _parser = new TBParser();
+                    break;
+                default:
+                    throw new NotSupportedException("Aplication does not support parser for this report");
+            }
             
             
             
-            ReadXmlFile(path);
         }
 
 
@@ -88,15 +92,17 @@ namespace XMLParser
         /// Reads the XML file.
         /// </summary>
         /// <param name="path">The path.</param>
-        public void ReadXmlFile(string path)
+        public XmlDocument ReadXmlFile(string path)
         {
             try
             {
                 XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.Load(path);
-                var root = GetRootNode(xmlDoc);
+                return xmlDoc;
 
-                Deserialize(path, root);
+                //var root = GetRootNode(xmlDoc);
+
+                //Deserialize(path, root);
 
                 //int count = ProcessPayments(overview.STMTRS.BANKTRANLIST);
 
@@ -108,9 +114,9 @@ namespace XMLParser
             }
         }
 
-        public BankAccount GetBankAccountWithNewPayments()
+        public Import GetBankAccountWithNewPayments(string path)
         {
-            return _paymentParser.GetBankAccountWithNewPayments();
+            return _parser.GetPayments(path);
         }
 
         #region Helper Methods
@@ -128,38 +134,38 @@ namespace XMLParser
             return root;
         }
 
-        /// <summary>
-        /// Deserializes the specified path.
-        /// </summary>
-        /// <param name="path">The path.</param>
-        /// <param name="root">The root.</param>
-        /// <exception cref="System.NotImplementedException">Aplication does not support parser for this report</exception>
-        private void Deserialize(string path, XmlElement root)
-        {
-            int type = getType(root.Name);
+        ///// <summary>
+        ///// Deserializes the specified path.
+        ///// </summary>
+        ///// <param name="path">The path.</param>
+        ///// <param name="root">The root.</param>
+        ///// <exception cref="System.NotImplementedException">Aplication does not support parser for this report</exception>
+        //private void Deserialize(string path, XmlElement root)
+        //{
+        //    int type = getType(root.Name);
 
-            switch (type)
-            {
-                case 1:
-                    CreateParser<OFX>(path);
+        //    switch (type)
+        //    {
+        //        case 1:
+        //            CreateParser<OFX>(path);
 
-                    break;
-                default:
-                    throw new NotImplementedException("Aplication does not support parser for this report");
-            }
+        //            break;
+        //        default:
+        //            throw new NotImplementedException("Aplication does not support parser for this report");
+        //    }
 
             
-        }
+        //}
 
-        /// <summary>
-        /// Creates the parser.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="path">The path.</param>
-        private void CreateParser<T>(string path) where T : class
-        {
-            _paymentParser = Deserializer.Manager.GetParser<OFX>(path);
-        }
+        ///// <summary>
+        ///// Creates the parser.
+        ///// </summary>
+        ///// <typeparam name="T"></typeparam>
+        ///// <param name="path">The path.</param>
+        //private void CreateParser<T>(string path) where T : class
+        //{
+        //    _paymentParser = Deserializer.Manager.GetParser<OFX>(path);
+        //}
 
         /// <summary>
         /// Gets the type of xml root node.
@@ -168,9 +174,9 @@ namespace XMLParser
         /// <returns></returns>
         private int getType(string name)
         {
-            if (String.Equals(name, typeof(OFX).Name))
+            if (String.Equals(name.ToLower().Trim(), typeof(OFX).Name.ToLower().Trim()))
             {
-                return  1;
+                return 1;
             }
 
             return 0;

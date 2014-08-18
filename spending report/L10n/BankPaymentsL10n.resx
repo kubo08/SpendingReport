@@ -120,7 +120,10 @@
   <data name="Amount" xml:space="preserve">
     <value>Suma</value>
   </data>
-  <data name="BankAccount" xml:space="preserve">
+  <data name="Bank" xml:space="preserve">
+    <value>Banka</value>
+  </data>
+  <data name="BankAccountID" xml:space="preserve">
     <value>Číslo účtu</value>
   </data>
   <data name="Currency" xml:space="preserve">
@@ -129,10 +132,22 @@
   <data name="Description" xml:space="preserve">
     <value>Popis transakcie</value>
   </data>
+  <data name="From" xml:space="preserve">
+    <value>Importované transakcie od:</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>Importované transakcie do:</value>
+  </data>
+  <data name="TransactionList" xml:space="preserve">
+    <value>Prehľad transakcií</value>
+  </data>
   <data name="TransactionPurpose" xml:space="preserve">
     <value>Účel transakcie</value>
   </data>
   <data name="TransactionType" xml:space="preserve">
     <value>Typ transakcie</value>
+  </data>
+  <data name="UploadNewTransactions" xml:space="preserve">
+    <value>Importovať nové transakcie</value>
   </data>
 </root>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using PagedList;
 using XMLParser.Data;
 
 namespace spending_report.Models
@@ -15,7 +16,12 @@ namespace spending_report.Models
             get { return _account; }
             set { _account = value; }
         }
+        public DateTime From { get; set; }
 
-        public Pager pager { get; set; }
+        public DateTime To { get; set; }
+
+        public IPagedList<Payment> Transactions { get; set; }
+
+        public Pager Pager { get; set; }
     }
 }

@@ -6,14 +6,17 @@ namespace XMLParser.Data
 {
     public class BankAccount
     {
-        private List<Payment> _payments = new List<Payment>(); 
+        public static BankAccount CreateBankAccount(ulong? accountID, string iBan, ushort? bankID)
+        {
+            return new BankAccount(accountID, iBan, bankID);
+        }
 
         #region Properties
 
         //public ulong? AccountNumber { get; set; }
         //public int? BankNumber { get; set; }
         //public ushort? BankID { get; set; }
-        public ulong? AccountID { get; set; }
+        public long? AccountID { get; set; }
         public string IBan { get; set; }
         public Bank Bank { get; set; }
         public List<Payment> Payments {
@@ -23,11 +26,15 @@ namespace XMLParser.Data
 
         #endregion
 
-        public BankAccount( ulong? accountID, string iBan)
+        private BankAccount( ulong? accountID, string iBan,ushort? bankID )
         {
             //BankID = bankID;
-            AccountID = accountID;
+            AccountID = (long?) accountID.Value;
             IBan = iBan;
+            Bank = new Bank
+            {
+                BankID = bankID
+            };
         }
 
         public BankAccount()

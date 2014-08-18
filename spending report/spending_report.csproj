@@ -139,11 +139,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\IndexController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ListController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
-    <Compile Include="Data\AmountInfo.cs" />
-    <Compile Include="Data\BankAccount.cs" />
-    <Compile Include="Data\Payment.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -156,7 +154,8 @@
     <Compile Include="Models\Pager.cs" />
     <Compile Include="Support\EntityHelpers.cs" />
     <Compile Include="Support\EnumExtensions.cs" />
-    <Compile Include="Support\Helpers.cs" />
+    <Compile Include="Support\Support.cs" />
+    <Compile Include="Support\XMLHelpers.cs" />
     <Compile Include="Support\HtmlExtensions.cs" />
     <Compile Include="Support\ParseHelpers.cs" />
     <Compile Include="L10n\enumsL10n.Designer.cs">
@@ -244,8 +243,11 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Views\Index\Index.aspx" />
+    <Content Include="Views\Home\Index.aspx" />
+    <Content Include="Views\List\Transactions.aspx" />
+    <Content Include="Views\Upload\SelectFile.aspx" />
     <Content Include="Views\Upload\UploadDocument.aspx" />
+    <Content Include="Views\View1.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -257,6 +259,7 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\Error.aspx" />
+    <Content Include="Views\Shared\SpendingMaster.Master" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

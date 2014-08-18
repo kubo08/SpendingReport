@@ -20,30 +20,69 @@ namespace spending_report.Controllers
     {
         private const int PAGE_SIZE = 10;
 
-        [HttpPost]
-        public ActionResult Upload(int page=1)
+        public ActionResult SelectFile()
         {
-            var path = XMLHelpers.SaveFile(Request.Files, Server.MapPath("~/temp/"));
-            
-            Parser parser = new Parser(path);
-            BankAccountPayments accountPayments = new BankAccountPayments
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Upload()
+        {
+            string path = null;
+            Import import;
+
+            try
             {
-                Account = parser.GetBankAccountWithNewPayments(),
-                pager = new Pager
+                path = XMLHelpers.SaveFile(Request.Files, Server.MapPath("~/temp/"));
+
+                Parser parser = new Parser(path);
+                import = EntityHelpers.SaveData(parser.GetBankAccountWithNewPayments(path));
+
+            }
+            catch (Exception ex)
+            {
+                return View("Error", ex);
+            }
+            finally
+            {
+                if (path != null) System.IO.File.Delete(path);
+            }
+
+            BankPayments bankPayments = new BankPayments
+            {
+                Transactions = import.Transactions.ToPagedList(1,PAGE_SIZE),
+                Pager = new Pager
                 {
-                    CurrentPageIndex = page,
+                    CurrentPageIndex = 1,
                     PageSize = PAGE_SIZE
                 }
             };
-            accountPayments.pager.ItemsCount = accountPayments.Account.Payments.Count;
-            ViewData["count"] = EntityHelpers.SaveData(accountPayments.Account,1);      //todo: tahat pouzivatela, teraz sa pouziva natvrdo id: 1
+            bankPayments.Pager.ItemsCount = bankPayments.Transactions.Count;
+            Session["import"] = import;            
 
-            //accountPayments.Account.Payments =
-            //    accountPayments.Account.Payments.Skip(page - 1 * PAGE_SIZE).Take(PAGE_SIZE).ToList();
-            return View("UploadDocument", accountPayments.Account.Payments.ToPagedList());
+            //bankPayments.TransactionImport.Transactions =
+            //    bankPayments.TransactionImport.Transactions.ToPagedList(page,PAGE_SIZE);
+            return View("UploadDocument", bankPayments);
         }
 
-        
+        [HttpGet]
+        public ActionResult Upload(int Page)
+        {
+            var import = (Import)Session["import"];
+            BankPayments bankPayments = new BankPayments
+            {
+                Transactions = import.Transactions.ToPagedList(Page, PAGE_SIZE),
+                Pager = new Pager
+                {
+                    CurrentPageIndex = Page,
+                    PageSize = PAGE_SIZE
+                }
+            };
+            bankPayments.Pager.ItemsCount = bankPayments.Transactions.Count;
+
+
+            return View("UploadDocument", bankPayments);
+        }
     }
 
 }

@@ -17,9 +17,10 @@ namespace Support
 {
     public static class EntityHelpers
     {
-        public static int SaveData(data.BankAccount bankPayments,int UserId)
+        public static Import SaveData(Import bankPayments,int UserId)
         {            
-            int processed = 0; 
+            Import ImportWithPocessedTransactions;
+
             try
             {
                 using (var context = new SpendingContext())
@@ -53,9 +54,18 @@ namespace Support
                     else
                     {
                         throw new Exception("Používateľ nebol nájdený");
-                    }                    
+                    }
 
-                    foreach (var transaction in bankPayments.Payments)
+                    ImportWithPocessedTransactions = new Import
+                    {
+                        Account = bankPayments.Account,
+                        From = bankPayments.From,
+                        To = bankPayments.To,
+                        Transactions = new List<Payment>()
+                    };
+
+                    entity.Bank bank = context.Banks.FirstOrDefault(t => t.BankCode == bankPayments.Account.Bank.BankID);
+                    foreach (var transaction in bankPayments.Transactions)
                     {
                         if (IsTransactionExist(context, transaction))
                         {
@@ -95,7 +105,7 @@ namespace Support
                                     transaction.BankAccount.Bank.BankID.HasValue
                                         ? GetBank(context, transaction.BankAccount.Bank.BankID.Value)
                                         : null
-                            };
+                        };
                         }
                         if (transaction.TransactionAmount.Type != XMLParser.Data.AmountType.NotDefined)
                         {
@@ -111,7 +121,7 @@ namespace Support
                         }
                         SourceAccount.Entry.Add(newTransaction);
                         //context.Entries.Add(newTransaction);
-                        processed++;
+                        ImportWithPocessedTransactions.Transactions.Add(transaction);
                     }
                     context.SaveChanges();
                 }
@@ -119,9 +129,8 @@ namespace Support
             catch (Exception e)
             {
                 throw (e);
-                return 0;
             }
-            return processed;
+            return ImportWithPocessedTransactions;
         }
 
         /// <summary>
@@ -160,10 +169,18 @@ namespace Support
                 item => item.Name.ToLower().Trim() == Name.ToLower().Trim());
         }
 
-        private static entity.Bank GetBank(SpendingContext context,ushort bankCode)
+        private static entity.Bank GetBank(SpendingContext context, ushort bankCode)
         {
             return context.Banks.FirstOrDefault(
                 item => item.BankCode == bankCode);
+        }
+
+        public static IEnumerable<Entry> GetTransactions()
+        {
+            using (var context = new SpendingContext())
+            {
+                return context.Entries.ToList();
+            }
         }
     }
 }
