@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using Microsoft.Ajax.Utilities;
 using SpendingReportEntity;
+using spending_report.Models;
 using entity = SpendingReportEntity;
 using XmlObjects;
 using XMLParser.Data;
@@ -35,18 +36,18 @@ namespace Support
                     entity.BankAccount SourceAccount;
                     if (currentUser != null)
                     {
-                        SourceAccount = currentUser.BankAccounts.FirstOrDefault(t => t.IBAN == bankPayments.IBan);
+                        SourceAccount = currentUser.BankAccounts.FirstOrDefault(t => t.IBAN == bankPayments.Account.IBan);
                         if (SourceAccount == null)
                         {
                             SourceAccount = new entity.BankAccount
                             {
-                                IBAN = bankPayments.IBan,
-                                AccountNumber = (long) bankPayments.AccountID
+                                IBAN = bankPayments.Account.IBan,
+                                AccountNumber = (long)bankPayments.Account.AccountID
                             };
                             SourceAccount.Bank =
-                                context.Banks.FirstOrDefault(t => t.BankCode == bankPayments.Bank.BankID) ?? new entity.Bank
+                                context.Banks.FirstOrDefault(t => t.BankCode == bankPayments.Account.Bank.BankID) ?? new entity.Bank
                                 {
-                                   BankCode=(short)bankPayments.Bank.BankID
+                                    BankCode = (short)bankPayments.Account.Bank.BankID
                                 };
                             currentUser.BankAccounts.Add(SourceAccount);
                         }
@@ -60,12 +61,11 @@ namespace Support
                     {
                         Account = bankPayments.Account,
                         From = bankPayments.From,
-                        To = bankPayments.To,
-                        Transactions = new List<Payment>()
+                        To = bankPayments.To
                     };
 
-                    entity.Bank bank = context.Banks.FirstOrDefault(t => t.BankCode == bankPayments.Account.Bank.BankID);
-                    foreach (var transaction in bankPayments.Transactions)
+                    //entity.Bank bank = context.Banks.FirstOrDefault(t => t.BankCode == bankPayments.Account.Bank.BankID);
+                    foreach (var transaction in bankPayments.Account.Payments)
                     {
                         if (IsTransactionExist(context, transaction))
                         {
@@ -121,7 +121,10 @@ namespace Support
                         }
                         SourceAccount.Entry.Add(newTransaction);
                         //context.Entries.Add(newTransaction);
-                        ImportWithPocessedTransactions.Transactions.Add(transaction);
+                        //ImportWithPocessedTransactions.Account.Payments.Add(new Payment
+                        //{
+                        //    VariableSymbol = transaction.VariableSymbol
+                        //});
                     }
                     context.SaveChanges();
                 }

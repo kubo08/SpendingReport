@@ -36,7 +36,7 @@ namespace spending_report.Controllers
                 path = XMLHelpers.SaveFile(Request.Files, Server.MapPath("~/temp/"));
 
                 Parser parser = new Parser(path);
-                import = EntityHelpers.SaveData(parser.GetBankAccountWithNewPayments(path));
+                import = EntityHelpers.SaveData(parser.GetBankAccountWithNewPayments(path),1);  //todo: tahat aktualneho pouzivatela
 
             }
             catch (Exception ex)
@@ -48,9 +48,9 @@ namespace spending_report.Controllers
                 if (path != null) System.IO.File.Delete(path);
             }
 
-            BankPayments bankPayments = new BankPayments
+            BankAccountPayments bankPayments = new BankAccountPayments
             {
-                Transactions = import.Transactions.ToPagedList(1,PAGE_SIZE),
+                Transactions = import.Account.Payments.ToPagedList(1,PAGE_SIZE),
                 Pager = new Pager
                 {
                     CurrentPageIndex = 1,
@@ -69,9 +69,9 @@ namespace spending_report.Controllers
         public ActionResult Upload(int Page)
         {
             var import = (Import)Session["import"];
-            BankPayments bankPayments = new BankPayments
+            BankAccountPayments bankPayments = new BankAccountPayments
             {
-                Transactions = import.Transactions.ToPagedList(Page, PAGE_SIZE),
+                Transactions = import.Account.Payments.ToPagedList(Page, PAGE_SIZE),
                 Pager = new Pager
                 {
                     CurrentPageIndex = Page,

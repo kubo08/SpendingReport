@@ -177,15 +177,15 @@ namespace Support
             return new DateTime(int.Parse(year),int.Parse(month),int.Parse(day));
         }
 
-        public static IEnumerable<Payment> GetBankTransactions(short bankNumber)
-        {
-            using (var context = new SpendingContext())
-            {
-                var bank = context.Banks.FirstOrDefault(t => t.BankCode == bankNumber);
+        //public static IEnumerable<Payment> GetBankTransactions(short bankNumber)
+        //{
+        //    using (var context = new SpendingContext())
+        //    {
+        //        var bank = context.Banks.FirstOrDefault(t => t.BankCode == bankNumber);
 
-                return bank != null ? FillBankTransactions(bank.Entries) : null;
-            }
-        }
+        //        return bank != null ? FillBankTransactions(bank.Entries) : null;
+        //    }
+        //}
 
         private static IEnumerable<Payment> FillBankTransactions(IEnumerable<SpendingReportEntity.Entry> transactions)
         {

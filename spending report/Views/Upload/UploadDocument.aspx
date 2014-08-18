@@ -10,9 +10,9 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <%= Html.Label(BankPaymentsL10n.Bank) %>    
-    <%= Model.BankAccount.Bank.Name %><br />
+    <%= Model.Account.Bank.Name %><br />
     <%= Html.Label(BankPaymentsL10n.BankAccountID) %>    
-    <%= Model.BankAccount.Bank.Account.AccountID %><br />
+    <%= Model.Account.Bank.Account.AccountID %><br />
     <%= Html.Label(BankPaymentsL10n.From) %>    
     <%= Model.From %><br />
     <%= Html.Label(BankPaymentsL10n.To) %>    

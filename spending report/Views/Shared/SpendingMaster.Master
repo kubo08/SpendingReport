@@ -15,7 +15,7 @@
     </div>
     <div class="spending-menu">
         <%= Html.ActionLink("Home", "Index", "Home") %>
-        <%=Html.ActionLink(BankPaymentsL10n.UploadNewTransactions, "Upload","Upload") %>
+        <%=Html.ActionLink(BankPaymentsL10n.UploadNewTransactions, "SelectFile", "Upload") %>
         <%= Html.ActionLink(BankPaymentsL10n.TransactionList, "Transactions", "List") %>
     </div>
     <div>

@@ -6,6 +6,8 @@ namespace XMLParser.Data
 {
     public class BankAccount
     {
+        List<Payment> _payments = new List<Payment>(); 
+
         public static BankAccount CreateBankAccount(ulong? accountID, string iBan, ushort? bankID)
         {
             return new BankAccount(accountID, iBan, bankID);

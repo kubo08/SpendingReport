@@ -39,18 +39,18 @@ namespace XMLParser.Converters
                 {
                     AccountID = report.STMTRS.BANKACCTFROM.ACCTID,
                     IBan = report.STMTRS.BANKACCTFROM.IBAN,
+                    Payments=new List<Payment>(),
                     Bank = new Bank
                     {
                         BankID = report.STMTRS.BANKACCTFROM.BANKID
                     }
                 },
-                Transactions=new List<Payment>(),
                 From = GetDate(report.STMTRS.BANKTRANLIST.DTSTART.ToString(CultureInfo.InvariantCulture)),
                 To = GetDate(report.STMTRS.BANKTRANLIST.DTEND.ToString(CultureInfo.InvariantCulture))
             };
             foreach (var trasaction in report.STMTRS.BANKTRANLIST.STMTTRN)
             {
-              bankTransactions.Transactions.Add(ObjectToModel(trasaction));  
+              bankTransactions.Account.Payments.Add(ObjectToModel(trasaction));  
             }
 
             return bankTransactions;
