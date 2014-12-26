@@ -1,6 +1,4 @@
-﻿
-using System.Collections.Generic;
-using XmlObjects;
+﻿using System.Collections.Generic;
 
 namespace XMLParser.Data
 {

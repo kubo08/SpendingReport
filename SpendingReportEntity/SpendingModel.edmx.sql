@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 08/18/2014 01:44:36
--- Generated from EDMX file: C:\Users\Kubo.kubo-nb\Documents\Visual Studio 2013\Projects\SpendingReport\SpendingReportEntity\SpendingModel.edmx
+-- Date Created: 12/26/2014 16:36:07
+-- Generated from EDMX file: C:\Users\kubo\Source\Repos\SpendingReport\SpendingReportEntity\SpendingModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -25,9 +25,6 @@ IF OBJECT_ID(N'[dbo].[FK_EntryAmountInfo]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_PaymentTypeEntry]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Entries] DROP CONSTRAINT [FK_PaymentTypeEntry];
-GO
-IF OBJECT_ID(N'[dbo].[FK_BankEntry]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Entries] DROP CONSTRAINT [FK_BankEntry];
 GO
 IF OBJECT_ID(N'[dbo].[FK_BankBankAccount]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[BankAccounts] DROP CONSTRAINT [FK_BankBankAccount];
@@ -87,7 +84,6 @@ CREATE TABLE [dbo].[Entries] (
     [Name] nvarchar(max)  NULL,
     [DatePosted] datetime  NULL,
     [Memo] nvarchar(max)  NULL,
-    [BankAccountId] int  NOT NULL,
     [DateAvailable] datetime  NULL,
     [VariableSymbol] bigint  NULL,
     [ConstantSymbol] smallint  NULL,
@@ -96,6 +92,7 @@ CREATE TABLE [dbo].[Entries] (
     [PaymentTypeId] int  NULL,
     [BankId] int  NOT NULL,
     [DateAdded] datetime  NOT NULL,
+    [BankAccountId] int  NOT NULL,
     [AmountInfo_Id] int  NOT NULL
 );
 GO
@@ -224,21 +221,6 @@ GO
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [BankAccountId] in table 'Entries'
-ALTER TABLE [dbo].[Entries]
-ADD CONSTRAINT [FK_BankAccountEntry]
-    FOREIGN KEY ([BankAccountId])
-    REFERENCES [dbo].[BankAccounts]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_BankAccountEntry'
-CREATE INDEX [IX_FK_BankAccountEntry]
-ON [dbo].[Entries]
-    ([BankAccountId]);
-GO
-
 -- Creating foreign key on [AmountInfo_Id] in table 'Entries'
 ALTER TABLE [dbo].[Entries]
 ADD CONSTRAINT [FK_EntryAmountInfo]
@@ -336,6 +318,21 @@ GO
 CREATE INDEX [IX_FK_UserBankAccount]
 ON [dbo].[BankAccounts]
     ([UserId]);
+GO
+
+-- Creating foreign key on [BankAccountId] in table 'Entries'
+ALTER TABLE [dbo].[Entries]
+ADD CONSTRAINT [FK_BankAccountEntry]
+    FOREIGN KEY ([BankAccountId])
+    REFERENCES [dbo].[BankAccounts]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_BankAccountEntry'
+CREATE INDEX [IX_FK_BankAccountEntry]
+ON [dbo].[Entries]
+    ([BankAccountId]);
 GO
 
 -- --------------------------------------------------

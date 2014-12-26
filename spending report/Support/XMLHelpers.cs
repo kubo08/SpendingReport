@@ -8,14 +8,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Configuration;
 using Microsoft.Ajax.Utilities;
-using XmlObjects;
+//using XmlObjects;
 using SpendingReportEntity;
 using XMLParser.Data;
-using XMLParser;
 using AmountInfo = SpendingReportEntity.AmountInfo;
 using Bank = XMLParser.Data.Bank;
 using BankAccount = SpendingReportEntity.BankAccount;
 using SpendingReportEntity.Converters;
+using AmountType = XMLParser.Data.AmountType;
 
 namespace Support
 {
@@ -201,7 +201,7 @@ namespace Support
                 },
                 TransactionAmount = new XMLParser.Data.AmountInfo
                 {
-                    Amount = transaction.AmountInfo.Amount, Currency = transaction.AmountInfo.Currency, Type = (XMLParser.Data.AmountType) transaction.AmountInfo.TypeId
+                    Amount = transaction.AmountInfo.Amount, Currency = transaction.AmountInfo.Currency, Type = (AmountType) transaction.AmountInfo.TypeId
                 },
                 PaymentType = transaction.PaymentTypeId.HasValue ? (Payment.TypeOfPayment?) transaction.PaymentTypeId : null,
                 Purpose = GetTransactionPurposes(transaction.EntryId)

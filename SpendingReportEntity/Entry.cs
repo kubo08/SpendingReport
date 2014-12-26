@@ -23,7 +23,6 @@ namespace SpendingReportEntity
         public string Name { get; set; }
         public Nullable<System.DateTime> DatePosted { get; set; }
         public string Memo { get; set; }
-        public int BankAccountId { get; set; }
         public Nullable<System.DateTime> DateAvailable { get; set; }
         public Nullable<long> VariableSymbol { get; set; }
         public Nullable<short> ConstantSymbol { get; set; }
@@ -32,10 +31,11 @@ namespace SpendingReportEntity
         public Nullable<int> PaymentTypeId { get; set; }
         public int BankId { get; set; }
         public System.DateTime DateAdded { get; set; }
+        public int BankAccountId { get; set; }
     
-        public virtual BankAccount BankAccount { get; set; }
         public virtual AmountInfo AmountInfo { get; set; }
         public virtual PaymentType PaymentType { get; set; }
         public virtual ICollection<Purpose> Purposes { get; set; }
+        public virtual BankAccount BankAccount { get; set; }
     }
 }

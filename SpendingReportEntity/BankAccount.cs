@@ -16,7 +16,7 @@ namespace SpendingReportEntity
     {
         public BankAccount()
         {
-            this.Entry = new HashSet<Entry>();
+            this.Entries = new HashSet<Entry>();
         }
     
         public int Id { get; set; }
@@ -26,8 +26,8 @@ namespace SpendingReportEntity
         public Nullable<int> BankId { get; set; }
         public int UserId { get; set; }
     
-        public virtual ICollection<Entry> Entry { get; set; }
         public virtual Bank Bank { get; set; }
         public virtual User User { get; set; }
+        public virtual ICollection<Entry> Entries { get; set; }
     }
 }

@@ -8,18 +8,16 @@ using System.Web;
 using Microsoft.Ajax.Utilities;
 using SpendingReportEntity;
 using spending_report.Models;
-using entity = SpendingReportEntity;
-using XmlObjects;
 using XMLParser.Data;
-using data = XMLParser.Data;
-using XMLParser;
+using entity = SpendingReportEntity;
+using AmountType = XMLParser.Data.AmountType;
 
 namespace Support
 {
     public static class EntityHelpers
     {
-        public static Import SaveData(Import bankPayments,int UserId)
-        {            
+        public static Import SaveData(Import bankPayments, int UserId)
+        {
             Import ImportWithPocessedTransactions;
 
             try
@@ -81,7 +79,7 @@ namespace Support
                             DatePosted = transaction.DatePosted,
                             Memo = transaction.Description,
                             Name = transaction.TransactionName,
-                            DateAdded=DateTime.Now,
+                            DateAdded = DateTime.Now,
                             AmountInfo = new entity.AmountInfo
                             {
                                 Amount = Math.Abs(transaction.TransactionAmount.Amount),
@@ -98,18 +96,18 @@ namespace Support
                         {
                             newTransaction.BankAccount = new entity.BankAccount
                             {
-                                AccountNumber = (long?) transaction.BankAccount.AccountID,
+                                AccountNumber = (long?)transaction.BankAccount.AccountID,
                                 //BankCode = (short?) transaction.BankAccount.BankID,
                                 IBAN = transaction.BankAccount.IBan,
                                 Bank =
                                     transaction.BankAccount.Bank.BankID.HasValue
                                         ? GetBank(context, transaction.BankAccount.Bank.BankID.Value)
                                         : null
-                        };
+                            };
                         }
-                        if (transaction.TransactionAmount.Type != XMLParser.Data.AmountType.NotDefined)
+                        if (transaction.TransactionAmount.Type != AmountType.NotDefined)
                         {
-                            newTransaction.AmountInfo.Type = transaction.TransactionAmount.Type == XMLParser.Data.AmountType.Credit
+                            newTransaction.AmountInfo.Type = transaction.TransactionAmount.Type == AmountType.Credit
                                 ? GetTransactionType(context, "Credit")
                                 : GetTransactionType(context, "Debit");
                         }
@@ -119,7 +117,7 @@ namespace Support
                                 ? GetTransactionType(context, "Debit")
                                 : GetTransactionType(context, "Credit");
                         }
-                        SourceAccount.Entry.Add(newTransaction);
+                        SourceAccount.Entries.Add(newTransaction);
                         //context.Entries.Add(newTransaction);
                         //ImportWithPocessedTransactions.Account.Payments.Add(new Payment
                         //{
@@ -144,7 +142,7 @@ namespace Support
         /// <returns></returns>
         private static bool IsTransactionExist(SpendingContext context, Payment transaction)
         {
-            var date = transaction.DateAvailable;            
+            var date = transaction.DateAvailable;
             var item =
                 context.Entries.Where(
                     t =>

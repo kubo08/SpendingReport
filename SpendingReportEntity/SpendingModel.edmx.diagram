@@ -8,18 +8,19 @@
         <EntityTypeShape EntityType="SpendingModel.Entry" Width="1.5" PointX="8" PointY="1.625" />
         <EntityTypeShape EntityType="SpendingModel.Type" Width="1.5" PointX="1" PointY="1.625" />
         <EntityTypeShape EntityType="SpendingModel.BankAccount" Width="1.5" PointX="2.75" PointY="4.25" />
-        <AssociationConnector Association="SpendingModel.BankAccountEntry" />
         <EntityTypeShape EntityType="SpendingModel.AmountInfo" Width="1.5" PointX="4.875" PointY="1.75" />
         <AssociationConnector Association="SpendingModel.EntryAmountInfo" />
-        <EntityTypeShape EntityType="SpendingModel.Bank" Width="1.5" PointX="10.625" PointY="3.125" />
-        <EntityTypeShape EntityType="SpendingModel.Purpose" Width="1.5" PointX="5.25" PointY="7.125" />
+        <EntityTypeShape EntityType="SpendingModel.Bank" Width="1.5" PointX="0.5" PointY="3.75" />
+        <EntityTypeShape EntityType="SpendingModel.Purpose" Width="1.5" PointX="11.75" PointY="1.75" />
         <EntityTypeShape EntityType="SpendingModel.PaymentType" Width="1.5" PointX="10.375" PointY="6.75" />
         <AssociationConnector Association="SpendingModel.PaymentTypeEntry" />
-        <AssociationConnector Association="SpendingModel.BankBankAccount" />
+        <AssociationConnector Association="SpendingModel.BankBankAccount" ManuallyRouted="false" >
+        </AssociationConnector>
         <AssociationConnector Association="SpendingModel.TypeAmountInfo" />
         <AssociationConnector Association="SpendingModel.PurposeEntry" />
         <EntityTypeShape EntityType="SpendingModel.User" Width="1.5" PointX="0.875" PointY="7.875" />
         <AssociationConnector Association="SpendingModel.UserBankAccount" />
+        <AssociationConnector Association="SpendingModel.BankAccountEntry" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
