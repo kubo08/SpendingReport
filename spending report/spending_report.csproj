@@ -13,13 +13,14 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>spending_report</RootNamespace>
     <AssemblyName>spending_report</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,6 +30,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,14 +39,16 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PagedList">
@@ -55,16 +59,16 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -125,6 +129,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.3.0\lib\WebGrease.dll</HintPath>
@@ -145,29 +150,34 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="L10n\BankPaymentsL10n.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BankPaymentsL10n.resx</DependentUpon>
     </Compile>
-    <Compile Include="Models\BankPayments.cs" />
-    <Compile Include="Models\Pager.cs" />
-    <Compile Include="Support\EntityHelpers.cs" />
+    <Compile Include="Models\BankAccountImportedPayments.cs" />
+    <Compile Include="Helpers\Filter.cs" />
+    <Compile Include="Helpers\Pager.cs" />
+    <Compile Include="Models\TransactionsModel.cs" />
+    <Compile Include="Service References\remote.ParsingService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\remote.TransactionsOperationsService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Support\EnumExtensions.cs" />
-    <Compile Include="Support\Support.cs" />
     <Compile Include="Support\XMLHelpers.cs" />
-    <Compile Include="Support\HtmlExtensions.cs" />
-    <Compile Include="Support\ParseHelpers.cs" />
     <Compile Include="L10n\enumsL10n.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>enumsL10n.resx</DependentUpon>
     </Compile>
-    <Compile Include="Parser\IParser.cs" />
-    <Compile Include="Parser\Parser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Parser\TBParser.cs" />
-    <Compile Include="xml objects\tatra banka.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\PagedList.css" />
@@ -227,6 +237,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Properties\DataSources\XMLParser.Data.Import.datasource" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -243,6 +254,23 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\_references.js" />
+    <None Include="Service References\remote.ParsingService\ParsingService.disco" />
+    <None Include="Service References\remote.ParsingService\configuration91.svcinfo" />
+    <None Include="Service References\remote.ParsingService\configuration.svcinfo" />
+    <None Include="Service References\remote.ParsingService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Service References\remote.TransactionsOperationsService\spending_report.remote.TransactionsOperationsService.Transaction.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\remote.TransactionsOperationsService\TransactionsOperationsService.disco" />
+    <None Include="Service References\remote.TransactionsOperationsService\configuration91.svcinfo" />
+    <None Include="Service References\remote.TransactionsOperationsService\configuration.svcinfo" />
+    <None Include="Service References\remote.TransactionsOperationsService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\List\Transactions.aspx" />
     <Content Include="Views\Upload\SelectFile.aspx" />
@@ -260,6 +288,35 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\Error.aspx" />
     <Content Include="Views\Shared\SpendingMaster.Master" />
+    <None Include="Service References\remote.ParsingService\ParsingService.wsdl" />
+    <None Include="Service References\remote.ParsingService\ParsingService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\remote.ParsingService\ParsingService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\remote.ParsingService\ParsingService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\remote.ParsingService\ParsingService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\remote.ParsingService\ParsingService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Service References\remote.ParsingService\spending_report.remote.ParsingService.Entry.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\remote.TransactionsOperationsService\TransactionsOperationsService.wsdl" />
+    <None Include="Service References\remote.TransactionsOperationsService\TransactionsOperationsService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\remote.TransactionsOperationsService\TransactionsOperationsService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\remote.TransactionsOperationsService\TransactionsOperationsService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -282,14 +339,21 @@
       <Project>{11503e12-6e83-475f-9baf-4a96aaa686fe}</Project>
       <Name>XMLParser.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SpendingReportEntity\SpendingReportEntity.csproj">
-      <Project>{32aabc0b-40f7-4486-89a5-b8813fd809e8}</Project>
-      <Name>SpendingReportEntity</Name>
+    <ProjectReference Include="..\SpendingReportEntity3\SpendingReportEntity3.csproj">
+      <Project>{f84b6da6-1801-4b0b-a043-f50d39791082}</Project>
+      <Name>SpendingReportEntity3</Name>
     </ProjectReference>
     <ProjectReference Include="..\XMLParser\XMLParser.csproj">
       <Project>{449c6283-cdff-4083-94b5-7b7b199d1ee6}</Project>
       <Name>XMLParser</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\remote.ParsingService\" />
+    <WCFMetadataStorage Include="Service References\remote.TransactionsOperationsService\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

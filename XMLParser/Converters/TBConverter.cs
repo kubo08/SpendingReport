@@ -11,9 +11,9 @@ namespace XMLParser.Converters
     public static class TBConverter
     {
 
-        public static Payment ObjectToModel(OFXSTMTRSBANKTRANLISTSTMTTRN xmlTransaction)
+        public static ImportedPayment ObjectToModel(OFXSTMTRSBANKTRANLISTSTMTTRN xmlTransaction)
         {
-            Payment transaction = new Payment
+            ImportedPayment transaction = new ImportedPayment
             {
                 TransactionAmount =
                     new AmountInfo(xmlTransaction.TRNAMT, xmlTransaction.CURRENCY.Trim(),
@@ -35,11 +35,11 @@ namespace XMLParser.Converters
         {
             var bankTransactions = new Import()
             {
-                Account = new BankAccount
+                Account = new ImportedBankAccount
                 {
                     AccountID = report.STMTRS.BANKACCTFROM.ACCTID,
                     IBan = report.STMTRS.BANKACCTFROM.IBAN,
-                    Payments=new List<Payment>(),
+                    Payments = new List<ImportedPayment>(),
                     Bank = new Bank
                     {
                         BankID = report.STMTRS.BANKACCTFROM.BANKID
@@ -50,11 +50,11 @@ namespace XMLParser.Converters
             };
             foreach (var trasaction in report.STMTRS.BANKTRANLIST.STMTTRN)
             {
-              bankTransactions.Account.Payments.Add(ObjectToModel(trasaction));  
+                bankTransactions.Account.Payments.Add(ObjectToModel(trasaction));
             }
 
             return bankTransactions;
-        } 
+        }
 
         private static BankAccount SetBankAccount(OFXSTMTRSBANKTRANLISTSTMTTRNBANKACCTTO bankAccount)
         {

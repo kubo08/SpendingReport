@@ -28,7 +28,7 @@ namespace XMLParser.Data
 
         public AmountInfo(string amountwithCurrency, string separator, AmountType? type)
         {
-            CultureInfo ci = (CultureInfo) CultureInfo.InvariantCulture.Clone();
+            CultureInfo ci = (CultureInfo)CultureInfo.InvariantCulture.Clone();
             ci.NumberFormat.CurrencyDecimalSeparator = separator;
             var numAmount = decimal.Parse(amountwithCurrency.Substring(0, amountwithCurrency.Length - 3).Trim(), ci);
             if (type != null)
@@ -41,7 +41,7 @@ namespace XMLParser.Data
 
         public AmountInfo(string amountwithCurrency, string separator)
         {
-            CultureInfo ci = (CultureInfo) CultureInfo.InvariantCulture.Clone();
+            CultureInfo ci = (CultureInfo)CultureInfo.InvariantCulture.Clone();
             ci.NumberFormat.CurrencyDecimalSeparator = separator;
             var numAmount = decimal.Parse(amountwithCurrency.Substring(0, amountwithCurrency.Length - 3).Trim(), ci);
             Type = numAmount >= 0 ? AmountType.Credit : AmountType.Debit;
@@ -49,19 +49,21 @@ namespace XMLParser.Data
             Currency = amountwithCurrency.Substring(amountwithCurrency.Length - 3);
         }
 
-        public AmountInfo(string amount, string currency, string separator) : this(amount, currency, separator, null)
+        public AmountInfo(string amount, string currency, string separator)
+            : this(amount, currency, separator, null)
         {
         }
 
-        public AmountInfo(decimal? amount, string currency) : this(amount.ToString(), currency, ".", null)
+        public AmountInfo(decimal? amount, string currency)
+            : this(amount.ToString(), currency, ".", null)
         {
         }
 
         public AmountInfo(string amount, string currency, string separator, AmountType? type)
         {
-            CultureInfo ci = (CultureInfo) CultureInfo.InvariantCulture.Clone();
+            CultureInfo ci = (CultureInfo)CultureInfo.InvariantCulture.Clone();
             ci.NumberFormat.CurrencyDecimalSeparator = separator;
-            var numAmount = decimal.Parse(amount.Trim(), ci);
+            var numAmount = decimal.Parse(amount.Trim());
             if (type != null)
             {
                 Type = type.Value;

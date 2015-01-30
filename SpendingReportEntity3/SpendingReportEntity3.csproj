@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F84B6DA6-1801-4B0B-A043-F50D39791082}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SpendingReportEntity</RootNamespace>
+    <AssemblyName>SpendingReportEntity</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entities\AmountInfo.cs" />
+    <Compile Include="Entities\Bank.cs" />
+    <Compile Include="Entities\BankAccount.cs" />
+    <Compile Include="Entities\Entry.cs" />
+    <Compile Include="Entities\PaymentType.cs" />
+    <Compile Include="Migrations\201501070049383_first.cs" />
+    <Compile Include="Migrations\201501070049383_first.Designer.cs">
+      <DependentUpon>201501070049383_first.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501070126385_bank_account_changes.cs" />
+    <Compile Include="Migrations\201501070126385_bank_account_changes.Designer.cs">
+      <DependentUpon>201501070126385_bank_account_changes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501070132296_bank_account_changes2.cs" />
+    <Compile Include="Migrations\201501070132296_bank_account_changes2.Designer.cs">
+      <DependentUpon>201501070132296_bank_account_changes2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501070136223_test.cs" />
+    <Compile Include="Migrations\201501070136223_test.Designer.cs">
+      <DependentUpon>201501070136223_test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501070140264_test2.cs" />
+    <Compile Include="Migrations\201501070140264_test2.Designer.cs">
+      <DependentUpon>201501070140264_test2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501101430414_accounts.cs" />
+    <Compile Include="Migrations\201501101430414_accounts.Designer.cs">
+      <DependentUpon>201501101430414_accounts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501101508161_userIDNullable.cs" />
+    <Compile Include="Migrations\201501101508161_userIDNullable.Designer.cs">
+      <DependentUpon>201501101508161_userIDNullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501101521493_userID_manual.cs" />
+    <Compile Include="Migrations\201501101521493_userID_manual.Designer.cs">
+      <DependentUpon>201501101521493_userID_manual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501301130076_delete_circularreferences.cs" />
+    <Compile Include="Migrations\201501301130076_delete_circularreferences.Designer.cs">
+      <DependentUpon>201501301130076_delete_circularreferences.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501301146068_repairDb.cs" />
+    <Compile Include="Migrations\201501301146068_repairDb.Designer.cs">
+      <DependentUpon>201501301146068_repairDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Entities\Purpose.cs" />
+    <Compile Include="SpendingContext.cs" />
+    <Compile Include="Entities\Type.cs" />
+    <Compile Include="Entities\User.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201501070049383_first.resx">
+      <DependentUpon>201501070049383_first.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501070126385_bank_account_changes.resx">
+      <DependentUpon>201501070126385_bank_account_changes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501070132296_bank_account_changes2.resx">
+      <DependentUpon>201501070132296_bank_account_changes2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501070136223_test.resx">
+      <DependentUpon>201501070136223_test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501070140264_test2.resx">
+      <DependentUpon>201501070140264_test2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501101430414_accounts.resx">
+      <DependentUpon>201501101430414_accounts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501101508161_userIDNullable.resx">
+      <DependentUpon>201501101508161_userIDNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501101521493_userID_manual.resx">
+      <DependentUpon>201501101521493_userID_manual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501301130076_delete_circularreferences.resx">
+      <DependentUpon>201501301130076_delete_circularreferences.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501301146068_repairDb.resx">
+      <DependentUpon>201501301146068_repairDb.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="data backup.sql" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

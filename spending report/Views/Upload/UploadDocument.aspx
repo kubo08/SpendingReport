@@ -1,26 +1,30 @@
-﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<spending_report.Models.BankAccountPayments>" %>
-<%@ Import Namespace="System.Activities.Statements" %>
-<%@ Import Namespace="Microsoft.Ajax.Utilities" %>
+﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<spending_report.Models.BankAccountImportedPayments>" MasterPageFile="~/Views/Shared/SpendingMaster.Master" %>
 <%@ Import Namespace="PagedList.Mvc" %>
 <%@ Import Namespace="spending_report.L10n" %>
+<%@ Import Namespace="XMLParser.Data" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Imported Transactions
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <% using (Html.BeginForm("Filter", "Upload", FormMethod.Post)) %>
+        <%
+       { %>
         <%= Html.Label(BankPaymentsL10n.Bank) %>    
         <%= Model.Account.Bank.Name %><br />
         <%= Html.Label(BankPaymentsL10n.BankAccountID) %>    
-        <%= Model.Account.Bank.Account.AccountID %><br />
+        <%= Model.Account.AccountID %><br />
         <%= Html.Label(BankPaymentsL10n.From) %>    
         <%= Model.From %><br />
         <%= Html.Label(BankPaymentsL10n.To) %>    
         <%= Model.To %><br />
+        <%= Html.LabelFor(l=>l.OnlyImported)%>
+        <%= Html.CheckBoxFor(c=>c.OnlyImported, new {onClick = "this.form.submit();"}) %>
             <table >
                 <tr>
                     <td>
-                        <%=  Html.Label(BankPaymentsL10n.Amount) %>
+                        <%= Html.Label(BankPaymentsL10n.Amount) %>
                     </td>
                     <td>
                         <%= Html.Label(BankPaymentsL10n.BankAccountID) %>
@@ -37,12 +41,16 @@
                     <td>
                         <%= Html.Label(BankPaymentsL10n.Description) %>
                     </td>
+                    
+                    <td>
+                        <%= Html.Label(BankPaymentsL10n.IsImported) %>
+                    </td>
                 </tr>
                 <tr>
                     <%
-                        foreach (var item in Model.Account.Payments)
+                        foreach (ImportedPayment item in Model.Transactions)
                         {
-                        %>
+                    %>
                     <td>
                         <%= item.TransactionAmount.Amount %>
                     </td>
@@ -50,10 +58,10 @@
                         <%= item.BankAccount.AccountID %>        
                     </td>
                     <td>
-                        <%= item.PaymentType %>
+                        <%= item.TransactionAmount.Type %>
                     </td>
                     <td>
-                        <%= item.Purpose%>
+                        <%= item.Purpose %>
                     </td>
                     <td>
                         <%= item.TransactionAmount.Currency %>
@@ -61,12 +69,18 @@
                     <td>
                         <%= item.Description %>
                     </td>
+                    <td>
+                        <%= item.Imported %> 
+                    </td>
                 </tr>
-                <% } ;%>
+                <% }
+                    ; %>
             </table>
-            <%= Html.PagedListPager(Model.Transactions, 
-            page => Url.Action("Upload", new RouteValueDictionary(){
-                {"Page", page}
-                }),
-                PagedListRenderOptions.ClassicPlusFirstAndLast) %>
+            <%= Html.PagedListPager(Model.Transactions,
+                    page => Url.Action("Upload", new RouteValueDictionary()
+                    {
+                        {"Page", page}
+                    }),
+                    PagedListRenderOptions.ClassicPlusFirstAndLast) %>
+    <% } %>
 </asp:Content>

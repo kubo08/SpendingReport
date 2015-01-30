@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/26/2014 16:36:07
+-- Date Created: 12/26/2014 21:09:33
 -- Generated from EDMX file: C:\Users\kubo\Source\Repos\SpendingReport\SpendingReportEntity\SpendingModel.edmx
 -- --------------------------------------------------
 
@@ -17,9 +17,6 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_BankAccountEntry]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Entries] DROP CONSTRAINT [FK_BankAccountEntry];
-GO
 IF OBJECT_ID(N'[dbo].[FK_EntryAmountInfo]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Entries] DROP CONSTRAINT [FK_EntryAmountInfo];
 GO
@@ -92,7 +89,6 @@ CREATE TABLE [dbo].[Entries] (
     [PaymentTypeId] int  NULL,
     [BankId] int  NOT NULL,
     [DateAdded] datetime  NOT NULL,
-    [BankAccountId] int  NOT NULL,
     [AmountInfo_Id] int  NOT NULL
 );
 GO
@@ -318,21 +314,6 @@ GO
 CREATE INDEX [IX_FK_UserBankAccount]
 ON [dbo].[BankAccounts]
     ([UserId]);
-GO
-
--- Creating foreign key on [BankAccountId] in table 'Entries'
-ALTER TABLE [dbo].[Entries]
-ADD CONSTRAINT [FK_BankAccountEntry]
-    FOREIGN KEY ([BankAccountId])
-    REFERENCES [dbo].[BankAccounts]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_BankAccountEntry'
-CREATE INDEX [IX_FK_BankAccountEntry]
-ON [dbo].[Entries]
-    ([BankAccountId]);
 GO
 
 -- --------------------------------------------------

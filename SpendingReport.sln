@@ -1,13 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMLParser", "XMLParser\XMLParser.csproj", "{449C6283-CDFF-4083-94B5-7B7B199D1EE6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpendingReportEntity", "SpendingReportEntity\SpendingReportEntity.csproj", "{32AABC0B-40F7-4486-89A5-B8813FD809E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spending_report", "spending report\spending_report.csproj", "{93D0DEB2-71F4-421D-BDF9-9896FAB5D11C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F84B6DA6-1801-4B0B-A043-F50D39791082} = {F84B6DA6-1801-4B0B-A043-F50D39791082}
+		{3537A5BB-502F-4174-AD6E-FC85B5BE4E6C} = {3537A5BB-502F-4174-AD6E-FC85B5BE4E6C}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "reports", "reports", "{23424836-BDCC-428A-9219-B4D9DB8DFF18}"
 EndProject
@@ -18,6 +22,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tb", "tb", "{A9F73FEC-80A8-
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMLParser.Data", "Parser_Data\XMLParser.Data.csproj", "{11503E12-6E83-475F-9BAF-4A96AAA686FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpendingReportEntity3", "SpendingReportEntity3\SpendingReportEntity3.csproj", "{F84B6DA6-1801-4B0B-A043-F50D39791082}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{3537A5BB-502F-4174-AD6E-FC85B5BE4E6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +49,14 @@ Global
 		{11503E12-6E83-475F-9BAF-4A96AAA686FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11503E12-6E83-475F-9BAF-4A96AAA686FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11503E12-6E83-475F-9BAF-4A96AAA686FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F84B6DA6-1801-4B0B-A043-F50D39791082}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F84B6DA6-1801-4B0B-A043-F50D39791082}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F84B6DA6-1801-4B0B-A043-F50D39791082}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F84B6DA6-1801-4B0B-A043-F50D39791082}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3537A5BB-502F-4174-AD6E-FC85B5BE4E6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3537A5BB-502F-4174-AD6E-FC85B5BE4E6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3537A5BB-502F-4174-AD6E-FC85B5BE4E6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3537A5BB-502F-4174-AD6E-FC85B5BE4E6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

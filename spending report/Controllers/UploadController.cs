@@ -7,12 +7,15 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
+using Microsoft.Ajax.Utilities;
 using spending_report.Models;
 using Support;
 using XMLParser.Data;
 using XMLParser;
 using PagedList.Mvc;
 using PagedList;
+using spending_report.remote.ParsingService;
+using data = XMLParser.Data;
 
 namespace spending_report.Controllers
 {
@@ -36,8 +39,11 @@ namespace spending_report.Controllers
                 path = XMLHelpers.SaveFile(Request.Files, Server.MapPath("~/temp/"));
 
                 Parser parser = new Parser(path);
-                import = EntityHelpers.SaveData(parser.GetBankAccountWithNewPayments(path),1);  //todo: tahat aktualneho pouzivatela
-
+                using (var svc = new ParsingServiceClient())
+                {
+                    import = svc.SaveData(parser.GetBankAccountWithNewPayments(path), 1);
+                    //todo: tahat aktualneho pouzivatela
+                }
             }
             catch (Exception ex)
             {
@@ -48,40 +54,102 @@ namespace spending_report.Controllers
                 if (path != null) System.IO.File.Delete(path);
             }
 
-            BankAccountPayments bankPayments = new BankAccountPayments
+            Session["import"] = import;
+
+
+            BankAccountImportedPayments bankImportedPayments = new BankAccountImportedPayments
             {
-                Transactions = import.Account.Payments.ToPagedList(1,PAGE_SIZE),
+                Transactions = import.Account.Payments.ToPagedList(1, PAGE_SIZE),
                 Pager = new Pager
                 {
                     CurrentPageIndex = 1,
                     PageSize = PAGE_SIZE
-                }
+                },
+                Account = new data.BankAccount
+                {
+                    AccountID = import.Account.AccountID,
+                    Bank = new data.Bank
+                    {
+                        BankID = import.Account.Bank.BankID
+                    },
+                    IBan = import.Account.IBan
+                },
+                From = import.From,
+                To = import.To
             };
-            bankPayments.Pager.ItemsCount = bankPayments.Transactions.Count;
-            Session["import"] = import;            
+            bankImportedPayments.Pager.ItemsCount = bankImportedPayments.Transactions.Count;
 
-            //bankPayments.TransactionImport.Transactions =
-            //    bankPayments.TransactionImport.Transactions.ToPagedList(page,PAGE_SIZE);
-            return View("UploadDocument", bankPayments);
+
+            //bankImportedPayments.TransactionImport.Transactions =
+            //    bankImportedPayments.TransactionImport.Transactions.ToPagedList(page,PAGE_SIZE);
+            return View("UploadDocument", bankImportedPayments);
+        }
+
+        [HttpPost]
+        public ActionResult Filter(BankAccountImportedPayments model)
+        {
+            var import = (Import)Session["import"];
+            BankAccountImportedPayments bankImportedPayments = new BankAccountImportedPayments
+            {
+                //Transactions = import.Account.Payments.ToPagedList(1, PAGE_SIZE),
+                Pager = new Pager
+                {
+                    CurrentPageIndex = 1,
+                    PageSize = PAGE_SIZE
+                },
+                Account = new data.BankAccount
+                {
+                    AccountID = import.Account.AccountID,
+                    Bank = new data.Bank
+                    {
+                        BankID = import.Account.Bank.BankID
+                    },
+                    IBan = import.Account.IBan
+                },
+                From = import.From,
+                To = import.To
+            };
+            if (model.OnlyImported)
+            {
+                bankImportedPayments.Transactions = import.Account.Payments.Where(a => a.Imported).ToPagedList(1, PAGE_SIZE);
+            }
+            else
+            {
+                bankImportedPayments.Transactions = import.Account.Payments.ToPagedList(1, PAGE_SIZE);
+            }
+            bankImportedPayments.Pager.ItemsCount = bankImportedPayments.Transactions.Count;
+
+            return View("UploadDocument", bankImportedPayments);
         }
 
         [HttpGet]
-        public ActionResult Upload(int Page)
+        public ActionResult Upload(int Page, BankAccountImportedPayments model)
         {
             var import = (Import)Session["import"];
-            BankAccountPayments bankPayments = new BankAccountPayments
+            BankAccountImportedPayments bankImportedPayments = new BankAccountImportedPayments
             {
                 Transactions = import.Account.Payments.ToPagedList(Page, PAGE_SIZE),
                 Pager = new Pager
                 {
                     CurrentPageIndex = Page,
                     PageSize = PAGE_SIZE
-                }
+                },
+                Account = new data.BankAccount
+                {
+                    AccountID = import.Account.AccountID,
+                    Bank = new data.Bank
+                    {
+                        BankID = import.Account.Bank.BankID
+                    },
+                    IBan = import.Account.IBan
+                },
+                From = import.From,
+                To = import.To
             };
-            bankPayments.Pager.ItemsCount = bankPayments.Transactions.Count;
+            bankImportedPayments.Pager.ItemsCount = bankImportedPayments.Transactions.Count;
 
 
-            return View("UploadDocument", bankPayments);
+            return View("UploadDocument", bankImportedPayments);
         }
     }
 

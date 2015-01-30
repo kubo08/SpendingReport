@@ -1,5 +1,7 @@
 ﻿using System.Web.Mvc;
-using Support;
+using PagedList;
+using spending_report.Models;
+using spending_report.remote.TransactionsOperationsService;
 
 namespace spending_report.Controllers
 {
@@ -7,9 +9,14 @@ namespace spending_report.Controllers
     {
         public ActionResult Transactions()
         {
-            var transactions = Support.Support.GetTransactions();
+            var model = new TransactionsModel();
+            using (var svc = new TransactionsOperationsServiceClient())
+            {
+                var transactions = svc.GetTransactionsByUserID(1);
+                model.TransactionsList = transactions.ToPagedList(0, transactions.Length);
+            }
 
-            return View();
+            return View("Transactions", model);
         }
     }
 }

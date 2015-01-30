@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web;
-using System.Web.Configuration;
-using Microsoft.Ajax.Utilities;
 //using XmlObjects;
 using SpendingReportEntity;
 using XMLParser.Data;
-using AmountInfo = SpendingReportEntity.AmountInfo;
 using Bank = XMLParser.Data.Bank;
-using BankAccount = SpendingReportEntity.BankAccount;
-using SpendingReportEntity.Converters;
+//using SpendingReportEntity.Converters;
 using AmountType = XMLParser.Data.AmountType;
 
 namespace Support
@@ -23,7 +16,7 @@ namespace Support
     {
         private const string TB = "Tatra Banka";
 
-        public static string SaveFile(HttpFileCollectionBase Files,string path)
+        public static string SaveFile(HttpFileCollectionBase Files, string path)
         {
             try
             {
@@ -174,7 +167,7 @@ namespace Support
             var year = date.Trim().Substring(0, 4);
             var month = date.Trim().Substring(4, 2);
             var day = date.Trim().Substring(6);
-            return new DateTime(int.Parse(year),int.Parse(month),int.Parse(day));
+            return new DateTime(int.Parse(year), int.Parse(month), int.Parse(day));
         }
 
         //public static IEnumerable<Payment> GetBankTransactions(short bankNumber)
@@ -191,20 +184,32 @@ namespace Support
         {
             return transactions.Select(transaction => new Payment
             {
-                DateAvailable = transaction.DateAvailable, ConstantSymbol = transaction.ConstantSymbol.HasValue ? transaction.ConstantSymbol.Value : (short) 0, DatePosted = transaction.DatePosted, Description = transaction.Memo, Reference = transaction.Reference, SpecificSymbol = transaction.SpecificSymbol.HasValue ? transaction.SpecificSymbol.Value : (long) 0, TransactionName = transaction.Name, VariableSymbol = transaction.VariableSymbol.HasValue ? transaction.VariableSymbol.Value : (long) 0, BankAccount = new XMLParser.Data.BankAccount
-                {
-                    AccountID = transaction.BankAccount.AccountNumber.HasValue ? transaction.BankAccount.AccountNumber.Value : 0, IBan = transaction.BankAccount.IBAN, Bank = new Bank
+                DateAvailable = transaction.DateAvailable,
+                ConstantSymbol = transaction.ConstantSymbol.HasValue ? transaction.ConstantSymbol.Value : (short)0,
+                DatePosted = transaction.DatePosted,
+                Description = transaction.Memo,
+                Reference = transaction.Reference,
+                SpecificSymbol = transaction.SpecificSymbol.HasValue ? transaction.SpecificSymbol.Value : (long)0,
+                TransactionName = transaction.Name,
+                VariableSymbol = transaction.VariableSymbol.HasValue ? transaction.VariableSymbol.Value : (long)0,
+                BankAccount = new XMLParser.Data.BankAccount
                     {
-                        //Name = transaction.BankAccount.BankId.HasValue ? ((Bank.bank?) transaction.BankAccount.BankId.Value) : null,
-                        BankID = (ushort) transaction.BankAccount.Bank.BankCode
-                    }
-                },
+                        AccountID = transaction.DestinationAccount.AccountNumber.HasValue ? transaction.DestinationAccount.AccountNumber.Value : 0,
+                        IBan = transaction.DestinationAccount.IBAN,
+                        Bank = new Bank
+                            {
+                                //Name = transaction.BankAccount.BankId.HasValue ? ((Bank.bank?) transaction.BankAccount.BankId.Value) : null,
+                                BankID = (ushort)transaction.DestinationAccount.Bank.BankCode
+                            }
+                    },
                 TransactionAmount = new XMLParser.Data.AmountInfo
                 {
-                    Amount = transaction.AmountInfo.Amount, Currency = transaction.AmountInfo.Currency, Type = (AmountType) transaction.AmountInfo.TypeId
+                    Amount = transaction.AmountInfo.Amount,
+                    Currency = transaction.AmountInfo.Currency,
+                    Type = (AmountType)transaction.AmountInfo.TypeId
                 },
-                PaymentType = transaction.PaymentTypeId.HasValue ? (Payment.TypeOfPayment?) transaction.PaymentTypeId : null,
-                Purpose = GetTransactionPurposes(transaction.EntryId)
+                PaymentType = transaction.PaymentTypeId.HasValue ? (TypeOfPayment?)transaction.PaymentTypeId : null,
+                Purpose = GetTransactionPurposes(transaction.ID)
             }).ToList();
         }
 
@@ -212,9 +217,9 @@ namespace Support
         {
             using (var context = new SpendingContext())
             {
-                var firstOrDefault = context.Entries.FirstOrDefault(t => t.EntryId == id);
+                var firstOrDefault = context.Entries.FirstOrDefault(t => t.ID == id);
                 if (firstOrDefault != null)
-                    return firstOrDefault.Purposes.ToList().Select(t=>t.Name).ToList();
+                    return firstOrDefault.Purposes.ToList().Select(t => t.Name).ToList();
             }
             return null;
         }

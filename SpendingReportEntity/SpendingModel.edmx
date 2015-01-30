@@ -44,10 +44,6 @@
       <End Role="User" EntitySet="Users" />
       <End Role="BankAccount" EntitySet="BankAccounts" />
     </AssociationSet>
-    <AssociationSet Name="BankAccountEntry" Association="SpendingModel.Store.BankAccountEntry">
-      <End Role="BankAccount" EntitySet="BankAccounts" />
-      <End Role="Entry" EntitySet="Entries" />
-    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Entries">
     <Key>
@@ -65,7 +61,6 @@
     <Property Name="PaymentTypeId" Type="int" Nullable="true" />
     <Property Name="BankId" Type="int" Nullable="false" />
     <Property Name="DateAdded" Type="datetime" Nullable="false" />
-    <Property Name="BankAccountId" Type="int" Nullable="false" />
     <Property Name="AmountInfo_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Types">
@@ -191,18 +186,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="BankAccountEntry">
-    <End Role="BankAccount" Type="SpendingModel.Store.BankAccounts" Multiplicity="1" />
-    <End Role="Entry" Type="SpendingModel.Store.Entries" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="BankAccount">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Entry">
-        <PropertyRef Name="BankAccountId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_PurposeEntry_Purpose">
     <End Role="Purpose" Type="SpendingModel.Store.Purposes" Multiplicity="1" />
     <End Role="PurposeEntry" Type="SpendingModel.Store.PurposeEntry" Multiplicity="*" />
@@ -289,7 +272,7 @@
           <NavigationProperty Name="Purposes" Relationship="SpendingModel.PurposeEntry" FromRole="Entry" ToRole="Purpose" />
           <Property Name="DateAdded" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="BankAccount" Relationship="SpendingModel.BankAccountEntry" FromRole="Entry" ToRole="BankAccount" />
-          <Property Name="BankAccountId" Nullable="false" Type="Int32" />
+          <Property Name="BankAccountId" Type="Int32" Nullable="false" />
           </EntityType>
         <EntityType Name="Type">
           <Key>
@@ -451,7 +434,6 @@
           <ScalarProperty Name="PaymentTypeId" ColumnName="PaymentTypeId" />
           <ScalarProperty Name="BankId" ColumnName="BankId" />
           <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
-          <ScalarProperty Name="BankAccountId" ColumnName="BankAccountId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

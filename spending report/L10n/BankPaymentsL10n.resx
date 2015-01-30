@@ -126,14 +126,32 @@
   <data name="BankAccountID" xml:space="preserve">
     <value>Číslo účtu</value>
   </data>
+  <data name="ConstantSymbol" xml:space="preserve">
+    <value>Konštantný symbol</value>
+  </data>
   <data name="Currency" xml:space="preserve">
     <value>Mena</value>
+  </data>
+  <data name="DateAvailable" xml:space="preserve">
+    <value>Dátum spracovania</value>
+  </data>
+  <data name="DatePosted" xml:space="preserve">
+    <value>Dátum rezervácie</value>
   </data>
   <data name="Description" xml:space="preserve">
     <value>Popis transakcie</value>
   </data>
   <data name="From" xml:space="preserve">
     <value>Importované transakcie od:</value>
+  </data>
+  <data name="IsImported" xml:space="preserve">
+    <value>Importované</value>
+  </data>
+  <data name="OnlyImported" xml:space="preserve">
+    <value>Len novo importované</value>
+  </data>
+  <data name="SpecificSymbol" xml:space="preserve">
+    <value>Špecifický symbol</value>
   </data>
   <data name="To" xml:space="preserve">
     <value>Importované transakcie do:</value>
@@ -149,5 +167,8 @@
   </data>
   <data name="UploadNewTransactions" xml:space="preserve">
     <value>Importovať nové transakcie</value>
+  </data>
+  <data name="VariableSymbol" xml:space="preserve">
+    <value>Variabilný symbol</value>
   </data>
 </root>

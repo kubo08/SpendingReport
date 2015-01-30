@@ -4,15 +4,15 @@ using System.Linq;
 
 namespace XMLParser.Data
 {
+    public enum TypeOfPayment
+    {
+        CardPayment,
+        ATMWithdrawall,
+        CashPayment,
+    }
+
     public class Payment
     {
-        public enum TypeOfPayment
-        {
-            CardPayment,
-            ATMWithdrawall,
-            CashPayment
-        }
-
         #region Properties
 
         public AmountInfo TransactionAmount { get; set; }
@@ -34,7 +34,7 @@ namespace XMLParser.Data
             set
             {
                 if (String.IsNullOrEmpty(value)) return;
-                string[] symbols = value.Split('/').Where(x=>!String.IsNullOrEmpty(x)).ToArray();
+                string[] symbols = value.Split('/').Where(x => !String.IsNullOrEmpty(x)).ToArray();
                 if (symbols[0].Length > 2)
                     VariableSymbol = long.Parse(symbols[0].Substring(2));
                 if (symbols[1].Length > 2)
@@ -55,5 +55,12 @@ namespace XMLParser.Data
         public List<string> Purpose { get; set; }
 
         #endregion
+
+        public Payment() { }
+
+        public Payment(Payment transaction)
+        {
+
+        }
     }
 }

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/XMLParser.Data" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/XMLParser.Data" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:64737/ParsingService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost:64737/ParsingService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="Import">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Account" nillable="true" type="tns:BankAccount" />
+      <xs:element minOccurs="0" name="From" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="To" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Import" nillable="true" type="tns:Import" />
+  <xs:complexType name="BankAccount">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountID" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="Bank" nillable="true" type="tns:Bank" />
+      <xs:element minOccurs="0" name="IBan" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Payments" nillable="true" type="tns:ArrayOfPayment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BankAccount" nillable="true" type="tns:BankAccount" />
+  <xs:complexType name="Bank">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Account" nillable="true" type="tns:BankAccount" />
+      <xs:element minOccurs="0" name="BankID" nillable="true" type="xs:unsignedShort" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Bank" nillable="true" type="tns:Bank" />
+  <xs:complexType name="ArrayOfPayment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Payment" nillable="true" type="tns:Payment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPayment" nillable="true" type="tns:ArrayOfPayment" />
+  <xs:complexType name="Payment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BankAccount" nillable="true" type="tns:BankAccount" />
+      <xs:element minOccurs="0" name="ConstantSymbol" type="xs:short" />
+      <xs:element minOccurs="0" name="DateAvailable" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DatePosted" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PaymentType" nillable="true" type="tns:Payment.TypeOfPayment" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Purpose" nillable="true" type="q1:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Reference" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SpecificSymbol" type="xs:long" />
+      <xs:element minOccurs="0" name="TransactionAmount" nillable="true" type="tns:AmountInfo" />
+      <xs:element minOccurs="0" name="TransactionName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VariableSymbol" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Payment" nillable="true" type="tns:Payment" />
+  <xs:simpleType name="Payment.TypeOfPayment">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CardPayment" />
+      <xs:enumeration value="ATMWithdrawall" />
+      <xs:enumeration value="CashPayment" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Payment.TypeOfPayment" nillable="true" type="tns:Payment.TypeOfPayment" />
+  <xs:complexType name="AmountInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Currency" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" type="tns:AmountType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AmountInfo" nillable="true" type="tns:AmountInfo" />
+  <xs:simpleType name="AmountType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Credit">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Debit">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NotDefined">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="AmountType" nillable="true" type="tns:AmountType" />
+</xs:schema>
