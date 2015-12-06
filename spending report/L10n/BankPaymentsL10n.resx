@@ -147,6 +147,9 @@
   <data name="IsImported" xml:space="preserve">
     <value>Importované</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Názov transakcie</value>
+  </data>
   <data name="OnlyImported" xml:space="preserve">
     <value>Len novo importované</value>
   </data>

@@ -9,7 +9,7 @@ namespace Services
     public interface ITransactionsOperationsService
     {
         [OperationContract]
-        IEnumerable<Transaction> GetTransactionsByUserID(int UserID);
+        IEnumerable<Transaction> GetTransactionsByUserID(int userId);
 
 
     }
@@ -25,6 +25,9 @@ namespace Services
 
         [DataMember]
         public string Description { get; set; }
+
+        [DataMember]
+        public string Name { get; set; }
     }
 
     [DataContract]

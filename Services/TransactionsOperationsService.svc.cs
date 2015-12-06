@@ -10,7 +10,7 @@ namespace Services
     // NOTE: In order to launch WCF Test Client for testing this service, please select TransactionsOperationsServiceService.svc or TransactionsOperationsServiceService.svc.cs at the Solution Explorer and start debugging.
     public class TransactionsOperationsService : ITransactionsOperationsService
     {
-        public IEnumerable<Transaction> GetTransactionsByUserID(int UserID)
+        public IEnumerable<Transaction> GetTransactionsByUserID(int userId)
         {
             try
             {
@@ -18,24 +18,34 @@ namespace Services
                 {
                     var transactions =
                         context.Entries.Where(
-                            e => e.SourceAccount.User.Id == UserID).Include("DestinationAccount").Include("DestinationAccount.Bank").Include("AmountInfo");
+                            e => e.SourceAccount.User.Id == userId).Include("DestinationAccount").Include("DestinationAccount.Bank").Include("AmountInfo");
                     var result = new List<Transaction>();
                     foreach (var item in transactions)
                     {
                         var transaction = new Transaction();
                         transaction.Description = item.Memo;
+                        transaction.Name = item.Name;
                         var accountNumber = item.DestinationAccount.AccountNumber;
+                        var bankAccount = new BankAccount();
                         if (accountNumber != null && accountNumber != 0)
                         {
-                            transaction.BankAccount.AccountNumber =
+                            bankAccount.AccountNumber =
                                 accountNumber.Value;
-                            transaction.BankAccount.BankCode = item.DestinationAccount.Bank.BankCode;
-                            transaction.BankAccount.BankName = item.DestinationAccount.Bank.Name;
+                            if (item.DestinationAccount.Bank != null)
+                            {
+                                bankAccount.BankCode = item.DestinationAccount.Bank.BankCode;
+                                bankAccount.BankName = item.DestinationAccount.Bank.Name;
+                            }
+                            transaction.BankAccount = bankAccount;
                         }
-                        transaction.TransacionAmount.Amount = item.AmountInfo.Amount;
-                        transaction.TransacionAmount.Currency = item.AmountInfo.Currency;
-                        transaction.TransacionAmount.PaymentType = item.PaymentType.Id;
-                        transaction.TransacionAmount.TransactionType = item.AmountInfo.Type.Id;
+                        transaction.BankAccount = bankAccount;
+                        var transactionAmount = new TransactionAmount();
+                        transactionAmount.Amount = item.AmountInfo.Amount;
+                        transactionAmount.Currency = item.AmountInfo.Currency;
+                        if (item.PaymentType != null)
+                            transactionAmount.PaymentType = item.PaymentType.Id;
+                        transactionAmount.TransactionType = item.AmountInfo.Type.Id;
+                        transaction.TransacionAmount = transactionAmount;
                         result.Add(transaction);
                     }
                     return result;

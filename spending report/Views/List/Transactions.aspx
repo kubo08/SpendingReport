@@ -3,11 +3,22 @@
 <%@ Import Namespace="spending_report.L10n" %>
 <%@ Import Namespace="XMLParser.Data" %>
 
+
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <%= BankPaymentsL10n.TransactionList %>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+   <% Scripts.Render("~/Scripts/jquery-ui-1.8.24.min.js"); %>
+<script>
+    $(function () {
+        $("#accordion").accordion({
+            header: "tr.transaction"
+        });
+    });
+</script>
+
+    <div id="accordion">
     <table >
             <tr>
                 <td>
@@ -32,6 +43,9 @@
                     <%= Html.Label(BankPaymentsL10n.Description) %>
                 </td>
                 <td>
+                    <%= Html.Label(BankPaymentsL10n.Name) %>
+                </td>
+                <td>
                     <%= Html.Label(BankPaymentsL10n.DatePosted) %>
                 </td>
                 <td>
@@ -47,7 +61,7 @@
                     <%= Html.Label(BankPaymentsL10n.ConstantSymbol) %>
                 </td>
             </tr>
-            <tr>
+            <tr class="transaction">
                 <%
                     foreach (var item in Model.TransactionsList)
                     {
@@ -58,7 +72,7 @@
                 <td>
                     <%= item.TransacionAmount.Amount %>
                 </td>
-                <td>
+                <td>a
                     <%= item.BankAccount.AccountNumber %>        
                 </td>
                 <td>
@@ -69,6 +83,9 @@
                 </td>
                 <td>
                     <%= item.TransacionAmount.Currency %>
+                </td>
+                <td>
+                    <%= item.Name %>
                 </td>
                 <td>
                     <%= item.Description %>
@@ -91,8 +108,9 @@
             </tr>
             <% } ;%>
         </table>
+        </div>
         <%= Html.PagedListPager(Model.TransactionsList, 
-                page => Url.Action("Transactions", new RouteValueDictionary(){
+                page => Url.Action("TransactionsPaging", new RouteValueDictionary(){
                 {"Page", page}
                 }),
                 PagedListRenderOptions.ClassicPlusFirstAndLast) %>

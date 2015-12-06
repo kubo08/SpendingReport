@@ -151,6 +151,15 @@ namespace spending_report.L10n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Názov transakcie.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Len novo importované.
         /// </summary>
         public static string OnlyImported {

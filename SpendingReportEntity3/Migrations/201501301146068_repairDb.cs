@@ -8,12 +8,12 @@ namespace SpendingReportEntity.Migrations
         public override void Up()
         {
             DropForeignKey("dbo.Entries", "AmountInfo_Id", "dbo.AmountInfos");
-            DropIndex("dbo.Entries", new[] { "AmountInfo_Id" });
+            //DropIndex("dbo.Entries", new[] { "AmountInfo_Id" });
             RenameColumn(table: "dbo.Entries", name: "AmountInfo_Id", newName: "AmountInfoId");
             AlterColumn("dbo.Entries", "AmountInfoId", c => c.Int(nullable: false));
             CreateIndex("dbo.Entries", "AmountInfoId");
             AddForeignKey("dbo.Entries", "AmountInfoId", "dbo.AmountInfos", "Id", cascadeDelete: true);
-            DropColumn("dbo.Entries", "AmountInfo_Id");
+            //DropColumn("dbo.Entries", "AmountInfo_Id");
         }
 
         public override void Down()

@@ -10,6 +10,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="BankAccount" nillable="true" type="tns:BankAccount" />
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TransacionAmount" nillable="true" type="tns:TransactionAmount" />
     </xs:sequence>
   </xs:complexType>

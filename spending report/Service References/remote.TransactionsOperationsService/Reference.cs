@@ -29,6 +29,9 @@ namespace spending_report.remote.TransactionsOperationsService {
         private string DescriptionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private spending_report.remote.TransactionsOperationsService.TransactionAmount TransacionAmountField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -63,6 +66,19 @@ namespace spending_report.remote.TransactionsOperationsService {
                 if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
                     this.DescriptionField = value;
                     this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
                 }
             }
         }
@@ -266,11 +282,11 @@ namespace spending_report.remote.TransactionsOperationsService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransactionsOperationsService/GetTransactionsByUserID", ReplyAction="http://tempuri.org/ITransactionsOperationsService/GetTransactionsByUserIDResponse" +
             "")]
-        spending_report.remote.TransactionsOperationsService.Transaction[] GetTransactionsByUserID(int UserID);
+        spending_report.remote.TransactionsOperationsService.Transaction[] GetTransactionsByUserID(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransactionsOperationsService/GetTransactionsByUserID", ReplyAction="http://tempuri.org/ITransactionsOperationsService/GetTransactionsByUserIDResponse" +
             "")]
-        System.Threading.Tasks.Task<spending_report.remote.TransactionsOperationsService.Transaction[]> GetTransactionsByUserIDAsync(int UserID);
+        System.Threading.Tasks.Task<spending_report.remote.TransactionsOperationsService.Transaction[]> GetTransactionsByUserIDAsync(int userId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -300,12 +316,12 @@ namespace spending_report.remote.TransactionsOperationsService {
                 base(binding, remoteAddress) {
         }
         
-        public spending_report.remote.TransactionsOperationsService.Transaction[] GetTransactionsByUserID(int UserID) {
-            return base.Channel.GetTransactionsByUserID(UserID);
+        public spending_report.remote.TransactionsOperationsService.Transaction[] GetTransactionsByUserID(int userId) {
+            return base.Channel.GetTransactionsByUserID(userId);
         }
         
-        public System.Threading.Tasks.Task<spending_report.remote.TransactionsOperationsService.Transaction[]> GetTransactionsByUserIDAsync(int UserID) {
-            return base.Channel.GetTransactionsByUserIDAsync(UserID);
+        public System.Threading.Tasks.Task<spending_report.remote.TransactionsOperationsService.Transaction[]> GetTransactionsByUserIDAsync(int userId) {
+            return base.Channel.GetTransactionsByUserIDAsync(userId);
         }
     }
 }

@@ -4,7 +4,7 @@
   <xs:element name="GetTransactionsByUserID">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="UserID" type="xs:int" />
+        <xs:element minOccurs="0" name="userId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
