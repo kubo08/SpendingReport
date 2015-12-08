@@ -1,29 +1,30 @@
 ﻿using System.Web.Mvc;
-using System.Web.Optimization;
-using PagedList;
-using spending_report.Models;
+using SpendingReport.Models;
+using spending_report.Helpers;
 using spending_report.remote.TransactionsOperationsService;
+using spending_report.ViewModels;
 
 namespace spending_report.Controllers
 {
     public class ListController : Controller
     {
+        public const int PAGESIZE = 10;
+
         [HttpGet]
         public ActionResult Transactions()
         {
             //bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
             //"~/Scripts/jquery-ui-{version}.js"));
-            var model = new TransactionsModel();
+            var model = new TransactionsListModel();
             using (var svc = new TransactionsOperationsServiceClient())
             {
-                var transactions = svc.GetTransactionsByUserID(1);
-                model.TransactionsList = transactions.ToPagedList(1, 10);
+                TransactionsModel transactions = svc.GetTransactionsByUserID(1, 0, PAGESIZE);
+                model.TransactionsList = transactions.ToPagedList(1, PAGESIZE);
                 model.Pager = new Pager
                 {
                     CurrentPageIndex = 1,
-                    PageSize = 10
+                    PageSize = PAGESIZE
                 };
-                Session["Transactions"] = transactions;
             }
 
 
@@ -31,15 +32,18 @@ namespace spending_report.Controllers
         }
 
         [HttpGet]
-        public ActionResult TransactionsPaging(int Page, TransactionsModel model)
+        public ActionResult TransactionsPaging(int Page, TransactionsListModel model)
         {
-            var transactions = (Transaction[])Session["Transactions"];
-
-            model.TransactionsList = transactions.ToPagedList(Page, 10);
-            model.Pager = new Pager
+            using (var svc = new TransactionsOperationsServiceClient())
             {
-                CurrentPageIndex = Page
-            };
+                TransactionsModel transactions = svc.GetTransactionsByUserID(1, (Page - 1) * PAGESIZE, PAGESIZE);
+
+                model.TransactionsList = transactions.ToPagedList(Page, PAGESIZE);
+                model.Pager = new Pager
+                {
+                    CurrentPageIndex = Page
+                };
+            }
 
             return View("Transactions", model);
         }

@@ -146,11 +146,13 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ListController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Helpers\Pager\PagerList.cs" />
     <Compile Include="L10n\BankPaymentsL10n.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -158,8 +160,14 @@
     </Compile>
     <Compile Include="Models\BankAccountImportedPayments.cs" />
     <Compile Include="Helpers\Filter.cs" />
-    <Compile Include="Helpers\Pager.cs" />
-    <Compile Include="Models\TransactionsModel.cs" />
+    <Compile Include="Helpers\Pager\Pager.cs" />
+    <Compile Include="Service References\remote.TransactionDescriptionService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\PaymentType.cs" />
+    <Compile Include="ViewModels\TransactionsModel.cs" />
     <Compile Include="Service References\remote.ParsingService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -238,6 +246,8 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Properties\DataSources\XMLParser.Data.Import.datasource" />
+    <Content Include="Properties\DataSources\SpendingReport.Models.Transaction.datasource" />
+    <Content Include="Properties\DataSources\SpendingReport.Models.TransactionsModel.datasource" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -261,13 +271,27 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="Service References\remote.TransactionsOperationsService\spending_report.remote.TransactionsOperationsService.Transaction.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
+    <None Include="Service References\remote.TransactionDescriptionService\TransactionDescriptionService.wsdl" />
+    <None Include="Service References\remote.TransactionDescriptionService\TransactionDescriptionService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\remote.TransactionDescriptionService\TransactionDescriptionService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\remote.TransactionDescriptionService\TransactionDescriptionService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\remote.TransactionsOperationsService\TransactionsOperationsService.disco" />
     <None Include="Service References\remote.TransactionsOperationsService\configuration91.svcinfo" />
     <None Include="Service References\remote.TransactionsOperationsService\configuration.svcinfo" />
     <None Include="Service References\remote.TransactionsOperationsService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\remote.TransactionDescriptionService\TransactionDescriptionService.disco" />
+    <None Include="Service References\remote.TransactionDescriptionService\configuration91.svcinfo" />
+    <None Include="Service References\remote.TransactionDescriptionService\configuration.svcinfo" />
+    <None Include="Service References\remote.TransactionDescriptionService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -317,6 +341,9 @@
     <None Include="Service References\remote.TransactionsOperationsService\TransactionsOperationsService2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Views\Shared\SpendingMaster.cshtml" />
+    <Content Include="Views\Reports\Index.cshtml" />
+    <Content Include="Views\Reports\PaymentDescriptions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -339,9 +366,9 @@
       <Project>{11503e12-6e83-475f-9baf-4a96aaa686fe}</Project>
       <Name>XMLParser.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SpendingReportEntity3\SpendingReportEntity3.csproj">
-      <Project>{f84b6da6-1801-4b0b-a043-f50d39791082}</Project>
-      <Name>SpendingReportEntity3</Name>
+    <ProjectReference Include="..\SpendingReport.Models\SpendingReport.Models.csproj">
+      <Project>{ad3b9b8e-7217-44af-8657-58cddab915dc}</Project>
+      <Name>SpendingReport.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\XMLParser\XMLParser.csproj">
       <Project>{449c6283-cdff-4083-94b5-7b7b199d1ee6}</Project>
@@ -353,6 +380,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\remote.ParsingService\" />
+    <WCFMetadataStorage Include="Service References\remote.TransactionDescriptionService\" />
     <WCFMetadataStorage Include="Service References\remote.TransactionsOperationsService\" />
   </ItemGroup>
   <PropertyGroup>

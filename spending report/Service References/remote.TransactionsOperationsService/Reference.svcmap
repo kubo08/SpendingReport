@@ -15,6 +15,7 @@
     <UseSerializerForFaults>true</UseSerializerForFaults>
     <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
     <ReferencedAssemblies>
+      <ReferencedAssembly AssemblyName="SpendingReport.Models" />
       <ReferencedAssembly AssemblyName="XMLParser" />
       <ReferencedAssembly AssemblyName="XMLParser.Data" />
     </ReferencedAssemblies>

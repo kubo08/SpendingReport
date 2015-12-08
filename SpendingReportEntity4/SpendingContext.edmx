@@ -1,0 +1,610 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SpendingReportModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AmountInfos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="Currency" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BankAccounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountNumber" Type="bigint" />
+          <Property Name="IBAN" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="BankId" Type="int" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>
+        <EntityType Name="Banks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BankCode" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Entries">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="DatePosted" Type="datetime" />
+          <Property Name="Memo" Type="nvarchar(max)" />
+          <Property Name="DateAvailable" Type="datetime" />
+          <Property Name="VariableSymbol" Type="bigint" />
+          <Property Name="ConstantSymbol" Type="smallint" />
+          <Property Name="SpecificSymbol" Type="bigint" />
+          <Property Name="Reference" Type="nvarchar(max)" />
+          <Property Name="PaymentTypeId" Type="int" />
+          <Property Name="BankId" Type="int" Nullable="false" />
+          <Property Name="DateAdded" Type="datetime" Nullable="false" />
+          <Property Name="AmountInfoId" Type="int" Nullable="false" />
+          <Property Name="SourceAccountId" Type="int" />
+          <Property Name="DestinationAccountId" Type="int" />
+        </EntityType>
+        <EntityType Name="PaymentTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TransactionDescription">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Types">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_AmountInfos_dbo_Types_TypeId">
+          <End Role="Types" Type="Self.Types" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AmountInfos" Type="Self.AmountInfos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AmountInfos">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_BankAccounts_dbo_Banks_BankId">
+          <End Role="Banks" Type="Self.Banks" Multiplicity="0..1" />
+          <End Role="BankAccounts" Type="Self.BankAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BankAccounts">
+              <PropertyRef Name="BankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_BankAccounts_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="BankAccounts" Type="Self.BankAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BankAccounts">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Entries_dbo_AmountInfos_AmountInfoId">
+          <End Role="AmountInfos" Type="Self.AmountInfos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Entries" Type="Self.Entries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AmountInfos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Entries">
+              <PropertyRef Name="AmountInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Entries_dbo_BankAccounts_BankAccountID">
+          <End Role="BankAccounts" Type="Self.BankAccounts" Multiplicity="0..1" />
+          <End Role="Entries" Type="Self.Entries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Entries">
+              <PropertyRef Name="SourceAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Entries_dbo_BankAccounts_DestinationAccountId">
+          <End Role="BankAccounts" Type="Self.BankAccounts" Multiplicity="0..1" />
+          <End Role="Entries" Type="Self.Entries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Entries">
+              <PropertyRef Name="DestinationAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Entries_dbo_PaymentTypes_PaymentTypeId">
+          <End Role="PaymentTypes" Type="Self.PaymentTypes" Multiplicity="0..1" />
+          <End Role="Entries" Type="Self.Entries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Entries">
+              <PropertyRef Name="PaymentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entries_AmountInfos">
+          <End Role="AmountInfos" Type="Self.AmountInfos" Multiplicity="1" />
+          <End Role="Entries" Type="Self.Entries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AmountInfos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Entries">
+              <PropertyRef Name="AmountInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SpendingReportModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AmountInfos" EntityType="Self.AmountInfos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BankAccounts" EntityType="Self.BankAccounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Banks" EntityType="Self.Banks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Entries" EntityType="Self.Entries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentTypes" EntityType="Self.PaymentTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransactionDescription" EntityType="Self.TransactionDescription" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Types" EntityType="Self.Types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_AmountInfos_dbo_Types_TypeId" Association="Self.FK_dbo_AmountInfos_dbo_Types_TypeId">
+            <End Role="Types" EntitySet="Types" />
+            <End Role="AmountInfos" EntitySet="AmountInfos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_BankAccounts_dbo_Banks_BankId" Association="Self.FK_dbo_BankAccounts_dbo_Banks_BankId">
+            <End Role="Banks" EntitySet="Banks" />
+            <End Role="BankAccounts" EntitySet="BankAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_BankAccounts_dbo_Users_UserId" Association="Self.FK_dbo_BankAccounts_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="BankAccounts" EntitySet="BankAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Entries_dbo_AmountInfos_AmountInfoId" Association="Self.FK_dbo_Entries_dbo_AmountInfos_AmountInfoId">
+            <End Role="AmountInfos" EntitySet="AmountInfos" />
+            <End Role="Entries" EntitySet="Entries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Entries_dbo_BankAccounts_BankAccountID" Association="Self.FK_dbo_Entries_dbo_BankAccounts_BankAccountID">
+            <End Role="BankAccounts" EntitySet="BankAccounts" />
+            <End Role="Entries" EntitySet="Entries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Entries_dbo_BankAccounts_DestinationAccountId" Association="Self.FK_dbo_Entries_dbo_BankAccounts_DestinationAccountId">
+            <End Role="BankAccounts" EntitySet="BankAccounts" />
+            <End Role="Entries" EntitySet="Entries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Entries_dbo_PaymentTypes_PaymentTypeId" Association="Self.FK_dbo_Entries_dbo_PaymentTypes_PaymentTypeId">
+            <End Role="PaymentTypes" EntitySet="PaymentTypes" />
+            <End Role="Entries" EntitySet="Entries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entries_AmountInfos" Association="Self.FK_Entries_AmountInfos">
+            <End Role="AmountInfos" EntitySet="AmountInfos" />
+            <End Role="Entries" EntitySet="Entries" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SpendingReportModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AmountInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Amount" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="Currency" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Type" Relationship="Self.FK_dbo_AmountInfos_dbo_Types_TypeId" FromRole="AmountInfos" ToRole="Types" />
+          <NavigationProperty Name="Entries" Relationship="Self.FK_dbo_Entries_dbo_AmountInfos_AmountInfoId" FromRole="AmountInfos" ToRole="Entries" />
+          <NavigationProperty Name="Entries1" Relationship="Self.FK_Entries_AmountInfos" FromRole="AmountInfos" ToRole="Entries" />
+        </EntityType>
+        <EntityType Name="BankAccount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountNumber" Type="Int64" />
+          <Property Name="IBAN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BankId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="Bank" Relationship="Self.FK_dbo_BankAccounts_dbo_Banks_BankId" FromRole="BankAccounts" ToRole="Banks" />
+          <NavigationProperty Name="User" Relationship="Self.FK_dbo_BankAccounts_dbo_Users_UserId" FromRole="BankAccounts" ToRole="Users" />
+          <NavigationProperty Name="Entries" Relationship="Self.FK_dbo_Entries_dbo_BankAccounts_BankAccountID" FromRole="BankAccounts" ToRole="Entries" />
+          <NavigationProperty Name="Entries1" Relationship="Self.FK_dbo_Entries_dbo_BankAccounts_DestinationAccountId" FromRole="BankAccounts" ToRole="Entries" />
+        </EntityType>
+        <EntityType Name="Bank">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BankCode" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="BankAccounts" Relationship="Self.FK_dbo_BankAccounts_dbo_Banks_BankId" FromRole="Banks" ToRole="BankAccounts" />
+        </EntityType>
+        <EntityType Name="Entry">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DatePosted" Type="DateTime" Precision="3" />
+          <Property Name="Memo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateAvailable" Type="DateTime" Precision="3" />
+          <Property Name="VariableSymbol" Type="Int64" />
+          <Property Name="ConstantSymbol" Type="Int16" />
+          <Property Name="SpecificSymbol" Type="Int64" />
+          <Property Name="Reference" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentTypeId" Type="Int32" />
+          <Property Name="BankId" Type="Int32" Nullable="false" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AmountInfoId" Type="Int32" Nullable="false" />
+          <Property Name="SourceAccountId" Type="Int32" />
+          <Property Name="DestinationAccountId" Type="Int32" />
+          <NavigationProperty Name="AmountInfo" Relationship="Self.FK_dbo_Entries_dbo_AmountInfos_AmountInfoId" FromRole="Entries" ToRole="AmountInfos" />
+          <NavigationProperty Name="AmountInfo1" Relationship="Self.FK_Entries_AmountInfos" FromRole="Entries" ToRole="AmountInfos" />
+          <NavigationProperty Name="SourceAccount" Relationship="Self.FK_dbo_Entries_dbo_BankAccounts_BankAccountID" FromRole="Entries" ToRole="BankAccounts" />
+          <NavigationProperty Name="DestinationAccount" Relationship="Self.FK_dbo_Entries_dbo_BankAccounts_DestinationAccountId" FromRole="Entries" ToRole="BankAccounts" />
+          <NavigationProperty Name="PaymentType" Relationship="Self.FK_dbo_Entries_dbo_PaymentTypes_PaymentTypeId" FromRole="Entries" ToRole="PaymentTypes" />
+        </EntityType>
+        <EntityType Name="PaymentType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Entries" Relationship="Self.FK_dbo_Entries_dbo_PaymentTypes_PaymentTypeId" FromRole="PaymentTypes" ToRole="Entries" />
+        </EntityType>
+        <EntityType Name="TransactionDescription">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AmountInfos" Relationship="Self.FK_dbo_AmountInfos_dbo_Types_TypeId" FromRole="Types" ToRole="AmountInfos" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="BankAccounts" Relationship="Self.FK_dbo_BankAccounts_dbo_Users_UserId" FromRole="Users" ToRole="BankAccounts" />
+        </EntityType>
+        <Association Name="FK_dbo_AmountInfos_dbo_Types_TypeId">
+          <End Role="Types" Type="Self.Type" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AmountInfos" Type="Self.AmountInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AmountInfos">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Entries_dbo_AmountInfos_AmountInfoId">
+          <End Role="AmountInfos" Type="Self.AmountInfo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Entries" Type="Self.Entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AmountInfos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Entries">
+              <PropertyRef Name="AmountInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entries_AmountInfos">
+          <End Role="AmountInfos" Type="Self.AmountInfo" Multiplicity="1" />
+          <End Role="Entries" Type="Self.Entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AmountInfos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Entries">
+              <PropertyRef Name="AmountInfoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_BankAccounts_dbo_Banks_BankId">
+          <End Role="Banks" Type="Self.Bank" Multiplicity="0..1" />
+          <End Role="BankAccounts" Type="Self.BankAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BankAccounts">
+              <PropertyRef Name="BankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_BankAccounts_dbo_Users_UserId">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="BankAccounts" Type="Self.BankAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BankAccounts">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Entries_dbo_BankAccounts_BankAccountID">
+          <End Role="BankAccounts" Type="Self.BankAccount" Multiplicity="0..1" />
+          <End Role="Entries" Type="Self.Entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Entries">
+              <PropertyRef Name="SourceAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Entries_dbo_BankAccounts_DestinationAccountId">
+          <End Role="BankAccounts" Type="Self.BankAccount" Multiplicity="0..1" />
+          <End Role="Entries" Type="Self.Entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Entries">
+              <PropertyRef Name="DestinationAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Entries_dbo_PaymentTypes_PaymentTypeId">
+          <End Role="PaymentTypes" Type="Self.PaymentType" Multiplicity="0..1" />
+          <End Role="Entries" Type="Self.Entry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Entries">
+              <PropertyRef Name="PaymentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SpendingReportEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="AmountInfos" EntityType="Self.AmountInfo" />
+          <EntitySet Name="BankAccounts" EntityType="Self.BankAccount" />
+          <EntitySet Name="Banks" EntityType="Self.Bank" />
+          <EntitySet Name="Entries" EntityType="Self.Entry" />
+          <EntitySet Name="PaymentTypes" EntityType="Self.PaymentType" />
+          <EntitySet Name="TransactionDescriptions" EntityType="Self.TransactionDescription" />
+          <EntitySet Name="Types" EntityType="Self.Type" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_dbo_AmountInfos_dbo_Types_TypeId" Association="Self.FK_dbo_AmountInfos_dbo_Types_TypeId">
+            <End Role="Types" EntitySet="Types" />
+            <End Role="AmountInfos" EntitySet="AmountInfos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Entries_dbo_AmountInfos_AmountInfoId" Association="Self.FK_dbo_Entries_dbo_AmountInfos_AmountInfoId">
+            <End Role="AmountInfos" EntitySet="AmountInfos" />
+            <End Role="Entries" EntitySet="Entries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entries_AmountInfos" Association="Self.FK_Entries_AmountInfos">
+            <End Role="AmountInfos" EntitySet="AmountInfos" />
+            <End Role="Entries" EntitySet="Entries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_BankAccounts_dbo_Banks_BankId" Association="Self.FK_dbo_BankAccounts_dbo_Banks_BankId">
+            <End Role="Banks" EntitySet="Banks" />
+            <End Role="BankAccounts" EntitySet="BankAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_BankAccounts_dbo_Users_UserId" Association="Self.FK_dbo_BankAccounts_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="BankAccounts" EntitySet="BankAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Entries_dbo_BankAccounts_BankAccountID" Association="Self.FK_dbo_Entries_dbo_BankAccounts_BankAccountID">
+            <End Role="BankAccounts" EntitySet="BankAccounts" />
+            <End Role="Entries" EntitySet="Entries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Entries_dbo_BankAccounts_DestinationAccountId" Association="Self.FK_dbo_Entries_dbo_BankAccounts_DestinationAccountId">
+            <End Role="BankAccounts" EntitySet="BankAccounts" />
+            <End Role="Entries" EntitySet="Entries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Entries_dbo_PaymentTypes_PaymentTypeId" Association="Self.FK_dbo_Entries_dbo_PaymentTypes_PaymentTypeId">
+            <End Role="PaymentTypes" EntitySet="PaymentTypes" />
+            <End Role="Entries" EntitySet="Entries" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SpendingReportModelStoreContainer" CdmEntityContainer="SpendingReportEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="SpendingReportModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AmountInfos">
+            <EntityTypeMapping TypeName="SpendingReportModel.AmountInfo">
+              <MappingFragment StoreEntitySet="AmountInfos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BankAccounts">
+            <EntityTypeMapping TypeName="SpendingReportModel.BankAccount">
+              <MappingFragment StoreEntitySet="BankAccounts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="IBAN" ColumnName="IBAN" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BankId" ColumnName="BankId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Banks">
+            <EntityTypeMapping TypeName="SpendingReportModel.Bank">
+              <MappingFragment StoreEntitySet="Banks">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BankCode" ColumnName="BankCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Entries">
+            <EntityTypeMapping TypeName="SpendingReportModel.Entry">
+              <MappingFragment StoreEntitySet="Entries">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DatePosted" ColumnName="DatePosted" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="DateAvailable" ColumnName="DateAvailable" />
+                <ScalarProperty Name="VariableSymbol" ColumnName="VariableSymbol" />
+                <ScalarProperty Name="ConstantSymbol" ColumnName="ConstantSymbol" />
+                <ScalarProperty Name="SpecificSymbol" ColumnName="SpecificSymbol" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="PaymentTypeId" ColumnName="PaymentTypeId" />
+                <ScalarProperty Name="BankId" ColumnName="BankId" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="AmountInfoId" ColumnName="AmountInfoId" />
+                <ScalarProperty Name="SourceAccountId" ColumnName="SourceAccountId" />
+                <ScalarProperty Name="DestinationAccountId" ColumnName="DestinationAccountId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentTypes">
+            <EntityTypeMapping TypeName="SpendingReportModel.PaymentType">
+              <MappingFragment StoreEntitySet="PaymentTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransactionDescriptions">
+            <EntityTypeMapping TypeName="SpendingReportModel.TransactionDescription">
+              <MappingFragment StoreEntitySet="TransactionDescription">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Types">
+            <EntityTypeMapping TypeName="SpendingReportModel.Type">
+              <MappingFragment StoreEntitySet="Types">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SpendingReportModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

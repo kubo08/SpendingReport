@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c354d20ae49a4337ac96caa32a65fb3d" Name="Diagram1">
+        <EntityTypeShape EntityType="SpendingReportModel.C__MigrationHistory" Width="1.5" PointX="11.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpendingReportModel.AmountInfo" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpendingReportModel.BankAccount" Width="1.5" PointX="3.125" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpendingReportModel.Bank" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpendingReportModel.Entry" Width="1.5" PointX="6.125" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpendingReportModel.PaymentType" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpendingReportModel.TransactionDescription" Width="1.5" PointX="9.625" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpendingReportModel.Type" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpendingReportModel.User" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <AssociationConnector Association="SpendingReportModel.FK_dbo_AmountInfos_dbo_Types_TypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="SpendingReportModel.FK_dbo_Entries_dbo_AmountInfos_AmountInfoId" ManuallyRouted="false" />
+        <AssociationConnector Association="SpendingReportModel.FK_Entries_AmountInfos" ManuallyRouted="false" />
+        <AssociationConnector Association="SpendingReportModel.FK_dbo_BankAccounts_dbo_Banks_BankId" ManuallyRouted="false" />
+        <AssociationConnector Association="SpendingReportModel.FK_dbo_BankAccounts_dbo_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="SpendingReportModel.FK_dbo_Entries_dbo_BankAccounts_BankAccountID" ManuallyRouted="false" />
+        <AssociationConnector Association="SpendingReportModel.FK_dbo_Entries_dbo_BankAccounts_DestinationAccountId" ManuallyRouted="false" />
+        <AssociationConnector Association="SpendingReportModel.FK_dbo_Entries_dbo_PaymentTypes_PaymentTypeId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

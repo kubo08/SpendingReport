@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.ServiceModel;
 using System.Web;
 //using XmlObjects;
-using SpendingReportEntity;
 using XMLParser.Data;
 using Bank = XMLParser.Data.Bank;
 //using SpendingReportEntity.Converters;
@@ -180,48 +180,48 @@ namespace Support
         //    }
         //}
 
-        private static IEnumerable<Payment> FillBankTransactions(IEnumerable<SpendingReportEntity.Entry> transactions)
-        {
-            return transactions.Select(transaction => new Payment
-            {
-                DateAvailable = transaction.DateAvailable,
-                ConstantSymbol = transaction.ConstantSymbol.HasValue ? transaction.ConstantSymbol.Value : (short)0,
-                DatePosted = transaction.DatePosted,
-                Description = transaction.Memo,
-                Reference = transaction.Reference,
-                SpecificSymbol = transaction.SpecificSymbol.HasValue ? transaction.SpecificSymbol.Value : (long)0,
-                TransactionName = transaction.Name,
-                VariableSymbol = transaction.VariableSymbol.HasValue ? transaction.VariableSymbol.Value : (long)0,
-                BankAccount = new XMLParser.Data.BankAccount
-                    {
-                        AccountID = transaction.DestinationAccount.AccountNumber.HasValue ? transaction.DestinationAccount.AccountNumber.Value : 0,
-                        IBan = transaction.DestinationAccount.IBAN,
-                        Bank = new Bank
-                            {
-                                //Name = transaction.BankAccount.BankId.HasValue ? ((Bank.bank?) transaction.BankAccount.BankId.Value) : null,
-                                BankID = (ushort)transaction.DestinationAccount.Bank.BankCode
-                            }
-                    },
-                TransactionAmount = new XMLParser.Data.AmountInfo
-                {
-                    Amount = transaction.AmountInfo.Amount,
-                    Currency = transaction.AmountInfo.Currency,
-                    Type = (AmountType)transaction.AmountInfo.TypeId
-                },
-                PaymentType = transaction.PaymentTypeId.HasValue ? (TypeOfPayment?)transaction.PaymentTypeId : null,
-                Purpose = GetTransactionPurposes(transaction.ID)
-            }).ToList();
-        }
+        //private static IEnumerable<Payment> FillBankTransactions(IEnumerable<SpendingReportEntity.Entry> transactions)
+        //{
+        //    return transactions.Select(transaction => new Payment
+        //    {
+        //        DateAvailable = transaction.DateAvailable,
+        //        ConstantSymbol = transaction.ConstantSymbol.HasValue ? transaction.ConstantSymbol.Value : (short)0,
+        //        DatePosted = transaction.DatePosted,
+        //        Description = transaction.Memo,
+        //        Reference = transaction.Reference,
+        //        SpecificSymbol = transaction.SpecificSymbol.HasValue ? transaction.SpecificSymbol.Value : (long)0,
+        //        TransactionName = transaction.Name,
+        //        VariableSymbol = transaction.VariableSymbol.HasValue ? transaction.VariableSymbol.Value : (long)0,
+        //        BankAccount = new XMLParser.Data.BankAccount
+        //            {
+        //                AccountID = transaction.DestinationAccount.AccountNumber.HasValue ? transaction.DestinationAccount.AccountNumber.Value : 0,
+        //                IBan = transaction.DestinationAccount.IBAN,
+        //                Bank = new Bank
+        //                    {
+        //                        //Name = transaction.BankAccount.BankId.HasValue ? ((Bank.bank?) transaction.BankAccount.BankId.Value) : null,
+        //                        BankID = (ushort)transaction.DestinationAccount.Bank.BankCode
+        //                    }
+        //            },
+        //        TransactionAmount = new XMLParser.Data.AmountInfo
+        //        {
+        //            Amount = transaction.AmountInfo.Amount,
+        //            Currency = transaction.AmountInfo.Currency,
+        //            Type = (AmountType)transaction.AmountInfo.TypeId
+        //        },
+        //        PaymentType = transaction.PaymentTypeId.HasValue ? (TypeOfPayment?)transaction.PaymentTypeId : null,
+        //        //purpose = GetTransactionPurposes(transaction.ID)
+        //    }).ToList();
+        //}
 
-        private static List<string> GetTransactionPurposes(int id)
-        {
-            using (var context = new SpendingContext())
-            {
-                var firstOrDefault = context.Entries.FirstOrDefault(t => t.ID == id);
-                if (firstOrDefault != null)
-                    return firstOrDefault.Purposes.ToList().Select(t => t.Name).ToList();
-            }
-            return null;
-        }
+        //private static List<string> GetTransactionPurposes(int id)
+        //{
+        //    using (var context = new spending())
+        //    {
+        //        var firstOrDefault = context.Entries.FirstOrDefault(t => t.ID == id);
+        //        if (firstOrDefault != null)
+        //            return firstOrDefault.Purposes.ToList().Select(t => t.Name).ToList();
+        //    }
+        //    return null;
+        //}
     }
 }

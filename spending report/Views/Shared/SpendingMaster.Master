@@ -18,6 +18,7 @@
         <%= Html.ActionLink("Home", "Index", "Home") %>
         <%=Html.ActionLink(BankPaymentsL10n.UploadNewTransactions, "SelectFile", "Upload") %>
         <%= Html.ActionLink(BankPaymentsL10n.TransactionList, "Transactions", "List") %>
+        <%= Html.ActionLink("Reports", "Index", "Reports") %>
     </div>
     <div>
         <asp:ContentPlaceHolder ID="MainContent" runat="server">

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="6415cf0a-3420-4d56-8ead-30716e5f77bb" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:64737/TransactionDescriptionService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="TransactionDescriptionService.disco" MetadataType="Disco" ID="fe95fee3-7855-437f-9bfe-7c7997afb985" SourceId="1" SourceUrl="http://localhost:64737/TransactionDescriptionService.svc?disco" />
+    <MetadataFile FileName="TransactionDescriptionService.wsdl" MetadataType="Wsdl" ID="c3a1df8f-ec8e-4cad-88ef-77214f050d86" SourceId="1" SourceUrl="http://localhost:64737/TransactionDescriptionService.svc?wsdl" />
+    <MetadataFile FileName="TransactionDescriptionService.xsd" MetadataType="Schema" ID="f6f45ce1-4fc4-441d-a936-bfa3d4abe5be" SourceId="1" SourceUrl="http://localhost:64737/TransactionDescriptionService.svc?xsd=xsd0" />
+    <MetadataFile FileName="TransactionDescriptionService1.xsd" MetadataType="Schema" ID="f03c4d2d-a879-41f0-b33e-f490d45f3662" SourceId="1" SourceUrl="http://localhost:64737/TransactionDescriptionService.svc?xsd=xsd1" />
+    <MetadataFile FileName="TransactionDescriptionService2.xsd" MetadataType="Schema" ID="958bc8ac-f3ad-40bd-976e-274946a656e6" SourceId="1" SourceUrl="http://localhost:64737/TransactionDescriptionService.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

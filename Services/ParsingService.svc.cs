@@ -5,9 +5,9 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
-using SpendingReportEntity;
+using SpendingReportEntity4;
 using XMLParser.Data;
-using entity = SpendingReportEntity;
+using entity = SpendingReportEntity4;
 using data = XMLParser.Data;
 
 
@@ -23,7 +23,7 @@ namespace Services
 
             try
             {
-                using (var context = new SpendingContext())
+                using (var context = new SpendingReportEntities())
                 {
                     //if (!bankPayments.Bank.BankID.HasValue)
                     //{
@@ -76,7 +76,7 @@ namespace Services
                             ImportWithPocessedTransactions.Account.Payments.Add(tr);
                             continue;
                         }
-                        Entry newTransaction = new Entry
+                        entity.Entry newTransaction = new entity.Entry
                         {
                             ConstantSymbol = transaction.ConstantSymbol,
                             VariableSymbol = transaction.VariableSymbol,
@@ -152,7 +152,7 @@ namespace Services
         /// <param name="context">The context.</param>
         /// <param name="transaction">The transaction.</param>
         /// <returns></returns>
-        private bool IsTransactionExist(SpendingContext context, Payment transaction)
+        private bool IsTransactionExist(SpendingReportEntities context, Payment transaction)
         {
             var date = transaction.DateAvailable;
             var item =
@@ -170,19 +170,19 @@ namespace Services
         /// <param name="context">The context.</param>
         /// <param name="type">The type.</param>
         /// <returns></returns>
-        private entity.Type GetTransactionType(SpendingContext context, string type)
+        private entity.Type GetTransactionType(SpendingReportEntities context, string type)
         {
             return context.Types.FirstOrDefault(
                 item => item.TypeName.ToLower().Trim() == type.ToLower().Trim());
         }
 
-        private entity.Bank GetBank(SpendingContext context, string Name)
+        private entity.Bank GetBank(SpendingReportEntities context, string Name)
         {
             return context.Banks.FirstOrDefault(
                 item => item.Name.ToLower().Trim() == Name.ToLower().Trim());
         }
 
-        private entity.Bank GetBank(SpendingContext context, ushort bankCode)
+        private entity.Bank GetBank(SpendingReportEntities context, ushort bankCode)
         {
             return context.Banks.FirstOrDefault(
                 item => item.BankCode == bankCode);
@@ -190,7 +190,7 @@ namespace Services
 
         public IEnumerable<Entry> GetTransactions()
         {
-            using (var context = new SpendingContext())
+            using (var context = new SpendingReportEntities())
             {
                 return context.Entries.ToList();
             }

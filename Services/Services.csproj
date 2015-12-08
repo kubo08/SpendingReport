@@ -67,17 +67,22 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ParsingService.svc" />
+    <Content Include="TransactionDescriptionService.svc" />
     <Content Include="TransactionsOperationsService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers.cs" />
+    <Compile Include="ITransactionDescriptionService.cs" />
     <Compile Include="ITransactionsOperationsService.cs" />
     <Compile Include="ParsingService.svc.cs">
       <DependentUpon>ParsingService.svc</DependentUpon>
     </Compile>
     <Compile Include="IParsingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TransactionDescriptionService.svc.cs">
+      <DependentUpon>TransactionDescriptionService.svc</DependentUpon>
+    </Compile>
     <Compile Include="TransactionsOperationsService.svc.cs">
       <DependentUpon>TransactionsOperationsService.svc</DependentUpon>
     </Compile>
@@ -99,9 +104,13 @@
       <Project>{11503e12-6e83-475f-9baf-4a96aaa686fe}</Project>
       <Name>XMLParser.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SpendingReportEntity3\SpendingReportEntity3.csproj">
-      <Project>{f84b6da6-1801-4b0b-a043-f50d39791082}</Project>
-      <Name>SpendingReportEntity3</Name>
+    <ProjectReference Include="..\SpendingReport.Models\SpendingReport.Models.csproj">
+      <Project>{ad3b9b8e-7217-44af-8657-58cddab915dc}</Project>
+      <Name>SpendingReport.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpendingReportEntity4\SpendingReportEntity4.csproj">
+      <Project>{8ce47e95-f001-4cbc-82ed-c875695fbb4c}</Project>
+      <Name>SpendingReportEntity4</Name>
     </ProjectReference>
     <ProjectReference Include="..\XMLParser\XMLParser.csproj">
       <Project>{449c6283-cdff-4083-94b5-7b7b199d1ee6}</Project>

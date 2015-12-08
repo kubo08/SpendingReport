@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using SpendingReportEntity;
+using SpendingReport.Models;
+using SpendingReportEntity4;
+using BankAccount = SpendingReport.Models.BankAccount;
 
 namespace Services
 {
@@ -10,21 +12,27 @@ namespace Services
     // NOTE: In order to launch WCF Test Client for testing this service, please select TransactionsOperationsServiceService.svc or TransactionsOperationsServiceService.svc.cs at the Solution Explorer and start debugging.
     public class TransactionsOperationsService : ITransactionsOperationsService
     {
-        public IEnumerable<Transaction> GetTransactionsByUserID(int userId)
+        public TransactionsModel GetTransactionsByUserID(int userId, int skip, int take)
         {
             try
             {
-                using (var context = new SpendingContext())
+                using (var context = new SpendingReportEntities())
                 {
                     var transactions =
+
                         context.Entries.Where(
-                            e => e.SourceAccount.User.Id == userId).Include("DestinationAccount").Include("DestinationAccount.Bank").Include("AmountInfo");
-                    var result = new List<Transaction>();
-                    foreach (var item in transactions)
+                            e => e.SourceAccount.User.Id == userId).Include("DestinationAccount").Include("DestinationAccount.Bank").Include("AmountInfo").OrderBy(a => a.DatePosted);
+                    var resultTransactions = new List<Transaction>();
+                    foreach (var item in transactions.Skip(skip).Take(take))
                     {
                         var transaction = new Transaction();
                         transaction.Description = item.Memo;
                         transaction.Name = item.Name;
+                        transaction.DateAvailable = item.DateAvailable;
+                        transaction.DatePosted = item.DatePosted;
+                        transaction.SpecificSymbol = item.SpecificSymbol.ToString();
+                        transaction.VariableSymbol = item.VariableSymbol.ToString();
+                        transaction.ConstantSymbol = item.ConstantSymbol.ToString();
                         var accountNumber = item.DestinationAccount.AccountNumber;
                         var bankAccount = new BankAccount();
                         if (accountNumber != null && accountNumber != 0)
@@ -33,6 +41,7 @@ namespace Services
                                 accountNumber.Value;
                             if (item.DestinationAccount.Bank != null)
                             {
+
                                 bankAccount.BankCode = item.DestinationAccount.Bank.BankCode;
                                 bankAccount.BankName = item.DestinationAccount.Bank.Name;
                             }
@@ -43,11 +52,16 @@ namespace Services
                         transactionAmount.Amount = item.AmountInfo.Amount;
                         transactionAmount.Currency = item.AmountInfo.Currency;
                         if (item.PaymentType != null)
-                            transactionAmount.PaymentType = item.PaymentType.Id;
-                        transactionAmount.TransactionType = item.AmountInfo.Type.Id;
+                            transactionAmount.PaymentType = item.PaymentType.Name;
+                        transactionAmount.TransactionType = item.AmountInfo.Type.TypeName;
                         transaction.TransacionAmount = transactionAmount;
-                        result.Add(transaction);
+                        resultTransactions.Add(transaction);
                     }
+                    var result = new TransactionsModel
+                    {
+                        TotalItems = transactions.Count(),
+                        Transactions = resultTransactions
+                    };
                     return result;
                 }
             }

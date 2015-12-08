@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMLParser", "XMLParser\XMLParser.csproj", "{449C6283-CDFF-4083-94B5-7B7B199D1EE6}"
 EndProject
@@ -26,6 +26,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpendingReportEntity3", "SpendingReportEntity3\SpendingReportEntity3.csproj", "{F84B6DA6-1801-4B0B-A043-F50D39791082}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{3537A5BB-502F-4174-AD6E-FC85B5BE4E6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpendingReportEntity4", "SpendingReportEntity4\SpendingReportEntity4.csproj", "{8CE47E95-F001-4CBC-82ED-C875695FBB4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpendingReport.Models", "SpendingReport.Models\SpendingReport.Models.csproj", "{AD3B9B8E-7217-44AF-8657-58CDDAB915DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,14 @@ Global
 		{3537A5BB-502F-4174-AD6E-FC85B5BE4E6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3537A5BB-502F-4174-AD6E-FC85B5BE4E6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3537A5BB-502F-4174-AD6E-FC85B5BE4E6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CE47E95-F001-4CBC-82ED-C875695FBB4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CE47E95-F001-4CBC-82ED-C875695FBB4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CE47E95-F001-4CBC-82ED-C875695FBB4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CE47E95-F001-4CBC-82ED-C875695FBB4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD3B9B8E-7217-44AF-8657-58CDDAB915DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD3B9B8E-7217-44AF-8657-58CDDAB915DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD3B9B8E-7217-44AF-8657-58CDDAB915DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD3B9B8E-7217-44AF-8657-58CDDAB915DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

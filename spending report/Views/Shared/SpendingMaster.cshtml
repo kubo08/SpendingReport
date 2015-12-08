@@ -1,0 +1,27 @@
+﻿@using System.Web.UI.WebControls
+@using spending_report.L10n
+
+<!DOCTYPE html>
+
+<html>
+<head >
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+    <meta name="description" content="The description of my page" />
+</head>
+<body>
+    <div>
+        <h1>Spending report</h1>
+    </div>
+    <div class="spending-menu">
+        @Html.ActionLink("Home", "Index", "Home") 
+        @Html.ActionLink(BankPaymentsL10n.UploadNewTransactions, "SelectFile", "Upload") 
+        @Html.ActionLink(BankPaymentsL10n.TransactionList, "Transactions", "List") 
+        @Html.ActionLink("Reports", "Index", "Reports")
+    </div>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

@@ -1,7 +1,6 @@
-﻿<%@ Page Title="Title" Language="C#" Inherits="System.Web.Mvc.ViewPage<spending_report.Models.TransactionsModel>" MasterPageFile="~/Views/Shared/SpendingMaster.Master" %>
+﻿<%@ Page Title="Title" Language="C#" Inherits="System.Web.Mvc.ViewPage<spending_report.ViewModels.TransactionsListModel>" MasterPageFile="~/Views/Shared/SpendingMaster.Master" %>
 <%@ Import Namespace="PagedList.Mvc" %>
 <%@ Import Namespace="spending_report.L10n" %>
-<%@ Import Namespace="XMLParser.Data" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
@@ -76,7 +75,7 @@
                     <%= item.BankAccount.AccountNumber %>        
                 </td>
                 <td>
-                    <%= item.TransacionAmount.PaymentType %>
+                    <%= item.TransacionAmount.TransactionType %>
                 </td>
                 <td>
                     <%--<%= item.Purpose %>--%>
@@ -91,7 +90,7 @@
                     <%= item.Description %>
                 </td>
                 <td>
-<%--                    <%= item.DatePosted %>
+                    <%= item.DatePosted %>
                 </td>
                 <td>
                     <%= item.DateAvailable %>
@@ -103,7 +102,7 @@
                     <%= item.VariableSymbol %>
                 </td>
                 <td>
-                    <%= item.ConstantSymbol %>--%>
+                    <%= item.ConstantSymbol %>
                 </td>
             </tr>
             <% } ;%>
