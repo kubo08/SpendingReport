@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace SpendingReport.ViewModels
+namespace spending_report.ViewModels
 {
     public class SingleDescriptionViewModel
     {

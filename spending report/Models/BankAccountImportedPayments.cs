@@ -5,14 +5,15 @@ using System.Web;
 using PagedList;
 using SpendingReport.Helpers;
 using XMLParser.Data;
+using data = XMLParser.Data;
 
 namespace SpendingReport.Models
 {
     public class BankAccountImportedPayments
     {
-        private BankAccount _account;
+        private data.BankAccount _account;
 
-        public BankAccount Account
+        public data.BankAccount Account
         {
             get { return _account; }
             set { _account = value; }

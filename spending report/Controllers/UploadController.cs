@@ -39,7 +39,7 @@ namespace SpendingReport.Controllers
             {
                 path = XMLHelpers.SaveFile(Request.Files, Server.MapPath("~/temp/"));
 
-                Parser parser = new Parser(path);
+                var parser = new Parser(path);
                 using (var svc = new ParsingServiceClient())
                 {
                     import = svc.SaveData(parser.GetBankAccountWithNewPayments(path), 1);
@@ -58,7 +58,7 @@ namespace SpendingReport.Controllers
             Session["import"] = import;
 
 
-            BankAccountImportedPayments bankImportedPayments = new BankAccountImportedPayments
+            var bankImportedPayments = new BankAccountImportedPayments
             {
                 Transactions = import.Account.Payments.ToPagedList(1, PAGE_SIZE),
                 Pager = new Pager
