@@ -34,5 +34,6 @@ namespace SpendingReportEntity4
         public virtual DbSet<TransactionDescription> TransactionDescriptions { get; set; }
         public virtual DbSet<Type> Types { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<DescriptionName> DescriptionNames { get; set; }
     }
 }

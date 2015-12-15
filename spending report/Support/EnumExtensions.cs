@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Resources;
 using System.Web;
-using spending_report.L10n;
+using SpendingReport.L10n;
 
 
 namespace Support

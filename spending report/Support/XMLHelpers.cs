@@ -208,7 +208,7 @@ namespace Support
         //            Currency = transaction.AmountInfo.Currency,
         //            Type = (AmountType)transaction.AmountInfo.TypeId
         //        },
-        //        PaymentType = transaction.PaymentTypeId.HasValue ? (TypeOfPayment?)transaction.PaymentTypeId : null,
+        //        TransactionDescriptionsViewModel = transaction.PaymentTypeId.HasValue ? (TypeOfPayment?)transaction.PaymentTypeId : null,
         //        //purpose = GetTransactionPurposes(transaction.ID)
         //    }).ToList();
         //}

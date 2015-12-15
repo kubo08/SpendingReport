@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace spending_report.Controllers
+namespace SpendingReport.Controllers
 {
     public class HomeController : Controller
     {

@@ -4,7 +4,7 @@
   <xs:element name="AddTransactionDescription">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/SpendingReport.Models" minOccurs="0" name="model" nillable="true" type="q1:TransactionDescription" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/SpendingReport.Models" minOccurs="0" name="model" nillable="true" type="q1:DescriptionModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -13,6 +13,42 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="AddTransactionDescriptionResult" type="xs:boolean" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllTransactionDescriptions">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllTransactionDescriptionsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/SpendingReport.Models" minOccurs="0" name="GetAllTransactionDescriptionsResult" nillable="true" type="q2:ArrayOfTransactionDescriptionsModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTransactionDescriptionsById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTransactionDescriptionsByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/SpendingReport.Models" minOccurs="0" name="GetTransactionDescriptionsByIdResult" nillable="true" type="q3:TransactionDescriptionsModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateAllDescriptions">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateAllDescriptionsResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

@@ -11,7 +11,7 @@
     <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>spending_report</RootNamespace>
+    <RootNamespace>SpendingReport</RootNamespace>
     <AssemblyName>spending_report</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
@@ -144,6 +144,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\DescriptionsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ListController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
@@ -166,7 +167,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\PaymentType.cs" />
+    <Compile Include="ViewModels\SingleDescriptionViewModel.cs" />
+    <Compile Include="ViewModels\TransactionDescriptionsViewModel.cs" />
     <Compile Include="ViewModels\TransactionsModel.cs" />
     <Compile Include="Service References\remote.ParsingService\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -248,6 +250,8 @@
     <Content Include="Properties\DataSources\XMLParser.Data.Import.datasource" />
     <Content Include="Properties\DataSources\SpendingReport.Models.Transaction.datasource" />
     <Content Include="Properties\DataSources\SpendingReport.Models.TransactionsModel.datasource" />
+    <Content Include="Properties\DataSources\SpendingReport.Models.TransactionDescription.datasource" />
+    <Content Include="Properties\DataSources\SpendingReport.Models.TransactionDescriptionsModel.datasource" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -271,6 +275,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Service References\remote.ParsingService\SpendingReport.remote.ParsingService.Entry.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\remote.TransactionDescriptionService\TransactionDescriptionService.wsdl" />
     <None Include="Service References\remote.TransactionDescriptionService\TransactionDescriptionService.xsd">
       <SubType>Designer</SubType>
@@ -328,9 +335,6 @@
     <None Include="Service References\remote.ParsingService\ParsingService4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Service References\remote.ParsingService\spending_report.remote.ParsingService.Entry.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <None Include="Service References\remote.TransactionsOperationsService\TransactionsOperationsService.wsdl" />
     <None Include="Service References\remote.TransactionsOperationsService\TransactionsOperationsService.xsd">
       <SubType>Designer</SubType>
@@ -343,7 +347,9 @@
     </None>
     <Content Include="Views\Shared\SpendingMaster.cshtml" />
     <Content Include="Views\Reports\Index.cshtml" />
-    <Content Include="Views\Reports\PaymentDescriptions.cshtml" />
+    <Content Include="Views\Descriptions\Index.cshtml" />
+    <Content Include="Views\Descriptions\NewDescription.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DescriptionsTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

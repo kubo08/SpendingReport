@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
-using System.Text;
 using SpendingReport.Models;
 
 namespace Services
@@ -13,6 +9,15 @@ namespace Services
     public interface ITransactionDescriptionService
     {
         [OperationContract]
-        bool AddTransactionDescription(TransactionDescription model);
+        bool AddTransactionDescription(DescriptionModel model);
+
+        [OperationContract]
+        IEnumerable<TransactionDescriptionsModel> GetAllTransactionDescriptions();
+
+        [OperationContract]
+        TransactionDescriptionsModel GetTransactionDescriptionsById(int id);
+
+        [OperationContract]
+        void UpdateAllDescriptions();
     }
 }

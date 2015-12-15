@@ -1,10 +1,12 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Web.Mvc;
 using SpendingReport.Models;
-using spending_report.remote.TransactionDescriptionService;
-using spending_report.ViewModels;
+using SpendingReport.remote.TransactionDescriptionService;
+using SpendingReport.ViewModels;
 
 
-namespace spending_report.Controllers
+namespace SpendingReport.Controllers
 {
     public class ReportsController : Controller
     {
@@ -16,25 +18,6 @@ namespace spending_report.Controllers
             return View();
         }
 
-        public ActionResult PaymentDescriptions()
-        {
-            return View();
-        }
-
-        public ActionResult AddPaymentDescription(PaymentType viewModel)
-        {
-            using (var svc = new TransactionDescriptionServiceClient())
-            {
-                var model = new TransactionDescription
-                {
-                    Name = viewModel.TypeName,
-                    Description = viewModel.Description
-                };
-                svc.AddTransactionDescription(model);
-            }
-
-            return View("PaymentDescriptions");
-        }
 
     }
 }

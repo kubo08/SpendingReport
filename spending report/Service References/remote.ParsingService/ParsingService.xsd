@@ -4,21 +4,30 @@
   <xs:import schemaLocation="http://localhost:64737/ParsingService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:complexType name="Import">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Account" nillable="true" type="tns:BankAccount" />
+      <xs:element minOccurs="0" name="Account" nillable="true" type="tns:ImportedBankAccount" />
       <xs:element minOccurs="0" name="From" type="xs:dateTime" />
       <xs:element minOccurs="0" name="To" type="xs:dateTime" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Import" nillable="true" type="tns:Import" />
-  <xs:complexType name="BankAccount">
+  <xs:complexType name="ImportedBankAccount">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BankAccountBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Payments" nillable="true" type="tns:ArrayOfImportedPayment" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ImportedBankAccount" nillable="true" type="tns:ImportedBankAccount" />
+  <xs:complexType name="BankAccountBase">
     <xs:sequence>
       <xs:element minOccurs="0" name="AccountID" nillable="true" type="xs:long" />
       <xs:element minOccurs="0" name="Bank" nillable="true" type="tns:Bank" />
       <xs:element minOccurs="0" name="IBan" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Payments" nillable="true" type="tns:ArrayOfPayment" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="BankAccount" nillable="true" type="tns:BankAccount" />
+  <xs:element name="BankAccountBase" nillable="true" type="tns:BankAccountBase" />
   <xs:complexType name="Bank">
     <xs:sequence>
       <xs:element minOccurs="0" name="Account" nillable="true" type="tns:BankAccount" />
@@ -26,6 +35,16 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Bank" nillable="true" type="tns:Bank" />
+  <xs:complexType name="BankAccount">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BankAccountBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Payments" nillable="true" type="tns:ArrayOfPayment" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BankAccount" nillable="true" type="tns:BankAccount" />
   <xs:complexType name="ArrayOfPayment">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Payment" nillable="true" type="tns:Payment" />
@@ -39,7 +58,7 @@
       <xs:element minOccurs="0" name="DateAvailable" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="DatePosted" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="PaymentType" nillable="true" type="tns:Payment.TypeOfPayment" />
+      <xs:element minOccurs="0" name="PaymentType" nillable="true" type="tns:TypeOfPayment" />
       <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Purpose" nillable="true" type="q1:ArrayOfstring" />
       <xs:element minOccurs="0" name="Reference" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SpecificSymbol" type="xs:long" />
@@ -49,14 +68,14 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Payment" nillable="true" type="tns:Payment" />
-  <xs:simpleType name="Payment.TypeOfPayment">
+  <xs:simpleType name="TypeOfPayment">
     <xs:restriction base="xs:string">
       <xs:enumeration value="CardPayment" />
       <xs:enumeration value="ATMWithdrawall" />
       <xs:enumeration value="CashPayment" />
     </xs:restriction>
   </xs:simpleType>
-  <xs:element name="Payment.TypeOfPayment" nillable="true" type="tns:Payment.TypeOfPayment" />
+  <xs:element name="TypeOfPayment" nillable="true" type="tns:TypeOfPayment" />
   <xs:complexType name="AmountInfo">
     <xs:sequence>
       <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
@@ -91,4 +110,20 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="AmountType" nillable="true" type="tns:AmountType" />
+  <xs:complexType name="ArrayOfImportedPayment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ImportedPayment" nillable="true" type="tns:ImportedPayment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfImportedPayment" nillable="true" type="tns:ArrayOfImportedPayment" />
+  <xs:complexType name="ImportedPayment">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Payment">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Imported" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ImportedPayment" nillable="true" type="tns:ImportedPayment" />
 </xs:schema>

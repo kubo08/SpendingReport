@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using PagedList;
 
-namespace spending_report.Helpers
+namespace SpendingReport.Helpers
 {
     public class PagerList<T> : BasePagedList<T>
     {

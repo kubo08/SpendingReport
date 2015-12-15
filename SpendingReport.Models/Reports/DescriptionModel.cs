@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
 
-namespace spending_report.ViewModels
+namespace SpendingReport.Models
 {
-    public class PaymentType
+    public class DescriptionModel : DescriptionBase
     {
-        public string TypeName { get; set; }
-
         public string Description { get; set; }
     }
 }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace spending_report.remote.TransactionsOperationsService {
+namespace SpendingReport.remote.TransactionsOperationsService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -25,12 +25,12 @@ namespace spending_report.remote.TransactionsOperationsService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ITransactionsOperationsServiceChannel : spending_report.remote.TransactionsOperationsService.ITransactionsOperationsService, System.ServiceModel.IClientChannel {
+    public interface ITransactionsOperationsServiceChannel : SpendingReport.remote.TransactionsOperationsService.ITransactionsOperationsService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class TransactionsOperationsServiceClient : System.ServiceModel.ClientBase<spending_report.remote.TransactionsOperationsService.ITransactionsOperationsService>, spending_report.remote.TransactionsOperationsService.ITransactionsOperationsService {
+    public partial class TransactionsOperationsServiceClient : System.ServiceModel.ClientBase<SpendingReport.remote.TransactionsOperationsService.ITransactionsOperationsService>, SpendingReport.remote.TransactionsOperationsService.ITransactionsOperationsService {
         
         public TransactionsOperationsServiceClient() {
         }

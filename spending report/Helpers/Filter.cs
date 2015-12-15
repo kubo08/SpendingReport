@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace spending_report.Models
+namespace SpendingReport.Models
 {
     public abstract class Filter
     {

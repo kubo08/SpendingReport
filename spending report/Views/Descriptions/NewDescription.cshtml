@@ -1,0 +1,16 @@
+﻿@model SpendingReport.ViewModels.SingleDescriptionViewModel
+@{
+    ViewBag.Title = "NewTransactionDescription";
+    Layout = "~/Views/Shared/SpendingMaster.cshtml";
+}
+
+@using (Html.BeginForm("CreateDescription", "Reports"))
+{
+        @:Type name:
+        @Html.EditorFor(i => i.Name)
+
+        @:Description:
+        @Html.EditorFor(i => i.Description)
+
+        <input type="submit" value="Send" />
+}

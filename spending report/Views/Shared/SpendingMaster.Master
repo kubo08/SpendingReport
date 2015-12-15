@@ -1,5 +1,5 @@
 ﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
-<%@ Import Namespace="spending_report.L10n" %>
+<%@ Import Namespace="SpendingReport.L10n" %>
 
 <!DOCTYPE html>
 

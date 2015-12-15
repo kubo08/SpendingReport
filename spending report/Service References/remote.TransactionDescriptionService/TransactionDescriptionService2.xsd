@@ -1,10 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/SpendingReport.Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/SpendingReport.Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="TransactionDescription">
+  <xs:complexType name="DescriptionModel">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:DescriptionBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DescriptionModel" nillable="true" type="tns:DescriptionModel" />
+  <xs:complexType name="DescriptionBase">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="TransactionDescription" nillable="true" type="tns:TransactionDescription" />
+  <xs:element name="DescriptionBase" nillable="true" type="tns:DescriptionBase" />
+  <xs:complexType name="ArrayOfTransactionDescriptionsModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TransactionDescriptionsModel" nillable="true" type="tns:TransactionDescriptionsModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTransactionDescriptionsModel" nillable="true" type="tns:ArrayOfTransactionDescriptionsModel" />
+  <xs:complexType name="TransactionDescriptionsModel">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:DescriptionBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Description" nillable="true" type="tns:ArrayOfDescriptionNameModel" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TransactionDescriptionsModel" nillable="true" type="tns:TransactionDescriptionsModel" />
+  <xs:complexType name="ArrayOfDescriptionNameModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DescriptionNameModel" nillable="true" type="tns:DescriptionNameModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDescriptionNameModel" nillable="true" type="tns:ArrayOfDescriptionNameModel" />
+  <xs:complexType name="DescriptionNameModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DescriptionNameModel" nillable="true" type="tns:DescriptionNameModel" />
 </xs:schema>

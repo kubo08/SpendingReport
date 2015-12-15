@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using PagedList;
-using spending_report.Helpers;
+using SpendingReport.Helpers;
 using XMLParser.Data;
 
-namespace spending_report.Models
+namespace SpendingReport.Models
 {
     public class BankAccountImportedPayments
     {

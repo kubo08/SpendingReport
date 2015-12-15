@@ -72,7 +72,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers.cs" />
+    <Compile Include="Helpers\UserHelpers.cs" />
+    <Compile Include="Helpers\Converters.cs" />
     <Compile Include="ITransactionDescriptionService.cs" />
     <Compile Include="ITransactionsOperationsService.cs" />
     <Compile Include="ParsingService.svc.cs">

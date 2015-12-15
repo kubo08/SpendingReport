@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace spending_report
+namespace SpendingReport
 {
     public static class WebApiConfig
     {

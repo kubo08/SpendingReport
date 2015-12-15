@@ -1,6 +1,6 @@
-﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<spending_report.Models.BankAccountImportedPayments>" MasterPageFile="~/Views/Shared/SpendingMaster.Master" %>
+﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<SpendingReport.Models.BankAccountImportedPayments>" MasterPageFile="~/Views/Shared/SpendingMaster.Master" %>
 <%@ Import Namespace="PagedList.Mvc" %>
-<%@ Import Namespace="spending_report.L10n" %>
+<%@ Import Namespace="SpendingReport.L10n" %>
 <%@ Import Namespace="XMLParser.Data" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">

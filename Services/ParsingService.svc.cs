@@ -31,7 +31,7 @@ namespace Services
                     //}
 
                     //entity.Bank bank = context.Banks.FirstOrDefault(t => t.BankCode == bankPayments.Bank.BankID);
-                    var currentUser = Helpers.GetUserByID(UserId);
+                    var currentUser = Helpers.UserHelpers.GetUserByID(UserId);
                     entity.BankAccount SourceAccount;
                     SourceAccount = currentUser.BankAccounts.FirstOrDefault(t => t.IBAN == bankPayments.Account.IBan);
                     if (SourceAccount == null)

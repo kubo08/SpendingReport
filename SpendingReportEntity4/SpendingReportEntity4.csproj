@@ -62,6 +62,9 @@
     <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>SpendingContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="DescriptionName.cs">
+      <DependentUpon>SpendingContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entry.cs">
       <DependentUpon>SpendingContext.tt</DependentUpon>
     </Compile>

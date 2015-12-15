@@ -1,10 +1,10 @@
 ﻿using System.Web.Mvc;
 using SpendingReport.Models;
-using spending_report.Helpers;
-using spending_report.remote.TransactionsOperationsService;
-using spending_report.ViewModels;
+using SpendingReport.Helpers;
+using SpendingReport.remote.TransactionsOperationsService;
+using SpendingReport.ViewModels;
 
-namespace spending_report.Controllers
+namespace SpendingReport.Controllers
 {
     public class ListController : Controller
     {

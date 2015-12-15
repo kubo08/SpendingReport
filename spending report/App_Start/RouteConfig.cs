@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace spending_report
+namespace SpendingReport
 {
     public class RouteConfig
     {

@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMLParser", "XMLParser\XMLP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpendingReportEntity", "SpendingReportEntity\SpendingReportEntity.csproj", "{32AABC0B-40F7-4486-89A5-B8813FD809E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spending_report", "spending report\spending_report.csproj", "{93D0DEB2-71F4-421D-BDF9-9896FAB5D11C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpendingReport", "spending report\SpendingReport.csproj", "{93D0DEB2-71F4-421D-BDF9-9896FAB5D11C}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F84B6DA6-1801-4B0B-A043-F50D39791082} = {F84B6DA6-1801-4B0B-A043-F50D39791082}
 		{3537A5BB-502F-4174-AD6E-FC85B5BE4E6C} = {3537A5BB-502F-4174-AD6E-FC85B5BE4E6C}

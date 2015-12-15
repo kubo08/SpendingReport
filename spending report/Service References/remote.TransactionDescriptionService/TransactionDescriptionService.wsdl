@@ -13,16 +13,73 @@
   <wsdl:message name="ITransactionDescriptionService_AddTransactionDescription_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddTransactionDescriptionResponse" />
   </wsdl:message>
+  <wsdl:message name="ITransactionDescriptionService_GetAllTransactionDescriptions_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllTransactionDescriptions" />
+  </wsdl:message>
+  <wsdl:message name="ITransactionDescriptionService_GetAllTransactionDescriptions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllTransactionDescriptionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransactionDescriptionService_GetTransactionDescriptionsById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransactionDescriptionsById" />
+  </wsdl:message>
+  <wsdl:message name="ITransactionDescriptionService_GetTransactionDescriptionsById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransactionDescriptionsByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITransactionDescriptionService_UpdateAllDescriptions_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateAllDescriptions" />
+  </wsdl:message>
+  <wsdl:message name="ITransactionDescriptionService_UpdateAllDescriptions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateAllDescriptionsResponse" />
+  </wsdl:message>
   <wsdl:portType name="ITransactionDescriptionService">
     <wsdl:operation name="AddTransactionDescription">
       <wsdl:input wsaw:Action="http://tempuri.org/ITransactionDescriptionService/AddTransactionDescription" message="tns:ITransactionDescriptionService_AddTransactionDescription_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITransactionDescriptionService/AddTransactionDescriptionResponse" message="tns:ITransactionDescriptionService_AddTransactionDescription_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTransactionDescriptions">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITransactionDescriptionService/GetAllTransactionDescriptions" message="tns:ITransactionDescriptionService_GetAllTransactionDescriptions_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITransactionDescriptionService/GetAllTransactionDescriptionsResponse" message="tns:ITransactionDescriptionService_GetAllTransactionDescriptions_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionDescriptionsById">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITransactionDescriptionService/GetTransactionDescriptionsById" message="tns:ITransactionDescriptionService_GetTransactionDescriptionsById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITransactionDescriptionService/GetTransactionDescriptionsByIdResponse" message="tns:ITransactionDescriptionService_GetTransactionDescriptionsById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAllDescriptions">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITransactionDescriptionService/UpdateAllDescriptions" message="tns:ITransactionDescriptionService_UpdateAllDescriptions_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITransactionDescriptionService/UpdateAllDescriptionsResponse" message="tns:ITransactionDescriptionService_UpdateAllDescriptions_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ITransactionDescriptionService" type="tns:ITransactionDescriptionService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="AddTransactionDescription">
       <soap:operation soapAction="http://tempuri.org/ITransactionDescriptionService/AddTransactionDescription" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTransactionDescriptions">
+      <soap:operation soapAction="http://tempuri.org/ITransactionDescriptionService/GetAllTransactionDescriptions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionDescriptionsById">
+      <soap:operation soapAction="http://tempuri.org/ITransactionDescriptionService/GetTransactionDescriptionsById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAllDescriptions">
+      <soap:operation soapAction="http://tempuri.org/ITransactionDescriptionService/UpdateAllDescriptions" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -8,17 +8,17 @@ using System.Threading;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using Microsoft.Ajax.Utilities;
-using spending_report.Helpers;
-using spending_report.Models;
+using SpendingReport.Helpers;
+using SpendingReport.Models;
 using Support;
 using XMLParser.Data;
 using XMLParser;
 using PagedList.Mvc;
 using PagedList;
-using spending_report.remote.ParsingService;
+using SpendingReport.remote.ParsingService;
 using data = XMLParser.Data;
 
-namespace spending_report.Controllers
+namespace SpendingReport.Controllers
 {
     public class UploadController : Controller
     {

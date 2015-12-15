@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SpendingReportModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SpendingReportModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -43,6 +43,14 @@
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="BankCode" Type="smallint" Nullable="false" />
         </EntityType>
+        <EntityType Name="DescriptionNames">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransactionDescriptionId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Entries">
           <Key>
             <PropertyRef Name="ID" />
@@ -63,6 +71,16 @@
           <Property Name="SourceAccountId" Type="int" />
           <Property Name="DestinationAccountId" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SpendingReport.dbo.EntryTansactionDescription' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="EntryTansactionDescription">
+          <Key>
+            <PropertyRef Name="EntryID" />
+            <PropertyRef Name="TransactionDescriptionID" />
+          </Key>
+          <Property Name="EntryID" Type="int" Nullable="false" />
+          <Property Name="TransactionDescriptionID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="PaymentTypes">
           <Key>
             <PropertyRef Name="Id" />
@@ -74,9 +92,8 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Types">
           <Key>
@@ -179,6 +196,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_dbo_EntryTansactionDescription_dbo_EntryTansactionDescription_EntryID">
+          <End Role="Entries" Type="Self.Entries" Multiplicity="1" />
+          <End Role="EntryTansactionDescription" Type="Self.EntryTansactionDescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entries">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EntryTansactionDescription">
+              <PropertyRef Name="EntryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_EntryTansactionDescription_dbo_EntryTansactionDescription_TransactionDescriptionID">
+          <End Role="TransactionDescription" Type="Self.TransactionDescription" Multiplicity="1" />
+          <End Role="EntryTansactionDescription" Type="Self.EntryTansactionDescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionDescription">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EntryTansactionDescription">
+              <PropertyRef Name="TransactionDescriptionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DescriptionNames_TransactionDescription">
+          <End Role="TransactionDescription" Type="Self.TransactionDescription" Multiplicity="1" />
+          <End Role="DescriptionNames" Type="Self.DescriptionNames" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionDescription">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DescriptionNames">
+              <PropertyRef Name="TransactionDescriptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Entries_AmountInfos">
           <End Role="AmountInfos" Type="Self.AmountInfos" Multiplicity="1" />
           <End Role="Entries" Type="Self.Entries" Multiplicity="*" />
@@ -196,11 +249,18 @@
           <EntitySet Name="AmountInfos" EntityType="Self.AmountInfos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BankAccounts" EntityType="Self.BankAccounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Banks" EntityType="Self.Banks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DescriptionNames" EntityType="Self.DescriptionNames" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Entries" EntityType="Self.Entries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentTypes" EntityType="Self.PaymentTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionDescription" EntityType="Self.TransactionDescription" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Types" EntityType="Self.Types" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EntryTansactionDescription" EntityType="Self.EntryTansactionDescription" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [EntryTansactionDescription].[EntryID] AS [EntryID], 
+    [EntryTansactionDescription].[TransactionDescriptionID] AS [TransactionDescriptionID]
+    FROM [dbo].[EntryTansactionDescription] AS [EntryTansactionDescription]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_dbo_AmountInfos_dbo_Types_TypeId" Association="Self.FK_dbo_AmountInfos_dbo_Types_TypeId">
             <End Role="Types" EntitySet="Types" />
             <End Role="AmountInfos" EntitySet="AmountInfos" />
@@ -229,13 +289,24 @@
             <End Role="PaymentTypes" EntitySet="PaymentTypes" />
             <End Role="Entries" EntitySet="Entries" />
           </AssociationSet>
+          <AssociationSet Name="FK_dbo_EntryTansactionDescription_dbo_EntryTansactionDescription_EntryID" Association="Self.FK_dbo_EntryTansactionDescription_dbo_EntryTansactionDescription_EntryID">
+            <End Role="Entries" EntitySet="Entries" />
+            <End Role="EntryTansactionDescription" EntitySet="EntryTansactionDescription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_EntryTansactionDescription_dbo_EntryTansactionDescription_TransactionDescriptionID" Association="Self.FK_dbo_EntryTansactionDescription_dbo_EntryTansactionDescription_TransactionDescriptionID">
+            <End Role="TransactionDescription" EntitySet="TransactionDescription" />
+            <End Role="EntryTansactionDescription" EntitySet="EntryTansactionDescription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DescriptionNames_TransactionDescription" Association="Self.FK_DescriptionNames_TransactionDescription">
+            <End Role="TransactionDescription" EntitySet="TransactionDescription" />
+            <End Role="DescriptionNames" EntitySet="DescriptionNames" />
+          </AssociationSet>
           <AssociationSet Name="FK_Entries_AmountInfos" Association="Self.FK_Entries_AmountInfos">
             <End Role="AmountInfos" EntitySet="AmountInfos" />
             <End Role="Entries" EntitySet="Entries" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SpendingReportModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -309,6 +380,7 @@
           <NavigationProperty Name="SourceAccount" Relationship="Self.FK_dbo_Entries_dbo_BankAccounts_BankAccountID" FromRole="Entries" ToRole="BankAccounts" />
           <NavigationProperty Name="DestinationAccount" Relationship="Self.FK_dbo_Entries_dbo_BankAccounts_DestinationAccountId" FromRole="Entries" ToRole="BankAccounts" />
           <NavigationProperty Name="PaymentType" Relationship="Self.FK_dbo_Entries_dbo_PaymentTypes_PaymentTypeId" FromRole="Entries" ToRole="PaymentTypes" />
+          <NavigationProperty Name="TransactionDescriptions" Relationship="SpendingReportModel.EntryTansactionDescription" FromRole="Entry" ToRole="TransactionDescription" />
         </EntityType>
         <EntityType Name="PaymentType">
           <Key>
@@ -324,7 +396,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Entries" Relationship="SpendingReportModel.EntryTansactionDescription" FromRole="TransactionDescription" ToRole="Entry" />
+          <NavigationProperty Name="DescriptionNames" Relationship="SpendingReportModel.FK_DescriptionNames_TransactionDescription" FromRole="TransactionDescription" ToRole="DescriptionName" />
         </EntityType>
         <EntityType Name="Type">
           <Key>
@@ -483,7 +556,41 @@
             <End Role="PaymentTypes" EntitySet="PaymentTypes" />
             <End Role="Entries" EntitySet="Entries" />
           </AssociationSet>
+          <AssociationSet Name="EntryTansactionDescription" Association="SpendingReportModel.EntryTansactionDescription">
+            <End Role="Entry" EntitySet="Entries" />
+            <End Role="TransactionDescription" EntitySet="TransactionDescriptions" />
+          </AssociationSet>
+          <EntitySet Name="DescriptionNames" EntityType="SpendingReportModel.DescriptionName" />
+          <AssociationSet Name="FK_DescriptionNames_TransactionDescription" Association="SpendingReportModel.FK_DescriptionNames_TransactionDescription">
+            <End Role="TransactionDescription" EntitySet="TransactionDescriptions" />
+            <End Role="DescriptionName" EntitySet="DescriptionNames" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="EntryTansactionDescription">
+          <End Type="SpendingReportModel.Entry" Role="Entry" Multiplicity="*" />
+          <End Type="SpendingReportModel.TransactionDescription" Role="TransactionDescription" Multiplicity="*" />
+        </Association>
+        <EntityType Name="DescriptionName">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TransactionDescriptionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TransactionDescription" Relationship="SpendingReportModel.FK_DescriptionNames_TransactionDescription" FromRole="DescriptionName" ToRole="TransactionDescription" />
+        </EntityType>
+        <Association Name="FK_DescriptionNames_TransactionDescription">
+          <End Type="SpendingReportModel.TransactionDescription" Role="TransactionDescription" Multiplicity="1" />
+          <End Type="SpendingReportModel.DescriptionName" Role="DescriptionName" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionDescription">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DescriptionName">
+              <PropertyRef Name="TransactionDescriptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -565,7 +672,6 @@
               <MappingFragment StoreEntitySet="TransactionDescription">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -580,6 +686,23 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="SpendingReportModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="EntryTansactionDescription" TypeName="SpendingReportModel.EntryTansactionDescription" StoreEntitySet="EntryTansactionDescription">
+            <EndProperty Name="TransactionDescription">
+              <ScalarProperty Name="Id" ColumnName="TransactionDescriptionID" />
+            </EndProperty>
+            <EndProperty Name="Entry">
+              <ScalarProperty Name="ID" ColumnName="EntryID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="DescriptionNames">
+            <EntityTypeMapping TypeName="SpendingReportModel.DescriptionName">
+              <MappingFragment StoreEntitySet="DescriptionNames">
+                <ScalarProperty Name="TransactionDescriptionId" ColumnName="TransactionDescriptionId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

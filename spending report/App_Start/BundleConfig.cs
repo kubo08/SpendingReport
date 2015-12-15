@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace spending_report
+namespace SpendingReport
 {
     public class BundleConfig
     {
