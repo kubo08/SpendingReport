@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using SpendingReport.Models;
 using SpendingReport.remote.TransactionDescriptionService;
@@ -58,6 +59,22 @@ namespace SpendingReport.Controllers
 
         }
 
+        public bool UpdateDescriptions()
+        {
+            using (var svc = new TransactionDescriptionServiceClient())
+            {
+                try
+                {
+                    svc.UpdateAllDescriptions();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
+
         private TransactionDescriptionsViewModel GetAllDescriptions(TransactionDescriptionServiceClient svc)
         {
             var model = new TransactionDescriptionsViewModel
@@ -69,6 +86,8 @@ namespace SpendingReport.Controllers
 
             return model;
         }
+
+
 
     }
 }

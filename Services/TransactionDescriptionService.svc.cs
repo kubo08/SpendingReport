@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using Services.Helpers;
 using SpendingReport.Models;
@@ -65,7 +66,7 @@ namespace Services
                     context.SaveChanges();
 
                     //todo: async
-                    UpdateTransactions(model.Description, description);
+                    UpdateTransactions(model.Description, description.Id);
                 }
 
                 return true;
@@ -106,35 +107,50 @@ namespace Services
         {
             foreach (var description in transactionDescription.DescriptionNames)
             {
-                UpdateTransactions(description.Description, transactionDescription);
+                UpdateTransactions(description.Description, transactionDescription.Id);
             }
         }
 
-        private void UpdateTransactions(string Description, TransactionDescription transactionDescription)
+        private void UpdateTransactions(string Description, int transactionDescriptionID)
         {
-            var transactions = GetTransactionsByDescription(Description);
-            foreach (var transaction in transactions)
+            using (var context = new SpendingReportEntities())
             {
-                if (!transaction.TransactionDescriptions.Contains(transactionDescription))
-                    transaction.TransactionDescriptions.Add(transactionDescription);
+                TransactionDescription transactionDescription;
+                try
+                {
+                    transactionDescription =
+                        context.TransactionDescriptions.SingleOrDefault(i => i.Id == transactionDescriptionID);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("There are more transaction descriptions with id: " + transactionDescriptionID, ex);
+                }
+                var transactions = GetTransactionsByDescription(Description, context);
+                foreach (var transaction in transactions)
+                {
+                    if (!transaction.TransactionDescriptions.Contains(transactionDescription))
+                    {
+                        transaction.TransactionDescriptions.Add(transactionDescription);
+                    }
+                    
+                }
+                context.SaveChanges();
             }
         }
 
-        private IEnumerable<Entry> GetTransactionsByDescription(string description)
+        private IEnumerable<Entry> GetTransactionsByDescription(string description, SpendingReportEntities context)
         {
             try
             {
-                using (var context = new SpendingReportEntities())
-                {
-                    IOrderedQueryable<Entry> transactions = context.Entries.Where(
-                        e => e.Memo.Contains(description) || e.Name.Contains(description))
-                        .Include("DestinationAccount")
-                        .Include("DestinationAccount.Bank")
-                        .Include("AmountInfo")
-                        .OrderBy(a => a.DatePosted);
+                IOrderedQueryable<Entry> transactions = context.Entries.Where(
+                    e => e.Memo.Contains(description) || e.Name.Contains(description))
+                    .Include("DestinationAccount")
+                    .Include("DestinationAccount.Bank")
+                    .Include("AmountInfo")
+                    .OrderBy(a => a.DatePosted);
 
-                    return transactions;
-                }
+                return transactions;
+
             }
             catch (Exception ex)
             {

@@ -255,12 +255,7 @@ warning 6002: The table/view 'SpendingReport.dbo.EntryTansactionDescription' doe
           <EntitySet Name="TransactionDescription" EntityType="Self.TransactionDescription" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Types" EntityType="Self.Types" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="EntryTansactionDescription" EntityType="Self.EntryTansactionDescription" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [EntryTansactionDescription].[EntryID] AS [EntryID], 
-    [EntryTansactionDescription].[TransactionDescriptionID] AS [TransactionDescriptionID]
-    FROM [dbo].[EntryTansactionDescription] AS [EntryTansactionDescription]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="EntryTansactionDescription" EntityType="Self.EntryTansactionDescription" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_dbo_AmountInfos_dbo_Types_TypeId" Association="Self.FK_dbo_AmountInfos_dbo_Types_TypeId">
             <End Role="Types" EntitySet="Types" />
             <End Role="AmountInfos" EntitySet="AmountInfos" />
@@ -381,7 +376,7 @@ warning 6002: The table/view 'SpendingReport.dbo.EntryTansactionDescription' doe
           <NavigationProperty Name="DestinationAccount" Relationship="Self.FK_dbo_Entries_dbo_BankAccounts_DestinationAccountId" FromRole="Entries" ToRole="BankAccounts" />
           <NavigationProperty Name="PaymentType" Relationship="Self.FK_dbo_Entries_dbo_PaymentTypes_PaymentTypeId" FromRole="Entries" ToRole="PaymentTypes" />
           <NavigationProperty Name="TransactionDescriptions" Relationship="SpendingReportModel.EntryTansactionDescription" FromRole="Entry" ToRole="TransactionDescription" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="PaymentType">
           <Key>
             <PropertyRef Name="Id" />
@@ -396,8 +391,8 @@ warning 6002: The table/view 'SpendingReport.dbo.EntryTansactionDescription' doe
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Entries" Relationship="SpendingReportModel.EntryTansactionDescription" FromRole="TransactionDescription" ToRole="Entry" />
           <NavigationProperty Name="DescriptionNames" Relationship="SpendingReportModel.FK_DescriptionNames_TransactionDescription" FromRole="TransactionDescription" ToRole="DescriptionName" />
+          <NavigationProperty Name="Entries" Relationship="SpendingReportModel.EntryTansactionDescription" FromRole="TransactionDescription" ToRole="Entry" />
         </EntityType>
         <EntityType Name="Type">
           <Key>
@@ -556,20 +551,16 @@ warning 6002: The table/view 'SpendingReport.dbo.EntryTansactionDescription' doe
             <End Role="PaymentTypes" EntitySet="PaymentTypes" />
             <End Role="Entries" EntitySet="Entries" />
           </AssociationSet>
-          <AssociationSet Name="EntryTansactionDescription" Association="SpendingReportModel.EntryTansactionDescription">
-            <End Role="Entry" EntitySet="Entries" />
-            <End Role="TransactionDescription" EntitySet="TransactionDescriptions" />
-          </AssociationSet>
           <EntitySet Name="DescriptionNames" EntityType="SpendingReportModel.DescriptionName" />
           <AssociationSet Name="FK_DescriptionNames_TransactionDescription" Association="SpendingReportModel.FK_DescriptionNames_TransactionDescription">
             <End Role="TransactionDescription" EntitySet="TransactionDescriptions" />
             <End Role="DescriptionName" EntitySet="DescriptionNames" />
           </AssociationSet>
-        </EntityContainer>
-        <Association Name="EntryTansactionDescription">
-          <End Type="SpendingReportModel.Entry" Role="Entry" Multiplicity="*" />
-          <End Type="SpendingReportModel.TransactionDescription" Role="TransactionDescription" Multiplicity="*" />
-        </Association>
+          <AssociationSet Name="EntryTansactionDescription" Association="Self.EntryTansactionDescription">
+            <End Role="Entry" EntitySet="Entries" />
+            <End Role="TransactionDescription" EntitySet="TransactionDescriptions" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="DescriptionName">
           <Key>
             <PropertyRef Name="Id" />
@@ -591,7 +582,11 @@ warning 6002: The table/view 'SpendingReport.dbo.EntryTansactionDescription' doe
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="EntryTansactionDescription">
+          <End Type="SpendingReportModel.Entry" Role="Entry" Multiplicity="*" />
+          <End Type="SpendingReportModel.TransactionDescription" Role="TransactionDescription" Multiplicity="*" />
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -690,14 +685,6 @@ warning 6002: The table/view 'SpendingReport.dbo.EntryTansactionDescription' doe
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="EntryTansactionDescription" TypeName="SpendingReportModel.EntryTansactionDescription" StoreEntitySet="EntryTansactionDescription">
-            <EndProperty Name="TransactionDescription">
-              <ScalarProperty Name="Id" ColumnName="TransactionDescriptionID" />
-            </EndProperty>
-            <EndProperty Name="Entry">
-              <ScalarProperty Name="ID" ColumnName="EntryID" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="DescriptionNames">
             <EntityTypeMapping TypeName="SpendingReportModel.DescriptionName">
               <MappingFragment StoreEntitySet="DescriptionNames">
@@ -707,6 +694,14 @@ warning 6002: The table/view 'SpendingReport.dbo.EntryTansactionDescription' doe
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="EntryTansactionDescription" TypeName="SpendingReportModel.EntryTansactionDescription" StoreEntitySet="EntryTansactionDescription">
+            <EndProperty Name="TransactionDescription">
+              <ScalarProperty Name="Id" ColumnName="TransactionDescriptionID" />
+            </EndProperty>
+            <EndProperty Name="Entry">
+              <ScalarProperty Name="ID" ColumnName="EntryID" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

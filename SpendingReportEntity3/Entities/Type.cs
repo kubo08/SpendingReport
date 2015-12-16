@@ -1,3 +1,5 @@
+using System.Configuration;
+
 namespace SpendingReportEntity
 {
     using System;
@@ -8,13 +10,20 @@ namespace SpendingReportEntity
 
     public partial class Type
     {
+        //public Type()
+        //{
+        //}
+
+        //public int Id { get; set; }
+
+        //[Required]
+        //public string TypeName { get; set; }
+
         public Type()
         {
+            this.Users = new HashSet<User>();
         }
 
-        public int Id { get; set; }
-
-        [Required]
-        public string TypeName { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

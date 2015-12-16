@@ -1,14 +1,17 @@
 ﻿@using System.Web.UI.WebControls
 @using SpendingReport.L10n
 
+
 <!DOCTYPE html>
 
 <html>
-<head >
+<head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
     <meta name="description" content="The description of my page" />
+    <script type="text/javascript" src="@Url.Content("/Scripts/jquery-1.8.2.min.js")"></script>
+    @RenderSection("Scripts", false)
 </head>
 <body>
     <div>
@@ -19,6 +22,7 @@
         @Html.ActionLink(BankPaymentsL10n.UploadNewTransactions, "SelectFile", "Upload") 
         @Html.ActionLink(BankPaymentsL10n.TransactionList, "Transactions", "List") 
         @Html.ActionLink("Reports", "Index", "Reports")
+        @Html.ActionLink("Descriptions","Index", "Descriptions")
     </div>
     <div>
         @RenderBody()

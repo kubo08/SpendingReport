@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using SpendingReport.Models;
-using spending_report.remote.TransactionDescriptionService;
-using spending_report.ViewModels;
+using SpendingReport.remote.TransactionDescriptionService;
+using SpendingReport.ViewModels;
 
 
-namespace spending_report.Controllers
+namespace SpendingReport.Controllers
 {
     public class ReportsController : Controller
     {

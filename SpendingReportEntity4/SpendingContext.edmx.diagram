@@ -25,7 +25,7 @@
         <AssociationConnector Association="SpendingReportModel.EntryTansactionDescription" />
         <EntityTypeShape EntityType="SpendingReportModel.DescriptionName" Width="1.5" PointX="5.375" PointY="8.875" />
         <AssociationConnector Association="SpendingReportModel.FK_DescriptionNames_TransactionDescription" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

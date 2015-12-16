@@ -1,10 +1,10 @@
-﻿@model spending_report.ViewModels.SingleDescriptionViewModel
+﻿@model SpendingReport.ViewModels.SingleDescriptionViewModel
 @{
     ViewBag.Title = "NewTransactionDescription";
     Layout = "~/Views/Shared/SpendingMaster.cshtml";
 }
 
-@using (Html.BeginForm("CreateDescription", "Reports"))
+@using (Html.BeginForm("CreateDescription", "Descriptions"))
 {
         @:Type name:
         @Html.EditorFor(i => i.Name)

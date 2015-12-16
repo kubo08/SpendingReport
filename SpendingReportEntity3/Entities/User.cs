@@ -8,13 +8,20 @@ namespace SpendingReportEntity
 
     public partial class User
     {
+        //public User()
+        //{
+        //    BankAccounts = new HashSet<BankAccount>();
+        //}
+
+        //public int Id { get; set; }
+
+        //public virtual ICollection<BankAccount> BankAccounts { get; set; }
+
         public User()
         {
-            BankAccounts = new HashSet<BankAccount>();
+            this.Types = new HashSet<Type>();
         }
 
-        public int Id { get; set; }
-
-        public virtual ICollection<BankAccount> BankAccounts { get; set; }
+        public virtual ICollection<Type> Types { get; set; }
     }
 }

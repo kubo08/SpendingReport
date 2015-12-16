@@ -306,7 +306,6 @@
     <Content Include="Views\List\Transactions.aspx" />
     <Content Include="Views\Upload\SelectFile.aspx" />
     <Content Include="Views\Upload\UploadDocument.aspx" />
-    <Content Include="Views\View1.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
