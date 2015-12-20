@@ -15,35 +15,33 @@ namespace SpendingReport.remote.TransactionDescriptionService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="remote.TransactionDescriptionService.ITransactionDescriptionService")]
     public interface ITransactionDescriptionService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransactionDescriptionService/AddTransactionDescription", ReplyAction="http://tempuri.org/ITransactionDescriptionService/AddTransactionDescriptionRespon" +
-            "se")]
-        bool AddTransactionDescription(SpendingReport.Models.DescriptionModel model);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransactionDescriptionService/AddTransactionCategory", ReplyAction="http://tempuri.org/ITransactionDescriptionService/AddTransactionCategoryResponse")]
+        bool AddTransactionCategory(SpendingReport.Models.CategoryModel model);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransactionDescriptionService/AddTransactionDescription", ReplyAction="http://tempuri.org/ITransactionDescriptionService/AddTransactionDescriptionRespon" +
-            "se")]
-        System.Threading.Tasks.Task<bool> AddTransactionDescriptionAsync(SpendingReport.Models.DescriptionModel model);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransactionDescriptionService/AddTransactionCategory", ReplyAction="http://tempuri.org/ITransactionDescriptionService/AddTransactionCategoryResponse")]
+        System.Threading.Tasks.Task<bool> AddTransactionCategoryAsync(SpendingReport.Models.CategoryModel model);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransactionDescriptionService/GetAllTransactionDescriptions", ReplyAction="http://tempuri.org/ITransactionDescriptionService/GetAllTransactionDescriptionsRe" +
-            "sponse")]
-        SpendingReport.Models.TransactionDescriptionsModel[] GetAllTransactionDescriptions();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransactionDescriptionService/GetAllTransactionCategories", ReplyAction="http://tempuri.org/ITransactionDescriptionService/GetAllTransactionCategoriesResp" +
+            "onse")]
+        SpendingReport.Models.TransactionCategoriesModel[] GetAllTransactionCategories();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransactionDescriptionService/GetAllTransactionDescriptions", ReplyAction="http://tempuri.org/ITransactionDescriptionService/GetAllTransactionDescriptionsRe" +
-            "sponse")]
-        System.Threading.Tasks.Task<SpendingReport.Models.TransactionDescriptionsModel[]> GetAllTransactionDescriptionsAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransactionDescriptionService/GetAllTransactionCategories", ReplyAction="http://tempuri.org/ITransactionDescriptionService/GetAllTransactionCategoriesResp" +
+            "onse")]
+        System.Threading.Tasks.Task<SpendingReport.Models.TransactionCategoriesModel[]> GetAllTransactionCategoriesAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransactionDescriptionService/GetTransactionDescriptionsById", ReplyAction="http://tempuri.org/ITransactionDescriptionService/GetTransactionDescriptionsByIdR" +
-            "esponse")]
-        SpendingReport.Models.TransactionDescriptionsModel GetTransactionDescriptionsById(int id);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransactionDescriptionService/GetTransactionCategoriesById", ReplyAction="http://tempuri.org/ITransactionDescriptionService/GetTransactionCategoriesByIdRes" +
+            "ponse")]
+        SpendingReport.Models.TransactionCategoriesModel GetTransactionCategoriesById(int id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransactionDescriptionService/GetTransactionDescriptionsById", ReplyAction="http://tempuri.org/ITransactionDescriptionService/GetTransactionDescriptionsByIdR" +
-            "esponse")]
-        System.Threading.Tasks.Task<SpendingReport.Models.TransactionDescriptionsModel> GetTransactionDescriptionsByIdAsync(int id);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransactionDescriptionService/GetTransactionCategoriesById", ReplyAction="http://tempuri.org/ITransactionDescriptionService/GetTransactionCategoriesByIdRes" +
+            "ponse")]
+        System.Threading.Tasks.Task<SpendingReport.Models.TransactionCategoriesModel> GetTransactionCategoriesByIdAsync(int id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransactionDescriptionService/UpdateAllDescriptions", ReplyAction="http://tempuri.org/ITransactionDescriptionService/UpdateAllDescriptionsResponse")]
-        void UpdateAllDescriptions();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransactionDescriptionService/UpdateAllCategories", ReplyAction="http://tempuri.org/ITransactionDescriptionService/UpdateAllCategoriesResponse")]
+        void UpdateAllCategories();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransactionDescriptionService/UpdateAllDescriptions", ReplyAction="http://tempuri.org/ITransactionDescriptionService/UpdateAllDescriptionsResponse")]
-        System.Threading.Tasks.Task UpdateAllDescriptionsAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransactionDescriptionService/UpdateAllCategories", ReplyAction="http://tempuri.org/ITransactionDescriptionService/UpdateAllCategoriesResponse")]
+        System.Threading.Tasks.Task UpdateAllCategoriesAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -73,36 +71,36 @@ namespace SpendingReport.remote.TransactionDescriptionService {
                 base(binding, remoteAddress) {
         }
         
-        public bool AddTransactionDescription(SpendingReport.Models.DescriptionModel model) {
-            return base.Channel.AddTransactionDescription(model);
+        public bool AddTransactionCategory(SpendingReport.Models.CategoryModel model) {
+            return base.Channel.AddTransactionCategory(model);
         }
         
-        public System.Threading.Tasks.Task<bool> AddTransactionDescriptionAsync(SpendingReport.Models.DescriptionModel model) {
-            return base.Channel.AddTransactionDescriptionAsync(model);
+        public System.Threading.Tasks.Task<bool> AddTransactionCategoryAsync(SpendingReport.Models.CategoryModel model) {
+            return base.Channel.AddTransactionCategoryAsync(model);
         }
         
-        public SpendingReport.Models.TransactionDescriptionsModel[] GetAllTransactionDescriptions() {
-            return base.Channel.GetAllTransactionDescriptions();
+        public SpendingReport.Models.TransactionCategoriesModel[] GetAllTransactionCategories() {
+            return base.Channel.GetAllTransactionCategories();
         }
         
-        public System.Threading.Tasks.Task<SpendingReport.Models.TransactionDescriptionsModel[]> GetAllTransactionDescriptionsAsync() {
-            return base.Channel.GetAllTransactionDescriptionsAsync();
+        public System.Threading.Tasks.Task<SpendingReport.Models.TransactionCategoriesModel[]> GetAllTransactionCategoriesAsync() {
+            return base.Channel.GetAllTransactionCategoriesAsync();
         }
         
-        public SpendingReport.Models.TransactionDescriptionsModel GetTransactionDescriptionsById(int id) {
-            return base.Channel.GetTransactionDescriptionsById(id);
+        public SpendingReport.Models.TransactionCategoriesModel GetTransactionCategoriesById(int id) {
+            return base.Channel.GetTransactionCategoriesById(id);
         }
         
-        public System.Threading.Tasks.Task<SpendingReport.Models.TransactionDescriptionsModel> GetTransactionDescriptionsByIdAsync(int id) {
-            return base.Channel.GetTransactionDescriptionsByIdAsync(id);
+        public System.Threading.Tasks.Task<SpendingReport.Models.TransactionCategoriesModel> GetTransactionCategoriesByIdAsync(int id) {
+            return base.Channel.GetTransactionCategoriesByIdAsync(id);
         }
         
-        public void UpdateAllDescriptions() {
-            base.Channel.UpdateAllDescriptions();
+        public void UpdateAllCategories() {
+            base.Channel.UpdateAllCategories();
         }
         
-        public System.Threading.Tasks.Task UpdateAllDescriptionsAsync() {
-            return base.Channel.UpdateAllDescriptionsAsync();
+        public System.Threading.Tasks.Task UpdateAllCategoriesAsync() {
+            return base.Channel.UpdateAllCategoriesAsync();
         }
     }
 }

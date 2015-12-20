@@ -1,0 +1,107 @@
+﻿@using PagedList.Mvc
+@using SpendingReport.L10n
+@model SpendingReport.ViewModels.TransactionsListModel
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/SpendingMaster.cshtml";
+}
+
+@Html.Partial("TransactionFilter", Model.Filter)
+
+<div id="accordion">
+            <table>
+                <tr>
+                    <td>
+                        @Html.Label(BankPaymentsL10n.Bank)
+                    </td>
+                    <td>
+                        @Html.Label(BankPaymentsL10n.Amount) 
+                    </td>
+                    <td>
+                        @Html.Label(BankPaymentsL10n.BankAccountID) 
+                    </td>
+                    <td>
+                        @Html.Label(BankPaymentsL10n.TransactionType) 
+                    </td>
+                    <td>
+                        @Html.Label(BankPaymentsL10n.TransactionPurpose) 
+                    </td>
+                    <td>
+                        @Html.Label(BankPaymentsL10n.Currency) 
+                    </td>
+                    <td>
+                        @Html.Label(BankPaymentsL10n.Description) 
+                    </td>
+                    <td>
+                        @Html.Label(BankPaymentsL10n.Name) 
+                    </td>
+                    <td>
+                        @Html.Label(BankPaymentsL10n.DatePosted) 
+                    </td>
+                    <td>
+                        @Html.Label(BankPaymentsL10n.DateAvailable) 
+                    </td>
+                    <td>
+                        @Html.Label(BankPaymentsL10n.SpecificSymbol) 
+                    </td>
+                    <td>
+                        @Html.Label(BankPaymentsL10n.VariableSymbol) 
+                    </td>
+                    <td>
+                        @Html.Label(BankPaymentsL10n.ConstantSymbol) 
+                    </td>
+                </tr>
+@foreach (var item in Model.TransactionsList)
+                    {
+                <tr class="transaction">
+                    
+                    <td>
+                        @item.BankAccount.BankName 
+                    </td>
+                    <td>
+                        @item.TransacionAmount.Amount 
+                    </td>
+                    <td>
+                        a
+                        @item.BankAccount.AccountNumber 
+                    </td>
+                    <td>
+                        @item.TransacionAmount.TransactionType 
+                    </td>
+                    <td>
+                        @*@item.Purpose*@
+                    </td>
+                    <td>
+                        @item.TransacionAmount.Currency 
+                    </td>
+                    <td>
+                        @item.Name 
+                    </td>
+                    <td>
+                        @item.Description 
+                    </td>
+                    <td>
+                        @item.DatePosted 
+                    </td>
+                    <td>
+                        @item.DateAvailable 
+                    </td>
+                    <td>
+                        @item.SpecificSymbol 
+                    </td>
+                    <td>
+                        @item.VariableSymbol 
+                    </td>
+                    <td>
+                        @item.ConstantSymbol 
+                    </td>
+                </tr>
+                }
+            </table>
+        </div>
+@Html.PagedListPager(Model.TransactionsList,
+                page => Url.Action("TransactionsPaging", new RouteValueDictionary(){
+                {"Page", page}
+                }),
+                PagedListRenderOptions.ClassicPlusFirstAndLast) 

@@ -11,7 +11,6 @@
         <EntityTypeShape EntityType="SpendingReportModel.Bank" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SpendingReportModel.Entry" Width="1.5" PointX="6.125" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SpendingReportModel.PaymentType" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="SpendingReportModel.TransactionDescription" Width="1.5" PointX="10.375" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="SpendingReportModel.Type" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SpendingReportModel.User" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
         <AssociationConnector Association="SpendingReportModel.FK_dbo_AmountInfos_dbo_Types_TypeId" ManuallyRouted="false" />
@@ -22,9 +21,10 @@
         <AssociationConnector Association="SpendingReportModel.FK_dbo_Entries_dbo_BankAccounts_BankAccountID" ManuallyRouted="false" />
         <AssociationConnector Association="SpendingReportModel.FK_dbo_Entries_dbo_BankAccounts_DestinationAccountId" ManuallyRouted="false" />
         <AssociationConnector Association="SpendingReportModel.FK_dbo_Entries_dbo_PaymentTypes_PaymentTypeId" ManuallyRouted="false" />
-        <AssociationConnector Association="SpendingReportModel.EntryTansactionDescription" />
-        <EntityTypeShape EntityType="SpendingReportModel.DescriptionName" Width="1.5" PointX="5.375" PointY="8.875" />
-        <AssociationConnector Association="SpendingReportModel.FK_DescriptionNames_TransactionDescription" />
+        <EntityTypeShape EntityType="SpendingReportModel.CategoryName" Width="1.5" PointX="8.375" PointY="6.75" />
+        <EntityTypeShape EntityType="SpendingReportModel.TransactionCategory" Width="1.5" PointX="8.375" PointY="4" />
+        <AssociationConnector Association="SpendingReportModel.EntryTansactionCategory" />
+        <AssociationConnector Association="SpendingReportModel.FK_CategoryNames_TransactionDescription" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

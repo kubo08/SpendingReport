@@ -1,0 +1,32 @@
+﻿@model SpendingReport.ViewModels.TransactionCategoriesViewModel
+@{
+    ViewBag.Title = "TransactionCategoriesViewModels";
+    Layout = "~/Views/Shared/SpendingMaster.cshtml";
+}
+@section Scripts{
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+}
+
+@Ajax.ActionLink("Update descriptions in transactions", "UpdateCategories", new AjaxOptions
+{
+    HttpMethod="GET"
+})
+        <table>
+            @foreach (var item in Model.Categories)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(_=>item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(_ => item.Category, "CategoriesTemplate")
+                    </td>
+                    <td>
+                        @Html.ActionLink("Add description", "AddPaymentCategory","Categories", new{@DescriptionId = item.Id},null)
+                    </td>
+                </tr>
+            }
+        </table>
+        @Html.ActionLink("Add new transaction description", "AddPaymentCategory", "Categories")
+        
+

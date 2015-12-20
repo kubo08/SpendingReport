@@ -17,7 +17,7 @@ namespace SpendingReportEntity4
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Entry()
         {
-            this.TransactionDescriptions = new HashSet<TransactionDescription>();
+            this.TransactionCategories = new HashSet<TransactionCategory>();
         }
     
         public int ID { get; set; }
@@ -42,6 +42,6 @@ namespace SpendingReportEntity4
         public virtual BankAccount DestinationAccount { get; set; }
         public virtual PaymentType PaymentType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TransactionDescription> TransactionDescriptions { get; set; }
+        public virtual ICollection<TransactionCategory> TransactionCategories { get; set; }
     }
 }

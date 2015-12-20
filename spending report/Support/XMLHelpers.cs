@@ -121,7 +121,7 @@ namespace Support
         //                Name = transaction.TransactionName,
         //                AmountInfo = amountInfo,
         //                BankAccount = bankAccount,
-        //                Memo=transaction.Description,
+        //                Memo=transaction.Category,
         //                ConstantSymbol = transaction.ConstantSymbol,
         //                VariableSymbol=transaction.VariableSymbol,
         //                SpecificSymbol = transaction.SpecificSymbol,
@@ -152,7 +152,7 @@ namespace Support
         //        context.Entries.Where(
         //            t =>
         //                t.AmountInfo.Amount == transaction.TransactionAmount.Amount && t.Name == transaction.TransactionName &&
-        //                t.Memo == transaction.Description &&
+        //                t.Memo == transaction.Category &&
         //                t.DateAvailable == date);
         //    return item.Any();            
         //}
@@ -187,7 +187,7 @@ namespace Support
         //        DateAvailable = transaction.DateAvailable,
         //        ConstantSymbol = transaction.ConstantSymbol.HasValue ? transaction.ConstantSymbol.Value : (short)0,
         //        DatePosted = transaction.DatePosted,
-        //        Description = transaction.Memo,
+        //        Category = transaction.Memo,
         //        Reference = transaction.Reference,
         //        SpecificSymbol = transaction.SpecificSymbol.HasValue ? transaction.SpecificSymbol.Value : (long)0,
         //        TransactionName = transaction.Name,

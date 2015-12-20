@@ -9,15 +9,15 @@ namespace Services
     public interface ITransactionDescriptionService
     {
         [OperationContract]
-        bool AddTransactionDescription(DescriptionModel model);
+        bool AddTransactionCategory(CategoryModel model);
 
         [OperationContract]
-        IEnumerable<TransactionDescriptionsModel> GetAllTransactionDescriptions();
+        IEnumerable<TransactionCategoriesModel> GetAllTransactionCategories();
 
         [OperationContract]
-        TransactionDescriptionsModel GetTransactionDescriptionsById(int id);
+        TransactionCategoriesModel GetTransactionCategoriesById(int id);
 
         [OperationContract]
-        void UpdateAllDescriptions();
+        void UpdateAllCategories();
     }
 }

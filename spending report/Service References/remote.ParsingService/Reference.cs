@@ -1148,7 +1148,7 @@ namespace SpendingReport.remote.ParsingService {
             set {
                 if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
                     this.DescriptionField = value;
-                    this.RaisePropertyChanged("Description");
+                    this.RaisePropertyChanged("Category");
                 }
             }
         }

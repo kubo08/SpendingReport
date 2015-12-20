@@ -7,21 +7,21 @@ namespace Services.Helpers
 {
     public static class Converters
     {
-        public static TransactionDescriptionsModel EntityToModel(this entity.TransactionDescription entity)
+        public static TransactionCategoriesModel EntityToModel(this entity.TransactionCategory entity)
         {
-            var description = new TransactionDescriptionsModel
+            var description = new TransactionCategoriesModel
             {
-                Description = new List<DescriptionNameModel>(),
+                Category = new List<CategoryNameModel>(),
                 Name = entity.Name,
                 Id = entity.Id
             };
-            foreach (var descriptionName in entity.DescriptionNames)
+            foreach (var descriptionName in entity.CategoryNames)
             {
-                var name = new DescriptionNameModel
+                var name = new CategoryNameModel
                 {
                     Description = descriptionName.Description
                 };
-                description.Description.Add(name);
+                description.Category.Add(name);
             }
             return description;
         }

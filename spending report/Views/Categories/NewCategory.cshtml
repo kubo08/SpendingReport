@@ -1,0 +1,16 @@
+﻿@model SpendingReport.ViewModels.SingleCategoryViewModel
+@{
+    ViewBag.Title = "NewTransactionCategory";
+    Layout = "~/Views/Shared/SpendingMaster.cshtml";
+}
+
+@using (Html.BeginForm("CreateCategory", "Categories"))
+{
+        @:Type name:
+        @Html.EditorFor(i => i.Name)
+
+        @:Category:
+        @Html.EditorFor(i => i.Category)
+
+        <input type="submit" value="Send" />
+}

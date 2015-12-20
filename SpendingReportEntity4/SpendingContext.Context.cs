@@ -31,9 +31,9 @@ namespace SpendingReportEntity4
         public virtual DbSet<Bank> Banks { get; set; }
         public virtual DbSet<Entry> Entries { get; set; }
         public virtual DbSet<PaymentType> PaymentTypes { get; set; }
-        public virtual DbSet<TransactionDescription> TransactionDescriptions { get; set; }
         public virtual DbSet<Type> Types { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<DescriptionName> DescriptionNames { get; set; }
+        public virtual DbSet<CategoryName> CategoryNames { get; set; }
+        public virtual DbSet<TransactionCategory> TransactionCategories { get; set; }
     }
 }

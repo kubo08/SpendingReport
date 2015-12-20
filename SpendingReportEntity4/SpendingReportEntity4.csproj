@@ -59,10 +59,10 @@
     <Compile Include="BankAccount.cs">
       <DependentUpon>SpendingContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="C__MigrationHistory.cs">
+    <Compile Include="CategoryName.cs">
       <DependentUpon>SpendingContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="DescriptionName.cs">
+    <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>SpendingContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Entry.cs">
@@ -87,7 +87,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SpendingContext.edmx</DependentUpon>
     </Compile>
-    <Compile Include="TransactionDescription.cs">
+    <Compile Include="TransactionCategory.cs">
       <DependentUpon>SpendingContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Type.cs">

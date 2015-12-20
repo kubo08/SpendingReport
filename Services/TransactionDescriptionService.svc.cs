@@ -14,59 +14,59 @@ namespace Services
     public class TransactionDescriptionService : ITransactionDescriptionService
     {
 
-        public IEnumerable<TransactionDescriptionsModel> GetAllTransactionDescriptions()
+        public IEnumerable<TransactionCategoriesModel> GetAllTransactionCategories()
         {
             using (var context = new SpendingReportEntities())
             {
-                var descriptions = context.TransactionDescriptions.Include("DescriptionNames").ToList();
-                var result = new List<TransactionDescriptionsModel>();
-                foreach (var transactionDescription in descriptions)
+                var categories = context.TransactionCategories.Include("CategoryNames").ToList();
+                var result = new List<TransactionCategoriesModel>();
+                foreach (var transactionCategory in categories)
                 {
-                    var desc = transactionDescription.EntityToModel();
+                    var desc = transactionCategory.EntityToModel();
                     result.Add(desc);
                 }
                 return result;
             }
         }
 
-        public TransactionDescriptionsModel GetTransactionDescriptionsById(int id)
+        public TransactionCategoriesModel GetTransactionCategoriesById(int id)
         {
             using (var context = new SpendingReportEntities())
             {
-                var description = context.TransactionDescriptions.FirstOrDefault(i => i.Id == id);
-                var result = description.EntityToModel();
+                var category = context.TransactionCategories.FirstOrDefault(i => i.Id == id);
+                var result = category.EntityToModel();
                 return result;
             }
         }
 
-        public bool AddTransactionDescription(DescriptionModel model)
+        public bool AddTransactionCategory(CategoryModel model)
         {
             try
             {
                 using (var context = new SpendingReportEntities())
                 {
-                    TransactionDescription description = null;
-                    var name = new DescriptionName
+                    TransactionCategory category = null;
+                    var name = new CategoryName()
                     {
                         Description = model.Description
                     };
-                    context.DescriptionNames.Add(name);
+                    context.CategoryNames.Add(name);
                     if (model.Id != 0)
                     {
-                        description = context.TransactionDescriptions.FirstOrDefault(i => i.Id == model.Id);
+                        category = context.TransactionCategories.FirstOrDefault(i => i.Id == model.Id);
                     }
-                    if (description == null)
+                    if (category == null)
                     {
-                        description = context.TransactionDescriptions.FirstOrDefault(i => i.Name == model.Name) ??
-                                      createTransactionDescription(context);
+                        category = context.TransactionCategories.FirstOrDefault(i => i.Name == model.Name) ??
+                                      CreateTransactionCategory(context);
                     }
-                    description.Name = model.Name;
+                    category.Name = model.Name;
 
-                    description.DescriptionNames.Add(name);
+                    category.CategoryNames.Add(name);
                     context.SaveChanges();
 
                     //todo: async
-                    UpdateTransactions(model.Description, description.Id);
+                    UpdateCategories(model.Description, category.Id);
                 }
 
                 return true;
@@ -77,68 +77,68 @@ namespace Services
             }
         }
 
-        private TransactionDescription createTransactionDescription(SpendingReportEntities context)
+        private TransactionCategory CreateTransactionCategory(SpendingReportEntities context)
         {
-            var description = new TransactionDescription();
-            context.TransactionDescriptions.Add(description);
-            return description;
+            var category = new TransactionCategory();
+            context.TransactionCategories.Add(category);
+            return category;
         }
 
-        public void UpdateAllDescriptions()
+        public void UpdateAllCategories()
         {
             try
             {
                 using (var context = new SpendingReportEntities())
                 {
-                    var descriptions = context.TransactionDescriptions;
-                    foreach (var transactionDescription in descriptions)
+                    var categories = context.TransactionCategories;
+                    foreach (var transactionCategory in categories)
                     {
-                        UpdateTransactions(transactionDescription);
+                        UpdateCategories(transactionCategory);
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception("Error occured in update descriptions!", ex);
+                throw new Exception("Error occured in update categories!", ex);
             }
         }
 
-        private void UpdateTransactions(TransactionDescription transactionDescription)
+        private void UpdateCategories(TransactionCategory transactionCategory)
         {
-            foreach (var description in transactionDescription.DescriptionNames)
+            foreach (var category in transactionCategory.CategoryNames)
             {
-                UpdateTransactions(description.Description, transactionDescription.Id);
+                UpdateCategories(category.Description, transactionCategory.Id);
             }
         }
 
-        private void UpdateTransactions(string Description, int transactionDescriptionID)
+        private void UpdateCategories(string Description, int transactionCategoryID)
         {
             using (var context = new SpendingReportEntities())
             {
-                TransactionDescription transactionDescription;
+                TransactionCategory transactionCategory;
                 try
                 {
-                    transactionDescription =
-                        context.TransactionDescriptions.SingleOrDefault(i => i.Id == transactionDescriptionID);
+                    transactionCategory =
+                        context.TransactionCategories.SingleOrDefault(i => i.Id == transactionCategoryID);
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("There are more transaction descriptions with id: " + transactionDescriptionID, ex);
+                    throw new Exception("There are more transaction descriptions with id: " + transactionCategoryID, ex);
                 }
-                var transactions = GetTransactionsByDescription(Description, context);
+                var transactions = GetTransactionsByCategory(Description, context);
                 foreach (var transaction in transactions)
                 {
-                    if (!transaction.TransactionDescriptions.Contains(transactionDescription))
+                    if (!transaction.TransactionCategories.Contains(transactionCategory))
                     {
-                        transaction.TransactionDescriptions.Add(transactionDescription);
+                        transaction.TransactionCategories.Add(transactionCategory);
                     }
-                    
+
                 }
                 context.SaveChanges();
             }
         }
 
-        private IEnumerable<Entry> GetTransactionsByDescription(string description, SpendingReportEntities context)
+        private IEnumerable<Entry> GetTransactionsByCategory(string description, SpendingReportEntities context)
         {
             try
             {

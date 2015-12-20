@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/XMLParser.Data" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/XMLParser.Data" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:64737/ParsingService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:import schemaLocation="http://localhost:64737/ParsingService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
@@ -57,7 +57,7 @@
       <xs:element minOccurs="0" name="ConstantSymbol" type="xs:short" />
       <xs:element minOccurs="0" name="DateAvailable" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="DatePosted" nillable="true" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Category" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PaymentType" nillable="true" type="tns:TypeOfPayment" />
       <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Purpose" nillable="true" type="q1:ArrayOfstring" />
       <xs:element minOccurs="0" name="Reference" nillable="true" type="xs:string" />

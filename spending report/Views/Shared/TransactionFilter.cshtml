@@ -1,1 +1,18 @@
-﻿
+﻿@using SpendingReport.ViewModels;
+@using SpendingReport.Helpers;
+@model TransactionFilterViewModel
+@Html.Script(
+    @<script src="@Url.Content("~/Scripts/jquery-ui-1.11.4.min.js")" type="text/javascript"></script>)
+@Html.Script(
+@<script src="@Url.Content("~/Scripts/Filter.js")" type="text/javascript"></script>)
+@Html.Script(
+@<link href="@Url.Content("~/Content/jquery-ui.min.css")" rel="stylesheet" type="text/css">)
+@Html.Script(
+@<link href="@Url.Content("~/Content/TransactionFilter.css")" rel="stylesheet" type="text/css">)
+
+<h2>Filter</h2>
+
+@*@HtmlExtensions.AutocompleteDropdown("Select one...", Model.CategoryItems)*@
+<div class="ui-widget">
+    @Html.DropDownListFor(x => x.TransactionCategory, Model.CategoryItems, new { @class = "combobox" })
+</div>
