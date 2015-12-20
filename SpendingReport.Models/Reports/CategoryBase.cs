@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SpendingReport.Models
 {
-    public abstract class CategoryBase
+    public class CategoryBase
     {
         public int Id { get; set; }
 

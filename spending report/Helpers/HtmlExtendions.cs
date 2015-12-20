@@ -8,18 +8,18 @@ namespace SpendingReport.Helpers
 {
     public static class HtmlExtensions
     {
-        public static string AutocompleteDropdown(string text, IList<SelectListItem> items)
-        {
-            string result = "<select id='combobox'>" +
-                            "<option value=''>" + text + "</option>";
-            foreach (var selectListItem in items)
-            {
-                result += String.Format("<option value='{0}'>{1}</option>", selectListItem.Value, selectListItem.Text);
-            }
-            result += "</select>";
+        //public static string AutocompleteDropdown(string text, IList<SelectListItem> items)
+        //{
+        //    string result = "<select id='combobox'>" +
+        //                    "<option value=''>" + text + "</option>";
+        //    foreach (var selectListItem in items)
+        //    {
+        //        result += String.Format("<option value='{0}'>{1}</option>", selectListItem.Value, selectListItem.Text);
+        //    }
+        //    result += "</select>";
 
-            return result;
-        }
+        //    return result;
+        //}
 
         public static MvcHtmlString Script(this HtmlHelper htmlHelper, Func<object, HelperResult> template)
         {

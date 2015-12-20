@@ -81,7 +81,7 @@ namespace SpendingReport.Controllers
             {
                 Categories = new List<TransactionCategoriesModel>()
             };
-            var descriptions = svc.GetAllTransactionCategories();
+            var descriptions = svc.GetAllTransactionCategories(true);
             model.Categories = descriptions;
 
             return model;

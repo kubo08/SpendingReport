@@ -145,7 +145,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
-    <Compile Include="Controllers\Filter.cs" />
+    <Compile Include="Controllers\FilterController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ListController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
@@ -256,6 +256,7 @@
     <Content Include="Properties\DataSources\SpendingReport.Models.TransactionDescription.datasource" />
     <Content Include="Properties\DataSources\SpendingReport.Models.TransactionDescriptionsModel.datasource" />
     <Content Include="Properties\DataSources\SpendingReport.Models.TransactionCategoriesModel.datasource" />
+    <Content Include="Properties\DataSources\SpendingReport.Models.CategoryBase.datasource" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\Filter.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />

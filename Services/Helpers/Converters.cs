@@ -15,14 +15,15 @@ namespace Services.Helpers
                 Name = entity.Name,
                 Id = entity.Id
             };
-            foreach (var descriptionName in entity.CategoryNames)
-            {
-                var name = new CategoryNameModel
+            if (entity.CategoryNames != null)
+                foreach (var descriptionName in entity.CategoryNames)
                 {
-                    Description = descriptionName.Description
-                };
-                description.Category.Add(name);
-            }
+                    var name = new CategoryNameModel
+                    {
+                        Description = descriptionName.Description
+                    };
+                    description.Category.Add(name);
+                }
             return description;
         }
 

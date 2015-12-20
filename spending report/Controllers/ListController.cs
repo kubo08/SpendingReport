@@ -26,7 +26,7 @@ namespace SpendingReport.Controllers
                     PageSize = PAGESIZE
                 };
             }
-            model.Filter = Filter.GetFilterModel();
+            model.Filter = FilterController.GetFilterModel();
 
             return View("Transactions", model);
         }

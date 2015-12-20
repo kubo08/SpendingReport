@@ -12,7 +12,8 @@ namespace Services
         bool AddTransactionCategory(CategoryModel model);
 
         [OperationContract]
-        IEnumerable<TransactionCategoriesModel> GetAllTransactionCategories();
+        IEnumerable<TransactionCategoriesModel> GetAllTransactionCategories(bool withNames = true);
+
 
         [OperationContract]
         TransactionCategoriesModel GetTransactionCategoriesById(int id);

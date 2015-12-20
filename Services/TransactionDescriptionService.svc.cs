@@ -14,11 +14,17 @@ namespace Services
     public class TransactionDescriptionService : ITransactionDescriptionService
     {
 
-        public IEnumerable<TransactionCategoriesModel> GetAllTransactionCategories()
+        public IEnumerable<TransactionCategoriesModel> GetAllTransactionCategories(bool withNames = true)
         {
             using (var context = new SpendingReportEntities())
             {
-                var categories = context.TransactionCategories.Include("CategoryNames").ToList();
+                IList<TransactionCategory> categories;
+                if (withNames)
+                    categories = context.TransactionCategories.Include("CategoryNames").ToList();
+                else
+                {
+                    categories = context.TransactionCategories.ToList();
+                }
                 var result = new List<TransactionCategoriesModel>();
                 foreach (var transactionCategory in categories)
                 {
