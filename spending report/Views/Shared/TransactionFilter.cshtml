@@ -1,8 +1,4 @@
-﻿@using System
-@using System.Collections.Generic
-@using System.Web.WebPages
-@using SpendingReport.ViewModels;
-@using SpendingReport.Helpers;
+﻿@using SpendingReport.ViewModels;
 @model TransactionFilterViewModel
 @*@{                          
     var list = new List<Func<object, HelperResult>>();
@@ -28,5 +24,6 @@
 
 @*@HtmlExtensions.AutocompleteDropdown("Select one...", Model.CategoryItems)*@
 <div class="ui-widget">
-    @Html.DropDownListFor(x => x.TransactionCategory, Model.CategoryItems,"select item...", new { @class = "combobox" })
+    @Html.DropDownListFor(x => x.TransactionCategory, Model.CategoryItems, new { @class = "combobox" })
+    <input type="submit" value="apply"/>
 </div>

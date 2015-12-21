@@ -12,8 +12,11 @@ namespace SpendingReport.Controllers
     {
         public ActionResult Index()
         {
-
-            return View();
+            var model = new ReportsViewModel
+            {
+                Filter = FilterController.GetFilterModel()
+            };
+            return View(model);
         }
 
 

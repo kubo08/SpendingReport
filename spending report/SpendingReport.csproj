@@ -169,6 +169,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ReportsViewModel.cs" />
     <Compile Include="ViewModels\SingleCategoryViewModel.cs" />
     <Compile Include="ViewModels\TransactionCategoriesViewModel.cs" />
     <Compile Include="ViewModels\TransactionfilterViewModel.cs" />
@@ -356,6 +357,7 @@
     <Content Include="Views\Categories\NewCategory.cshtml" />
     <Content Include="Views\Shared\TransactionFilter.cshtml" />
     <Content Include="Views\List\Transactions.cshtml" />
+    <Content Include="Views\Shared\Displaytemplates\CategoriesTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

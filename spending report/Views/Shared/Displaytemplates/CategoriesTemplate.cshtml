@@ -1,0 +1,10 @@
+﻿@{
+    Layout = null;
+    string list = string.Empty;
+    foreach (var item in Model)
+    {
+        list += item.Description + " ";
+    }
+}
+
+<span>@list</span>

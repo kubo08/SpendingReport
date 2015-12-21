@@ -17,11 +17,17 @@ namespace SpendingReport.remote.TransactionsOperationsService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransactionsOperationsService/GetTransactionsByUserID", ReplyAction="http://tempuri.org/ITransactionsOperationsService/GetTransactionsByUserIDResponse" +
             "")]
-        SpendingReport.Models.TransactionsModel GetTransactionsByUserID(int userId, int skip, int take);
+        SpendingReport.Models.TransactionsModel GetTransactionsByUserID(System.Nullable<int> userId, int categoryId, int skip, System.Nullable<int> take);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransactionsOperationsService/GetTransactionsByUserID", ReplyAction="http://tempuri.org/ITransactionsOperationsService/GetTransactionsByUserIDResponse" +
             "")]
-        System.Threading.Tasks.Task<SpendingReport.Models.TransactionsModel> GetTransactionsByUserIDAsync(int userId, int skip, int take);
+        System.Threading.Tasks.Task<SpendingReport.Models.TransactionsModel> GetTransactionsByUserIDAsync(System.Nullable<int> userId, int categoryId, int skip, System.Nullable<int> take);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransactionsOperationsService/GetAllTransactions", ReplyAction="http://tempuri.org/ITransactionsOperationsService/GetAllTransactionsResponse")]
+        SpendingReport.Models.TransactionsModel GetAllTransactions();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITransactionsOperationsService/GetAllTransactions", ReplyAction="http://tempuri.org/ITransactionsOperationsService/GetAllTransactionsResponse")]
+        System.Threading.Tasks.Task<SpendingReport.Models.TransactionsModel> GetAllTransactionsAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -51,12 +57,20 @@ namespace SpendingReport.remote.TransactionsOperationsService {
                 base(binding, remoteAddress) {
         }
         
-        public SpendingReport.Models.TransactionsModel GetTransactionsByUserID(int userId, int skip, int take) {
-            return base.Channel.GetTransactionsByUserID(userId, skip, take);
+        public SpendingReport.Models.TransactionsModel GetTransactionsByUserID(System.Nullable<int> userId, int categoryId, int skip, System.Nullable<int> take) {
+            return base.Channel.GetTransactionsByUserID(userId, categoryId, skip, take);
         }
         
-        public System.Threading.Tasks.Task<SpendingReport.Models.TransactionsModel> GetTransactionsByUserIDAsync(int userId, int skip, int take) {
-            return base.Channel.GetTransactionsByUserIDAsync(userId, skip, take);
+        public System.Threading.Tasks.Task<SpendingReport.Models.TransactionsModel> GetTransactionsByUserIDAsync(System.Nullable<int> userId, int categoryId, int skip, System.Nullable<int> take) {
+            return base.Channel.GetTransactionsByUserIDAsync(userId, categoryId, skip, take);
+        }
+        
+        public SpendingReport.Models.TransactionsModel GetAllTransactions() {
+            return base.Channel.GetAllTransactions();
+        }
+        
+        public System.Threading.Tasks.Task<SpendingReport.Models.TransactionsModel> GetAllTransactionsAsync() {
+            return base.Channel.GetAllTransactionsAsync();
         }
     }
 }

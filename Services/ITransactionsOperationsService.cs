@@ -10,7 +10,7 @@ namespace Services
     public interface ITransactionsOperationsService
     {
         [OperationContract]
-        TransactionsModel GetTransactionsByUserID(int? userId, int skip, int? take);
+        TransactionsModel GetTransactionsByUserID(int? userId, int categoryId, int skip, int? take);
 
         [OperationContract]
         TransactionsModel GetAllTransactions();

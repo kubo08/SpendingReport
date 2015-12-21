@@ -15,34 +15,29 @@ namespace Services
     {
         public TransactionsModel GetAllTransactions()
         {
-            return GetTransactionsByUserID(null, 0, null);
+            return GetTransactionsByUserID(null, -1, 0, null);
         }
 
-        public TransactionsModel GetTransactionsByUserID(int? userId, int skip, int? take)
+        public TransactionsModel GetTransactionsByUserID(int? userId, int categoryId, int skip, int? take)
         {
             try
             {
                 using (var context = new SpendingReportEntities())
                 {
-                    IOrderedQueryable<Entry> transactions;
+                    var transactions = context.Entries
+                        .Include("DestinationAccount")
+                        .Include("DestinationAccount.Bank")
+                        .Include("AmountInfo")
+                        .OrderBy(a => a.DatePosted).ToList();
                     if (userId.HasValue)
                     {
                         transactions =
-                            context.Entries.Where(
-                                e => e.SourceAccount.User.Id == userId)
-                                .Include("DestinationAccount")
-                                .Include("DestinationAccount.Bank")
-                                .Include("AmountInfo")
-                                .OrderBy(a => a.DatePosted);
+                            transactions.Where(e => e.SourceAccount.User.Id == userId).ToList();
                     }
-                    else
+                    if (categoryId > 0)
                     {
-                        transactions =
-                            context.Entries
-                                .Include("DestinationAccount")
-                                .Include("DestinationAccount.Bank")
-                                .Include("AmountInfo")
-                                .OrderBy(a => a.DatePosted);
+                        var category = context.TransactionCategories.SingleOrDefault(i => i.Id == categoryId);
+                        transactions = transactions.Where(e => e.TransactionCategories.Contains(category)).ToList();
                     }
                     var resultTransactions = new List<Transaction>();
                     if (!take.HasValue)

@@ -22,7 +22,7 @@ namespace SpendingReport.Controllers
                 {
                     model.CategoryItems.Add(new SelectListItem { Text = transactionCategoriesModel.Name, Value = transactionCategoriesModel.Id.ToString() });
                 }
-            }
+            };
 
             return model;
         }

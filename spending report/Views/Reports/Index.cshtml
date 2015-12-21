@@ -2,9 +2,9 @@
     ViewBag.Title = "Reports";
     Layout = "~/Views/Shared/SpendingMaster.cshtml";
 }
-@model SpendingReport.ViewModels.TransactionFilterViewModel
+@model SpendingReport.ViewModels.ReportsViewModel
 
 
-@Html.Partial("TransactionFilter")
+@Html.Partial("TransactionFilter", Model.Filter)
 
 @Html.ActionLink("Show transaction categories", "PaymentCategories", "Categories")

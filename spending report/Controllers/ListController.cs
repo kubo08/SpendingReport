@@ -18,7 +18,7 @@ namespace SpendingReport.Controllers
             var model = new TransactionsListModel();
             using (var svc = new TransactionsOperationsServiceClient())
             {
-                TransactionsModel transactions = svc.GetTransactionsByUserID(1, 0, PAGESIZE);
+                TransactionsModel transactions = svc.GetTransactionsByUserID(1, -1, 0, PAGESIZE);
                 model.TransactionsList = transactions.ToPagedList(1, PAGESIZE);
                 model.Pager = new Pager
                 {
@@ -32,11 +32,18 @@ namespace SpendingReport.Controllers
         }
 
         [HttpGet]
-        public ActionResult TransactionsPaging(int Page, TransactionsListModel model)
+        public ActionResult TransactionsPaging(int Page, int? CategoryId)
         {
+            if (!CategoryId.HasValue)
+                CategoryId = -1;
+            var model = new TransactionsListModel
+            {
+                Filter = FilterController.GetFilterModel()
+            };
+            model.Filter.TransactionCategory = CategoryId.ToString();
             using (var svc = new TransactionsOperationsServiceClient())
             {
-                TransactionsModel transactions = svc.GetTransactionsByUserID(1, (Page - 1) * PAGESIZE, PAGESIZE);
+                TransactionsModel transactions = svc.GetTransactionsByUserID(1, CategoryId.Value, (Page - 1) * PAGESIZE, PAGESIZE);
 
                 model.TransactionsList = transactions.ToPagedList(Page, PAGESIZE);
                 model.Pager = new Pager
@@ -44,6 +51,26 @@ namespace SpendingReport.Controllers
                     CurrentPageIndex = Page
                 };
             }
+
+            return View("Transactions", model);
+        }
+
+        [HttpPost]
+        public ActionResult Transactions(TransactionsListModel model, TransactionFilterViewModel filter)
+        {
+            var id = int.Parse(filter.TransactionCategory);
+            using (var svc = new TransactionsOperationsServiceClient())
+            {
+                TransactionsModel transactions = svc.GetTransactionsByUserID(1, id, 0, PAGESIZE);
+                model.TransactionsList = transactions.ToPagedList(1, PAGESIZE);
+                model.Pager = new Pager
+                {
+                    CurrentPageIndex = 1,
+                    PageSize = PAGESIZE
+                };
+            }
+            model.Filter = FilterController.GetFilterModel();
+            model.Filter.TransactionCategory = filter.TransactionCategory;
 
             return View("Transactions", model);
         }

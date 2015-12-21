@@ -4,9 +4,10 @@
   <xs:element name="GetTransactionsByUserID">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="userId" type="xs:int" />
+        <xs:element minOccurs="0" name="userId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="categoryId" type="xs:int" />
         <xs:element minOccurs="0" name="skip" type="xs:int" />
-        <xs:element minOccurs="0" name="take" type="xs:int" />
+        <xs:element minOccurs="0" name="take" nillable="true" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -14,6 +15,18 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/SpendingReport.Models" minOccurs="0" name="GetTransactionsByUserIDResult" nillable="true" type="q1:TransactionsModel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllTransactions">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllTransactionsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/SpendingReport.Models" minOccurs="0" name="GetAllTransactionsResult" nillable="true" type="q2:TransactionsModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
