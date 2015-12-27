@@ -43,12 +43,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\TBConverter.cs" />
+    <Compile Include="CSV Parser\CSVParser.cs" />
     <Compile Include="Helpers\ParseHelpers.cs" />
     <Compile Include="BaseParser\AbstractParserBase.cs" />
     <Compile Include="BaseParser\Parser.cs" />
-    <Compile Include="XMLParser\BankParserBase.cs" />
+    <Compile Include="BaseParser\BankParserBase.cs" />
     <Compile Include="XMLParser\Deserializer.cs" />
-    <Compile Include="XMLParser\IBankParser.cs" />
+    <Compile Include="BaseParser\IBankParser.cs" />
     <Compile Include="XMLParser\XMLParser.cs" />
     <Compile Include="XMLParser\TBParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -60,9 +61,7 @@
       <Name>Parser.Data</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CSV Parser\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
