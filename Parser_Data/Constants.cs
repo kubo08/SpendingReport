@@ -1,4 +1,4 @@
-﻿namespace XMLParser.Data
+﻿namespace parser.Data
 {
     public static class Constants
     {

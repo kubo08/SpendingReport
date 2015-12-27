@@ -5,10 +5,10 @@ using System.Linq;
 using System.ServiceModel;
 using System.Web;
 //using XmlObjects;
-using XMLParser.Data;
-using Bank = XMLParser.Data.Bank;
+using parser.Data;
+using Bank = parser.Data.Bank;
 //using SpendingReportEntity.Converters;
-using AmountType = XMLParser.Data.AmountType;
+using AmountType = parser.Data.AmountType;
 
 namespace Support
 {
@@ -83,11 +83,11 @@ namespace Support
         //            SpendingReportEntity.Type amountType;
         //            switch(transaction.TransactionAmount.Type)
         //            {
-        //                case XMLParser.Data.AmountType.Debit:
+        //                case parser.Data.AmountType.Debit:
         //                    amountType =
         //                        context.Types.FirstOrDefault(item => item.TypeName.ToLower().Trim() == "Debit".ToLower().Trim());
         //                    break;
-        //                case XMLParser.Data.AmountType.Credit:
+        //                case parser.Data.AmountType.Credit:
         //                    amountType =
         //                        context.Types.FirstOrDefault(
         //                            item => item.TypeName.ToLower().Trim() == "Credit".ToLower().Trim());
@@ -192,7 +192,7 @@ namespace Support
         //        SpecificSymbol = transaction.SpecificSymbol.HasValue ? transaction.SpecificSymbol.Value : (long)0,
         //        TransactionName = transaction.Name,
         //        VariableSymbol = transaction.VariableSymbol.HasValue ? transaction.VariableSymbol.Value : (long)0,
-        //        BankAccount = new XMLParser.Data.BankAccount
+        //        BankAccount = new parser.Data.BankAccount
         //            {
         //                AccountID = transaction.DestinationAccount.AccountNumber.HasValue ? transaction.DestinationAccount.AccountNumber.Value : 0,
         //                IBan = transaction.DestinationAccount.IBAN,
@@ -202,7 +202,7 @@ namespace Support
         //                        BankID = (ushort)transaction.DestinationAccount.Bank.BankCode
         //                    }
         //            },
-        //        TransactionAmount = new XMLParser.Data.AmountInfo
+        //        TransactionAmount = new parser.Data.AmountInfo
         //        {
         //            Amount = transaction.AmountInfo.Amount,
         //            Currency = transaction.AmountInfo.Currency,

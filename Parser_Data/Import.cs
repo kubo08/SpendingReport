@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace XMLParser.Data
+namespace parser.Data
 {
     public class Import
     {

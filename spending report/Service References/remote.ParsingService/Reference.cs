@@ -80,7 +80,7 @@ namespace SpendingReport.remote.ParsingService {
         private System.Nullable<long> SpecificSymbolField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SpendingReport.remote.ParsingService.TransactionDescription[] TransactionDescriptionsField;
+        private SpendingReport.remote.ParsingService.TransactionCategory[] TransactionCategoriesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<long> VariableSymbolField;
@@ -343,14 +343,14 @@ namespace SpendingReport.remote.ParsingService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SpendingReport.remote.ParsingService.TransactionDescription[] TransactionDescriptions {
+        public SpendingReport.remote.ParsingService.TransactionCategory[] TransactionCategories {
             get {
-                return this.TransactionDescriptionsField;
+                return this.TransactionCategoriesField;
             }
             set {
-                if ((object.ReferenceEquals(this.TransactionDescriptionsField, value) != true)) {
-                    this.TransactionDescriptionsField = value;
-                    this.RaisePropertyChanged("TransactionDescriptions");
+                if ((object.ReferenceEquals(this.TransactionCategoriesField, value) != true)) {
+                    this.TransactionCategoriesField = value;
+                    this.RaisePropertyChanged("TransactionCategories");
                 }
             }
         }
@@ -787,15 +787,15 @@ namespace SpendingReport.remote.ParsingService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TransactionDescription", Namespace="http://schemas.datacontract.org/2004/07/SpendingReportEntity4")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TransactionCategory", Namespace="http://schemas.datacontract.org/2004/07/SpendingReportEntity4")]
     [System.SerializableAttribute()]
-    public partial class TransactionDescription : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class TransactionCategory : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SpendingReport.remote.ParsingService.DescriptionName[] DescriptionNamesField;
+        private SpendingReport.remote.ParsingService.CategoryName[] CategoryNamesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private SpendingReport.remote.ParsingService.Entry[] EntriesField;
@@ -817,14 +817,14 @@ namespace SpendingReport.remote.ParsingService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SpendingReport.remote.ParsingService.DescriptionName[] DescriptionNames {
+        public SpendingReport.remote.ParsingService.CategoryName[] CategoryNames {
             get {
-                return this.DescriptionNamesField;
+                return this.CategoryNamesField;
             }
             set {
-                if ((object.ReferenceEquals(this.DescriptionNamesField, value) != true)) {
-                    this.DescriptionNamesField = value;
-                    this.RaisePropertyChanged("DescriptionNames");
+                if ((object.ReferenceEquals(this.CategoryNamesField, value) != true)) {
+                    this.CategoryNamesField = value;
+                    this.RaisePropertyChanged("CategoryNames");
                 }
             }
         }
@@ -1111,9 +1111,9 @@ namespace SpendingReport.remote.ParsingService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DescriptionName", Namespace="http://schemas.datacontract.org/2004/07/SpendingReportEntity4")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CategoryName", Namespace="http://schemas.datacontract.org/2004/07/SpendingReportEntity4")]
     [System.SerializableAttribute()]
-    public partial class DescriptionName : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class CategoryName : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -1125,7 +1125,7 @@ namespace SpendingReport.remote.ParsingService {
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SpendingReport.remote.ParsingService.TransactionDescription TransactionDescriptionField;
+        private SpendingReport.remote.ParsingService.TransactionCategory TransactionCategoryField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int TransactionDescriptionIdField;
@@ -1148,7 +1148,7 @@ namespace SpendingReport.remote.ParsingService {
             set {
                 if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
                     this.DescriptionField = value;
-                    this.RaisePropertyChanged("Category");
+                    this.RaisePropertyChanged("Description");
                 }
             }
         }
@@ -1167,14 +1167,14 @@ namespace SpendingReport.remote.ParsingService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public SpendingReport.remote.ParsingService.TransactionDescription TransactionDescription {
+        public SpendingReport.remote.ParsingService.TransactionCategory TransactionCategory {
             get {
-                return this.TransactionDescriptionField;
+                return this.TransactionCategoryField;
             }
             set {
-                if ((object.ReferenceEquals(this.TransactionDescriptionField, value) != true)) {
-                    this.TransactionDescriptionField = value;
-                    this.RaisePropertyChanged("TransactionDescription");
+                if ((object.ReferenceEquals(this.TransactionCategoryField, value) != true)) {
+                    this.TransactionCategoryField = value;
+                    this.RaisePropertyChanged("TransactionCategory");
                 }
             }
         }
@@ -1207,10 +1207,10 @@ namespace SpendingReport.remote.ParsingService {
     public interface IParsingService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IParsingService/SaveData", ReplyAction="http://tempuri.org/IParsingService/SaveDataResponse")]
-        XMLParser.Data.Import SaveData(XMLParser.Data.Import bankPayments, int UserId);
+        parser.Data.Import SaveData(parser.Data.Import bankPayments, int UserId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IParsingService/SaveData", ReplyAction="http://tempuri.org/IParsingService/SaveDataResponse")]
-        System.Threading.Tasks.Task<XMLParser.Data.Import> SaveDataAsync(XMLParser.Data.Import bankPayments, int UserId);
+        System.Threading.Tasks.Task<parser.Data.Import> SaveDataAsync(parser.Data.Import bankPayments, int UserId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IParsingService/GetTransactions", ReplyAction="http://tempuri.org/IParsingService/GetTransactionsResponse")]
         SpendingReport.remote.ParsingService.Entry[] GetTransactions();
@@ -1246,11 +1246,11 @@ namespace SpendingReport.remote.ParsingService {
                 base(binding, remoteAddress) {
         }
         
-        public XMLParser.Data.Import SaveData(XMLParser.Data.Import bankPayments, int UserId) {
+        public parser.Data.Import SaveData(parser.Data.Import bankPayments, int UserId) {
             return base.Channel.SaveData(bankPayments, UserId);
         }
         
-        public System.Threading.Tasks.Task<XMLParser.Data.Import> SaveDataAsync(XMLParser.Data.Import bankPayments, int UserId) {
+        public System.Threading.Tasks.Task<parser.Data.Import> SaveDataAsync(parser.Data.Import bankPayments, int UserId) {
             return base.Channel.SaveDataAsync(bankPayments, UserId);
         }
         

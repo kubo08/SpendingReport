@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{11503E12-6E83-475F-9BAF-4A96AAA686FE}</ProjectGuid>
+    <ProjectGuid>{449C6283-CDFF-4083-94B5-7B7B199D1EE6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>XMLParser.Data</RootNamespace>
-    <AssemblyName>XMLParser.Data</AssemblyName>
+    <RootNamespace>Parser</RootNamespace>
+    <AssemblyName>Parser</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,9 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Parser.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\spending report\Bin\Parser.Data.dll</HintPath>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -44,16 +42,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AmountInfo.cs" />
-    <Compile Include="Bank.cs" />
-    <Compile Include="BankAccount.cs" />
-    <Compile Include="BankAccountBase.cs" />
-    <Compile Include="Constants.cs" />
-    <Compile Include="Import.cs" />
-    <Compile Include="ImportedBankAccount.cs" />
-    <Compile Include="ImportedPayment.cs" />
-    <Compile Include="Payment.cs" />
+    <Compile Include="Converters\TBConverter.cs" />
+    <Compile Include="Helpers\ParseHelpers.cs" />
+    <Compile Include="BaseParser\AbstractParserBase.cs" />
+    <Compile Include="BaseParser\Parser.cs" />
+    <Compile Include="XMLParser\BankParserBase.cs" />
+    <Compile Include="XMLParser\Deserializer.cs" />
+    <Compile Include="XMLParser\IBankParser.cs" />
+    <Compile Include="XMLParser\XMLParser.cs" />
+    <Compile Include="XMLParser\TBParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="xml objects\tatra banka.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Parser_Data\Parser.Data.csproj">
+      <Project>{11503e12-6e83-475f-9baf-4a96aaa686fe}</Project>
+      <Name>Parser.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CSV Parser\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

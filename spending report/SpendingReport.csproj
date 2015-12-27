@@ -70,6 +70,9 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -102,10 +105,6 @@
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
@@ -164,6 +163,11 @@
     <Compile Include="Models\BankAccountImportedPayments.cs" />
     <Compile Include="Helpers\Filter.cs" />
     <Compile Include="Helpers\Pager\Pager.cs" />
+    <Compile Include="Service References\remote.ParsingService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\remote.TransactionDescriptionService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -174,11 +178,6 @@
     <Compile Include="ViewModels\TransactionCategoriesViewModel.cs" />
     <Compile Include="ViewModels\TransactionfilterViewModel.cs" />
     <Compile Include="ViewModels\TransactionsModel.cs" />
-    <Compile Include="Service References\remote.ParsingService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Service References\remote.TransactionsOperationsService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -258,6 +257,7 @@
     <Content Include="Properties\DataSources\SpendingReport.Models.TransactionDescriptionsModel.datasource" />
     <Content Include="Properties\DataSources\SpendingReport.Models.TransactionCategoriesModel.datasource" />
     <Content Include="Properties\DataSources\SpendingReport.Models.CategoryBase.datasource" />
+    <Content Include="Properties\DataSources\parser.Data.Import.datasource" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\Filter.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
@@ -275,12 +275,21 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\_references.js" />
-    <None Include="Service References\remote.ParsingService\ParsingService.disco" />
-    <None Include="Service References\remote.ParsingService\configuration91.svcinfo" />
-    <None Include="Service References\remote.ParsingService\configuration.svcinfo" />
-    <None Include="Service References\remote.ParsingService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
+    <None Include="Service References\remote.ParsingService\ParsingService.wsdl" />
+    <None Include="Service References\remote.ParsingService\ParsingService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\remote.ParsingService\ParsingService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\remote.ParsingService\ParsingService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\remote.ParsingService\ParsingService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\remote.ParsingService\ParsingService4.xsd">
+      <SubType>Designer</SubType>
     </None>
     <Content Include="Service References\remote.ParsingService\SpendingReport.remote.ParsingService.Entry.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -309,6 +318,13 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\remote.ParsingService\ParsingService.disco" />
+    <None Include="Service References\remote.ParsingService\configuration91.svcinfo" />
+    <None Include="Service References\remote.ParsingService\configuration.svcinfo" />
+    <None Include="Service References\remote.ParsingService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\List\Transactions_old.aspx" />
     <Content Include="Views\Upload\SelectFile.aspx" />
@@ -325,22 +341,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\Error.aspx" />
     <Content Include="Views\Shared\SpendingMaster.Master" />
-    <None Include="Service References\remote.ParsingService\ParsingService.wsdl" />
-    <None Include="Service References\remote.ParsingService\ParsingService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\remote.ParsingService\ParsingService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\remote.ParsingService\ParsingService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\remote.ParsingService\ParsingService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\remote.ParsingService\ParsingService4.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\remote.TransactionsOperationsService\TransactionsOperationsService.wsdl" />
     <None Include="Service References\remote.TransactionsOperationsService\TransactionsOperationsService.xsd">
       <SubType>Designer</SubType>
@@ -376,17 +376,17 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Parser_Data\XMLParser.Data.csproj">
+    <ProjectReference Include="..\Parser_Data\Parser.Data.csproj">
       <Project>{11503e12-6e83-475f-9baf-4a96aaa686fe}</Project>
-      <Name>XMLParser.Data</Name>
+      <Name>Parser.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\SpendingReport.Models\SpendingReport.Models.csproj">
       <Project>{ad3b9b8e-7217-44af-8657-58cddab915dc}</Project>
       <Name>SpendingReport.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\XMLParser\XMLParser.csproj">
+    <ProjectReference Include="..\XMLParser\Parser.csproj">
       <Project>{449c6283-cdff-4083-94b5-7b7b199d1ee6}</Project>
-      <Name>XMLParser</Name>
+      <Name>Parser</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

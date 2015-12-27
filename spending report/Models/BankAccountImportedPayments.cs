@@ -4,8 +4,8 @@ using System.Linq;
 using System.Web;
 using PagedList;
 using SpendingReport.Helpers;
-using XMLParser.Data;
-using data = XMLParser.Data;
+using parser.Data;
+using data = parser.Data;
 
 namespace SpendingReport.Models
 {

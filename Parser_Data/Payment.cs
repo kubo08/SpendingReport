@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace XMLParser.Data
+namespace parser.Data
 {
     public enum TypeOfPayment
     {

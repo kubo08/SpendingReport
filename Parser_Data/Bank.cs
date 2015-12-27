@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace XMLParser.Data
+namespace parser.Data
 {
     public class Bank
     {

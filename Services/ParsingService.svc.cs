@@ -6,9 +6,9 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using SpendingReportEntity4;
-using XMLParser.Data;
+using parser.Data;
 using entity = SpendingReportEntity4;
-using data = XMLParser.Data;
+using data = parser.Data;
 
 
 namespace Services

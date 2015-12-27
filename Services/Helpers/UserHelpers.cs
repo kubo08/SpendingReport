@@ -14,7 +14,7 @@ namespace Services.Helpers
             {
                 using (var context = new SpendingReportEntities())
                 {
-                    var currentUser = context.Users.FirstOrDefault(t => t.Id == UserId);
+                    var currentUser = context.Users.Include("BankAccounts").FirstOrDefault(t => t.Id == UserId);
                     if (currentUser == null)
                         throw new Exception("Používateľ nebol nájdený!");
                     return currentUser;

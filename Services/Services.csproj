@@ -101,9 +101,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Parser_Data\XMLParser.Data.csproj">
+    <ProjectReference Include="..\Parser_Data\Parser.Data.csproj">
       <Project>{11503e12-6e83-475f-9baf-4a96aaa686fe}</Project>
-      <Name>XMLParser.Data</Name>
+      <Name>Parser.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\SpendingReport.Models\SpendingReport.Models.csproj">
       <Project>{ad3b9b8e-7217-44af-8657-58cddab915dc}</Project>
@@ -113,9 +113,9 @@
       <Project>{8ce47e95-f001-4cbc-82ed-c875695fbb4c}</Project>
       <Name>SpendingReportEntity4</Name>
     </ProjectReference>
-    <ProjectReference Include="..\XMLParser\XMLParser.csproj">
+    <ProjectReference Include="..\XMLParser\Parser.csproj">
       <Project>{449c6283-cdff-4083-94b5-7b7b199d1ee6}</Project>
-      <Name>XMLParser</Name>
+      <Name>Parser</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

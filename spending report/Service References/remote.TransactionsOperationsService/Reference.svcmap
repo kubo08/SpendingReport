@@ -16,8 +16,8 @@
     <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
     <ReferencedAssemblies>
       <ReferencedAssembly AssemblyName="SpendingReport.Models" />
-      <ReferencedAssembly AssemblyName="XMLParser" />
-      <ReferencedAssembly AssemblyName="XMLParser.Data" />
+      <ReferencedAssembly AssemblyName="parser" />
+      <ReferencedAssembly AssemblyName="parser.Data" />
     </ReferencedAssemblies>
     <ReferencedDataContractTypes />
     <ServiceContractMappings />

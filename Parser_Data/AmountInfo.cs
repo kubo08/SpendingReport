@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace XMLParser.Data
+namespace parser.Data
 {
     public enum AmountType
     {

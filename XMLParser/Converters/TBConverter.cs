@@ -4,9 +4,9 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using XmlObjects;
-using XMLParser.Data;
+using parser.Data;
 
-namespace XMLParser.Converters
+namespace parser.Converters
 {
     public static class TBConverter
     {

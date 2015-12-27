@@ -1,22 +1,12 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading;
+using System.Web;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
-using Microsoft.Ajax.Utilities;
 using SpendingReport.Helpers;
 using SpendingReport.Models;
-using Support;
-using XMLParser.Data;
-using XMLParser;
-using PagedList.Mvc;
-using PagedList;
 using SpendingReport.remote.ParsingService;
-using data = XMLParser.Data;
+using data = parser.Data;
+using parser.Data;
 
 namespace SpendingReport.Controllers
 {
@@ -33,18 +23,22 @@ namespace SpendingReport.Controllers
         public ActionResult Upload()
         {
             string path = null;
-            Import import;
+            //HttpFileCollectionBase file;
+            Import import = new Import();
 
             try
             {
-                path = XMLHelpers.SaveFile(Request.Files, Server.MapPath("~/temp/"));
+                //path = XMLHelpers.SaveFile(Request.Files, Server.MapPath("~/temp/"));
+                var file = Request.Files[0];
 
-                var parser = new Parser(path);
+                var parser = new Parser.BaseParser.Parser(file.InputStream);
                 using (var svc = new ParsingServiceClient())
                 {
-                    import = svc.SaveData(parser.GetBankAccountWithNewPayments(path), 1);
+                    var data = parser.GetData();
+                    import = svc.SaveData(data, 1);
                     //todo: tahat aktualneho pouzivatela
                 }
+
             }
             catch (Exception ex)
             {
