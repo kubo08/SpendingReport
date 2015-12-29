@@ -5,12 +5,12 @@ using XmlObjects;
 
 namespace Parser.XMLParser
 {
-    public class BankParserBase<T> where T : class
+    public class XMLBankParserBase<T> where T : class
     {
         protected T _report;
         protected Stream stream;
 
-        public BankParserBase(Stream stream)
+        public XMLBankParserBase(Stream stream)
         {
             this.stream = stream;
         }

@@ -1,14 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Parser.BaseParser;
 using parser.Data;
 
 namespace Parser.CSV_Parser
 {
-    public class CSVParser : IBankParser
+    public class CSVParser : ParserBase
     {
-        public Import GetPayments()
+
+        public override IBankParser GetParser()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Import GetData()
         {
             throw new NotImplementedException();
         }

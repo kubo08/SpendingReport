@@ -7,7 +7,7 @@ using parser.Data;
 
 namespace parser
 {
-    public class TBParser : BankParserBase<OFX>, IBankParser
+    public class TBParser : XMLBankParserBase<OFX>, IBankParser
     {
         public TBParser(Stream stream)
             : base(stream)
