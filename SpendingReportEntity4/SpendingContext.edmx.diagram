@@ -25,6 +25,17 @@
         <EntityTypeShape EntityType="SpendingReportModel.TransactionCategory" Width="1.5" PointX="8.375" PointY="4" />
         <AssociationConnector Association="SpendingReportModel.EntryTansactionCategory" />
         <AssociationConnector Association="SpendingReportModel.FK_CategoryNames_TransactionDescription" />
+        <EntityTypeShape EntityType="SpendingReportModel.Car" Width="1.5" PointX="5.375" PointY="12.125" />
+        <EntityTypeShape EntityType="SpendingReportModel.FuelStation" Width="1.5" PointX="9.25" PointY="10.75" />
+        <EntityTypeShape EntityType="SpendingReportModel.Fueling" Width="1.5" PointX="9.875" PointY="13.75" />
+        <AssociationConnector Association="SpendingReportModel.FK_Fuelings_Cars" />
+        <AssociationConnector Association="SpendingReportModel.FK_Fuelings_FuelStations" />
+        <AssociationConnector Association="SpendingReportModel.FK_Cars_Users" />
+        <EntityTypeShape EntityType="SpendingReportModel.TankStatus" Width="1.5" PointX="6.875" PointY="15.25" />
+        <AssociationConnector Association="SpendingReportModel.FK_TankStatuses_Cars" />
+        <AssociationConnector Association="SpendingReportModel.FK_Fuelings_TankStatuses" />
+        <EntityTypeShape EntityType="SpendingReportModel.Trip" Width="1.5" PointX="4" PointY="16.875" />
+        <AssociationConnector Association="SpendingReportModel.FK_Trips_Cars" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

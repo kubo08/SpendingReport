@@ -12,20 +12,26 @@ namespace SpendingReportEntity4
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Car
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public Car()
         {
-            this.BankAccounts = new HashSet<BankAccount>();
-            this.Cars = new HashSet<Car>();
+            this.Fuelings = new HashSet<Fueling>();
+            this.TankStatuses = new HashSet<TankStatus>();
+            this.Trips = new HashSet<Trip>();
         }
     
         public int Id { get; set; }
+        public string Name { get; set; }
+        public int UserId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BankAccount> BankAccounts { get; set; }
+        public virtual ICollection<Fueling> Fuelings { get; set; }
+        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Car> Cars { get; set; }
+        public virtual ICollection<TankStatus> TankStatuses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Trip> Trips { get; set; }
     }
 }

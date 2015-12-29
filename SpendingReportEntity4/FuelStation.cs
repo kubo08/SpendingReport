@@ -12,20 +12,20 @@ namespace SpendingReportEntity4
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class FuelStation
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public FuelStation()
         {
-            this.BankAccounts = new HashSet<BankAccount>();
-            this.Cars = new HashSet<Car>();
+            this.Fuelings = new HashSet<Fueling>();
         }
     
         public int Id { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BankAccount> BankAccounts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Car> Cars { get; set; }
+        public virtual ICollection<Fueling> Fuelings { get; set; }
     }
 }

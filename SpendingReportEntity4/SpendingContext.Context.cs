@@ -35,5 +35,10 @@ namespace SpendingReportEntity4
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<CategoryName> CategoryNames { get; set; }
         public virtual DbSet<TransactionCategory> TransactionCategories { get; set; }
+        public virtual DbSet<Car> Cars { get; set; }
+        public virtual DbSet<FuelStation> FuelStations { get; set; }
+        public virtual DbSet<Fueling> Fuelings { get; set; }
+        public virtual DbSet<TankStatus> TankStatuses { get; set; }
+        public virtual DbSet<Trip> Trips { get; set; }
     }
 }

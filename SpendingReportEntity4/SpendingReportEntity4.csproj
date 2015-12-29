@@ -59,6 +59,9 @@
     <Compile Include="BankAccount.cs">
       <DependentUpon>SpendingContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Car.cs">
+      <DependentUpon>SpendingContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="CategoryName.cs">
       <DependentUpon>SpendingContext.tt</DependentUpon>
     </Compile>
@@ -66,6 +69,12 @@
       <DependentUpon>SpendingContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Entry.cs">
+      <DependentUpon>SpendingContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Fueling.cs">
+      <DependentUpon>SpendingContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FuelStation.cs">
       <DependentUpon>SpendingContext.tt</DependentUpon>
     </Compile>
     <Compile Include="PaymentType.cs">
@@ -87,7 +96,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SpendingContext.edmx</DependentUpon>
     </Compile>
+    <Compile Include="TankStatus.cs">
+      <DependentUpon>SpendingContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="TransactionCategory.cs">
+      <DependentUpon>SpendingContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Trip.cs">
       <DependentUpon>SpendingContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Type.cs">
