@@ -143,6 +143,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CarsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\FilterController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -153,8 +154,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Extensions.cs" />
-    <Compile Include="Helpers\HtmlExtendions.cs" />
+    <Compile Include="Helpers\HtmlExtensions.cs" />
     <Compile Include="Helpers\Pager\PagerList.cs" />
+    <Compile Include="Helpers\UserHelpers.cs" />
     <Compile Include="L10n\BankPaymentsL10n.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -163,6 +165,11 @@
     <Compile Include="Models\BankAccountImportedPayments.cs" />
     <Compile Include="Helpers\Filter.cs" />
     <Compile Include="Helpers\Pager\Pager.cs" />
+    <Compile Include="Service References\remote.DriveService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\remote.ParsingService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -173,6 +180,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Cars\CarsViewModel.cs" />
     <Compile Include="ViewModels\ReportsViewModel.cs" />
     <Compile Include="ViewModels\SingleCategoryViewModel.cs" />
     <Compile Include="ViewModels\TransactionCategoriesViewModel.cs" />
@@ -258,6 +266,7 @@
     <Content Include="Properties\DataSources\SpendingReport.Models.TransactionCategoriesModel.datasource" />
     <Content Include="Properties\DataSources\SpendingReport.Models.CategoryBase.datasource" />
     <Content Include="Properties\DataSources\parser.Data.Import.datasource" />
+    <Content Include="Properties\DataSources\SpendingReport.Models.Cars.Car.datasource" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\Filter.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
@@ -275,6 +284,16 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\_references.js" />
+    <None Include="Service References\remote.DriveService\DriveService.wsdl" />
+    <None Include="Service References\remote.DriveService\DriveService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\remote.DriveService\DriveService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\remote.DriveService\DriveService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\remote.ParsingService\ParsingService.wsdl" />
     <None Include="Service References\remote.ParsingService\ParsingService.xsd">
       <SubType>Designer</SubType>
@@ -290,6 +309,13 @@
     </None>
     <None Include="Service References\remote.ParsingService\ParsingService4.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\remote.DriveService\DriveService.disco" />
+    <None Include="Service References\remote.DriveService\configuration91.svcinfo" />
+    <None Include="Service References\remote.DriveService\configuration.svcinfo" />
+    <None Include="Service References\remote.DriveService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Service References\remote.ParsingService\SpendingReport.remote.ParsingService.Entry.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -358,9 +384,13 @@
     <Content Include="Views\Shared\TransactionFilter.cshtml" />
     <Content Include="Views\List\Transactions.cshtml" />
     <Content Include="Views\Shared\Displaytemplates\CategoriesTemplate.cshtml" />
+    <Content Include="Views\Cars\Index.cshtml" />
+    <Content Include="Views\Cars\NewCar.cshtml" />
+    <Content Include="Views\Cars\CarDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Helpers\Converters\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -393,6 +423,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\remote.DriveService\" />
     <WCFMetadataStorage Include="Service References\remote.ParsingService\" />
     <WCFMetadataStorage Include="Service References\remote.TransactionDescriptionService\" />
     <WCFMetadataStorage Include="Service References\remote.TransactionsOperationsService\" />

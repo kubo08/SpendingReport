@@ -1,0 +1,48 @@
+﻿@model SpendingReport.ViewModels.CarsViewModel
+@{
+    ViewBag.Title = "NewCar";
+    Layout = "~/Views/Shared/SpendingMaster.cshtml";
+}
+
+@Html.ActionLink("Add new car", "NewCar")
+
+Cars:
+<table>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Tank size
+        </th>
+        <th>
+            Color
+        </th>
+        <th>
+            
+        </th>
+    </tr>
+    @foreach (var car in Model.Cars)
+    {
+        <tr>
+            <td>
+                @car.Name
+            </td>
+            <td>
+                @car.Description
+            </td>
+            <td>
+                @car.TankSize
+            </td>
+            <td>
+                @car.Color
+            </td>
+            <td>
+                @Html.ActionLink("Detail", "CarDetail",new{id=car.Id})
+            </td>
+        </tr>
+    }
+</table>

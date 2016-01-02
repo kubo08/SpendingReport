@@ -66,14 +66,20 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DriveService.svc" />
     <Content Include="ParsingService.svc" />
     <Content Include="TransactionDescriptionService.svc" />
     <Content Include="TransactionsOperationsService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\CarsConverter.cs" />
+    <Compile Include="DriveService.svc.cs">
+      <DependentUpon>DriveService.svc</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\UserHelpers.cs" />
-    <Compile Include="Helpers\Converters.cs" />
+    <Compile Include="Converters\TransactionConverter.cs" />
+    <Compile Include="IDriveService.cs" />
     <Compile Include="ITransactionDescriptionService.cs" />
     <Compile Include="ITransactionsOperationsService.cs" />
     <Compile Include="ParsingService.svc.cs">

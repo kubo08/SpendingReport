@@ -50,6 +50,9 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="TankSize" Type="int" />
+          <Property Name="Color" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="CategoryNames">
           <Key>
@@ -92,10 +95,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="CarId" Type="int" Nullable="false" />
           <Property Name="Value" Type="float" Nullable="false" />
-          <Property Name="Price" Type="float" Nullable="false" />
-          <Property Name="StationId" Type="int" />
+          <Property Name="FuelPrice" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="FuelStations">
           <Key>
@@ -113,13 +114,25 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
+        <EntityType Name="Purchases">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CarId" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="StationId" Type="int" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="TankStatuses">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="TotalDistance" Type="image" Nullable="false" />
-          <Property Name="Empty" Type="bit" />
+          <Property Name="TotalDistance" Type="int" Nullable="false" />
+          <Property Name="Empty" Type="bit" Nullable="false" />
           <Property Name="CarId" Type="int" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="Percentage" Type="int" />
@@ -305,26 +318,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Fuelings_Cars">
-          <End Role="Cars" Type="Self.Cars" Multiplicity="1" />
-          <End Role="Fuelings" Type="Self.Fuelings" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cars">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Fuelings">
-              <PropertyRef Name="CarId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Fuelings_FuelStations">
           <End Role="FuelStations" Type="Self.FuelStations" Multiplicity="0..1" />
-          <End Role="Fuelings" Type="Self.Fuelings" Multiplicity="*" />
+          <End Role="Purchases" Type="Self.Purchases" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="FuelStations">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Fuelings">
+            <Dependent Role="Purchases">
               <PropertyRef Name="StationId" />
             </Dependent>
           </ReferentialConstraint>
@@ -338,6 +339,30 @@
             </Principal>
             <Dependent Role="Fuelings">
               <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fuelings_ToTable">
+          <End Role="Purchases" Type="Self.Purchases" Multiplicity="1" />
+          <End Role="Fuelings" Type="Self.Fuelings" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Purchases">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Fuelings">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Purchases_Cars">
+          <End Role="Cars" Type="Self.Cars" Multiplicity="0..1" />
+          <End Role="Purchases" Type="Self.Purchases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Purchases">
+              <PropertyRef Name="CarId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -377,6 +402,7 @@
           <EntitySet Name="Fuelings" EntityType="Self.Fuelings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FuelStations" EntityType="Self.FuelStations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymentTypes" EntityType="Self.PaymentTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Purchases" EntityType="Self.Purchases" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TankStatuses" EntityType="Self.TankStatuses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionCategory" EntityType="Self.TransactionCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Trips" EntityType="Self.Trips" Schema="dbo" store:Type="Tables" />
@@ -430,17 +456,21 @@
             <End Role="AmountInfos" EntitySet="AmountInfos" />
             <End Role="Entries" EntitySet="Entries" />
           </AssociationSet>
-          <AssociationSet Name="FK_Fuelings_Cars" Association="Self.FK_Fuelings_Cars">
-            <End Role="Cars" EntitySet="Cars" />
-            <End Role="Fuelings" EntitySet="Fuelings" />
-          </AssociationSet>
           <AssociationSet Name="FK_Fuelings_FuelStations" Association="Self.FK_Fuelings_FuelStations">
             <End Role="FuelStations" EntitySet="FuelStations" />
-            <End Role="Fuelings" EntitySet="Fuelings" />
+            <End Role="Purchases" EntitySet="Purchases" />
           </AssociationSet>
           <AssociationSet Name="FK_Fuelings_TankStatuses" Association="Self.FK_Fuelings_TankStatuses">
             <End Role="TankStatuses" EntitySet="TankStatuses" />
             <End Role="Fuelings" EntitySet="Fuelings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fuelings_ToTable" Association="Self.FK_Fuelings_ToTable">
+            <End Role="Purchases" EntitySet="Purchases" />
+            <End Role="Fuelings" EntitySet="Fuelings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Purchases_Cars" Association="Self.FK_Purchases_Cars">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="Purchases" EntitySet="Purchases" />
           </AssociationSet>
           <AssociationSet Name="FK_TankStatuses_Cars" Association="Self.FK_TankStatuses_Cars">
             <End Role="Cars" EntitySet="Cars" />
@@ -704,18 +734,28 @@
           </AssociationSet>
           <EntitySet Name="Cars" EntityType="SpendingReportModel.Car" />
           <EntitySet Name="FuelStations" EntityType="SpendingReportModel.FuelStation" />
-          <EntitySet Name="Fuelings" EntityType="SpendingReportModel.Fueling" />
-          <AssociationSet Name="FK_Fuelings_Cars" Association="SpendingReportModel.FK_Fuelings_Cars">
+          <AssociationSet Name="FK_Cars_Users" Association="SpendingReportModel.FK_Cars_Users">
+            <End Role="User" EntitySet="Users" />
             <End Role="Car" EntitySet="Cars" />
+          </AssociationSet>
+          <EntitySet Name="Trips" EntityType="SpendingReportModel.Trip" />
+          <AssociationSet Name="FK_Trips_Cars" Association="SpendingReportModel.FK_Trips_Cars">
+            <End Role="Car" EntitySet="Cars" />
+            <End Role="Trip" EntitySet="Trips" />
+          </AssociationSet>
+          <EntitySet Name="Fuelings" EntityType="SpendingReportModel.Fueling" />
+          <EntitySet Name="Purchases" EntityType="SpendingReportModel.Purchase" />
+          <AssociationSet Name="FK_Purchases_Cars" Association="SpendingReportModel.FK_Purchases_Cars">
+            <End Role="Car" EntitySet="Cars" />
+            <End Role="Purchase" EntitySet="Purchases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fuelings_ToTable" Association="SpendingReportModel.FK_Fuelings_ToTable">
+            <End Role="Purchase" EntitySet="Purchases" />
             <End Role="Fueling" EntitySet="Fuelings" />
           </AssociationSet>
           <AssociationSet Name="FK_Fuelings_FuelStations" Association="SpendingReportModel.FK_Fuelings_FuelStations">
             <End Role="FuelStation" EntitySet="FuelStations" />
-            <End Role="Fueling" EntitySet="Fuelings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cars_Users" Association="SpendingReportModel.FK_Cars_Users">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Car" EntitySet="Cars" />
+            <End Role="Purchase" EntitySet="Purchases" />
           </AssociationSet>
           <EntitySet Name="TankStatuses" EntityType="SpendingReportModel.TankStatus" />
           <AssociationSet Name="FK_TankStatuses_Cars" Association="SpendingReportModel.FK_TankStatuses_Cars">
@@ -725,11 +765,6 @@
           <AssociationSet Name="FK_Fuelings_TankStatuses" Association="SpendingReportModel.FK_Fuelings_TankStatuses">
             <End Role="TankStatus" EntitySet="TankStatuses" />
             <End Role="Fueling" EntitySet="Fuelings" />
-          </AssociationSet>
-          <EntitySet Name="Trips" EntityType="SpendingReportModel.Trip" />
-          <AssociationSet Name="FK_Trips_Cars" Association="SpendingReportModel.FK_Trips_Cars">
-            <End Role="Car" EntitySet="Cars" />
-            <End Role="Trip" EntitySet="Trips" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="CategoryName">
@@ -772,11 +807,14 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Fuelings" Relationship="SpendingReportModel.FK_Fuelings_Cars" FromRole="Car" ToRole="Fueling" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="User" Relationship="SpendingReportModel.FK_Cars_Users" FromRole="Car" ToRole="User" />
-          <NavigationProperty Name="TankStatuses" Relationship="SpendingReportModel.FK_TankStatuses_Cars" FromRole="Car" ToRole="TankStatus" />
           <NavigationProperty Name="Trips" Relationship="SpendingReportModel.FK_Trips_Cars" FromRole="Car" ToRole="Trip" />
+          <Property Name="TankSize" Type="Int32" />
+          <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Purchases" Relationship="SpendingReportModel.FK_Purchases_Cars" FromRole="Car" ToRole="Purchase" />
+          <NavigationProperty Name="TankStatuses" Relationship="SpendingReportModel.FK_TankStatuses_Cars" FromRole="Car" ToRole="TankStatus" />
         </EntityType>
         <EntityType Name="FuelStation">
           <Key>
@@ -786,45 +824,8 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Fuelings" Relationship="SpendingReportModel.FK_Fuelings_FuelStations" FromRole="FuelStation" ToRole="Fueling" />
+          <NavigationProperty Name="Purchases" Relationship="SpendingReportModel.FK_Fuelings_FuelStations" FromRole="FuelStation" ToRole="Purchase" />
         </EntityType>
-        <EntityType Name="Fueling">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="CarId" Type="Int32" Nullable="false" />
-          <Property Name="Value" Type="Double" Nullable="false" />
-          <Property Name="Price" Type="Double" Nullable="false" />
-          <Property Name="StationId" Type="Int32" />
-          <NavigationProperty Name="Car" Relationship="SpendingReportModel.FK_Fuelings_Cars" FromRole="Fueling" ToRole="Car" />
-          <NavigationProperty Name="FuelStation" Relationship="SpendingReportModel.FK_Fuelings_FuelStations" FromRole="Fueling" ToRole="FuelStation" />
-          <NavigationProperty Name="TankStatus" Relationship="SpendingReportModel.FK_Fuelings_TankStatuses" FromRole="Fueling" ToRole="TankStatus" />
-        </EntityType>
-        <Association Name="FK_Fuelings_Cars">
-          <End Type="SpendingReportModel.Car" Role="Car" Multiplicity="1" />
-          <End Type="SpendingReportModel.Fueling" Role="Fueling" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Car">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Fueling">
-              <PropertyRef Name="CarId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Fuelings_FuelStations">
-          <End Type="SpendingReportModel.FuelStation" Role="FuelStation" Multiplicity="0..1" />
-          <End Type="SpendingReportModel.Fueling" Role="Fueling" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FuelStation">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Fueling">
-              <PropertyRef Name="StationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Cars_Users">
           <End Type="SpendingReportModel.User" Role="User" Multiplicity="1" />
           <End Type="SpendingReportModel.Car" Role="Car" Multiplicity="*" />
@@ -837,13 +838,100 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Trip">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Distance" Type="Int32" Nullable="false" />
+          <Property Name="From" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="To" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CarId" Type="Int32" Nullable="false" />
+          <Property Name="DistanceStart" Type="Int32" />
+          <Property Name="DistanceEnd" Type="Int32" />
+          <NavigationProperty Name="Car" Relationship="SpendingReportModel.FK_Trips_Cars" FromRole="Trip" ToRole="Car" />
+        </EntityType>
+        <Association Name="FK_Trips_Cars">
+          <End Type="SpendingReportModel.Car" Role="Car" Multiplicity="1" />
+          <End Type="SpendingReportModel.Trip" Role="Trip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Car">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trip">
+              <PropertyRef Name="CarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Fueling">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="Double" Nullable="false" />
+          <Property Name="FuelPrice" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Purchase" Relationship="SpendingReportModel.FK_Fuelings_ToTable" FromRole="Fueling" ToRole="Purchase" />
+          <NavigationProperty Name="TankStatus" Relationship="SpendingReportModel.FK_Fuelings_TankStatuses" FromRole="Fueling" ToRole="TankStatus" />
+        </EntityType>
+        <EntityType Name="Purchase">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CarId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StationId" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Car" Relationship="SpendingReportModel.FK_Purchases_Cars" FromRole="Purchase" ToRole="Car" />
+          <NavigationProperty Name="Fueling" Relationship="SpendingReportModel.FK_Fuelings_ToTable" FromRole="Purchase" ToRole="Fueling" />
+          <NavigationProperty Name="FuelStation" Relationship="SpendingReportModel.FK_Fuelings_FuelStations" FromRole="Purchase" ToRole="FuelStation" />
+        </EntityType>
+        <Association Name="FK_Purchases_Cars">
+          <End Type="SpendingReportModel.Car" Role="Car" Multiplicity="0..1" />
+          <End Type="SpendingReportModel.Purchase" Role="Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Car">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="CarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fuelings_ToTable">
+          <End Type="SpendingReportModel.Purchase" Role="Purchase" Multiplicity="1" />
+          <End Type="SpendingReportModel.Fueling" Role="Fueling" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Purchase">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Fueling">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fuelings_FuelStations">
+          <End Type="SpendingReportModel.FuelStation" Role="FuelStation" Multiplicity="0..1" />
+          <End Type="SpendingReportModel.Purchase" Role="Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FuelStation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="StationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="TankStatus">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="TotalDistance" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
-          <Property Name="Empty" Type="Boolean" />
+          <Property Name="TotalDistance" Type="Int32" Nullable="false" />
+          <Property Name="Empty" Type="Boolean" Nullable="false" />
           <Property Name="CarId" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Percentage" Type="Int32" />
@@ -871,32 +959,6 @@
             </Principal>
             <Dependent Role="Fueling">
               <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Trip">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Distance" Type="Int32" Nullable="false" />
-          <Property Name="From" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="To" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CarId" Type="Int32" Nullable="false" />
-          <Property Name="DistanceStart" Type="Int32" />
-          <Property Name="DistanceEnd" Type="Int32" />
-          <NavigationProperty Name="Car" Relationship="SpendingReportModel.FK_Trips_Cars" FromRole="Trip" ToRole="Car" />
-        </EntityType>
-        <Association Name="FK_Trips_Cars">
-          <End Type="SpendingReportModel.Car" Role="Car" Multiplicity="1" />
-          <End Type="SpendingReportModel.Trip" Role="Trip" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Car">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Trip">
-              <PropertyRef Name="CarId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1019,6 +1081,9 @@
           <EntitySetMapping Name="Cars">
             <EntityTypeMapping TypeName="SpendingReportModel.Car">
               <MappingFragment StoreEntitySet="Cars">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="TankSize" ColumnName="TankSize" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -1035,13 +1100,38 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Trips">
+            <EntityTypeMapping TypeName="SpendingReportModel.Trip">
+              <MappingFragment StoreEntitySet="Trips">
+                <ScalarProperty Name="DistanceEnd" ColumnName="DistanceEnd" />
+                <ScalarProperty Name="DistanceStart" ColumnName="DistanceStart" />
+                <ScalarProperty Name="CarId" ColumnName="CarId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="To" ColumnName="To" />
+                <ScalarProperty Name="From" ColumnName="From" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Fuelings">
             <EntityTypeMapping TypeName="SpendingReportModel.Fueling">
               <MappingFragment StoreEntitySet="Fuelings">
-                <ScalarProperty Name="StationId" ColumnName="StationId" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="FuelPrice" ColumnName="FuelPrice" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Purchases">
+            <EntityTypeMapping TypeName="SpendingReportModel.Purchase">
+              <MappingFragment StoreEntitySet="Purchases">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="StationId" ColumnName="StationId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="CarId" ColumnName="CarId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1054,20 +1144,6 @@
                 <ScalarProperty Name="CarId" ColumnName="CarId" />
                 <ScalarProperty Name="Empty" ColumnName="Empty" />
                 <ScalarProperty Name="TotalDistance" ColumnName="TotalDistance" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Trips">
-            <EntityTypeMapping TypeName="SpendingReportModel.Trip">
-              <MappingFragment StoreEntitySet="Trips">
-                <ScalarProperty Name="DistanceEnd" ColumnName="DistanceEnd" />
-                <ScalarProperty Name="DistanceStart" ColumnName="DistanceStart" />
-                <ScalarProperty Name="CarId" ColumnName="CarId" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="To" ColumnName="To" />
-                <ScalarProperty Name="From" ColumnName="From" />
-                <ScalarProperty Name="Distance" ColumnName="Distance" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -1,0 +1,16 @@
+﻿@model SpendingReport.ViewModels.CarsViewModel
+@{
+    ViewBag.Title = "NewCar";
+    Layout = "~/Views/Shared/SpendingMaster.cshtml";
+}
+
+@using(Html.BeginForm("NewCar"))
+{
+@Html.AntiForgeryToken()
+@Html.LabelFor(i => i.Name)
+@Html.TextBoxFor(i => i.Name)
+@Html.LabelFor(i => i.TankSize)
+@Html.TextBoxFor(i => i.TankSize)
+
+<input type="submit" value="Add car" />
+}

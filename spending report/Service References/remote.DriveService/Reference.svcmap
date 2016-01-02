@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="3084cd17-1a35-48f4-80aa-33ea7a4a441b" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:64737/DriveService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="DriveService.xsd" MetadataType="Schema" ID="18dd8890-4e19-4299-a3c2-7d653a70e5c8" SourceId="1" SourceUrl="http://localhost:64737/DriveService.svc?xsd=xsd0" />
+    <MetadataFile FileName="DriveService1.xsd" MetadataType="Schema" ID="a13c0391-88d8-4c1f-b412-7b39e41f314c" SourceId="1" SourceUrl="http://localhost:64737/DriveService.svc?xsd=xsd2" />
+    <MetadataFile FileName="DriveService2.xsd" MetadataType="Schema" ID="d481bc30-9745-48ae-b4d3-26c5c47ae93c" SourceId="1" SourceUrl="http://localhost:64737/DriveService.svc?xsd=xsd1" />
+    <MetadataFile FileName="DriveService.disco" MetadataType="Disco" ID="79fcafd6-8473-4b08-ad05-1b71dacd936d" SourceId="1" SourceUrl="http://localhost:64737/DriveService.svc?disco" />
+    <MetadataFile FileName="DriveService.wsdl" MetadataType="Wsdl" ID="fd22c04c-336c-471d-803e-a5aff3b46c22" SourceId="1" SourceUrl="http://localhost:64737/DriveService.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

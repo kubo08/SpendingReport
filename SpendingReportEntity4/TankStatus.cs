@@ -15,8 +15,8 @@ namespace SpendingReportEntity4
     public partial class TankStatus
     {
         public int Id { get; set; }
-        public byte[] TotalDistance { get; set; }
-        public Nullable<bool> Empty { get; set; }
+        public int TotalDistance { get; set; }
+        public bool Empty { get; set; }
         public int CarId { get; set; }
         public System.DateTime Date { get; set; }
         public Nullable<int> Percentage { get; set; }

@@ -39,6 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cars\Car.cs" />
+    <Compile Include="Cars\Fueling.cs" />
+    <Compile Include="Cars\Purchase.cs" />
+    <Compile Include="Cars\FuelStation.cs" />
+    <Compile Include="Cars\TankStatus.cs" />
+    <Compile Include="Cars\Trip.cs" />
     <Compile Include="List\BankAccount.cs" />
     <Compile Include="List\Transaction.cs" />
     <Compile Include="List\TransactionsModel.cs" />

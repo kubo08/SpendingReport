@@ -25,5 +25,24 @@ namespace Services.Helpers
                 throw (e);
             }
         }
+
+        public static User GetUserByIDWithCars(int UserId)
+        {
+            //todo:otestovat static
+            try
+            {
+                using (var context = new SpendingReportEntities())
+                {
+                    var currentUser = context.Users.Include("Cars").FirstOrDefault(t => t.Id == UserId);
+                    if (currentUser == null)
+                        throw new Exception("Používateľ nebol nájdený!");
+                    return currentUser;
+                }
+            }
+            catch (Exception e)
+            {
+                throw (e);
+            }
+        }
     }
 }

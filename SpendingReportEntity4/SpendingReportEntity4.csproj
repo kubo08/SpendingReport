@@ -81,6 +81,9 @@
       <DependentUpon>SpendingContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Purchase.cs">
+      <DependentUpon>SpendingContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="SpendingContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

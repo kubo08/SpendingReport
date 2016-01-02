@@ -5,7 +5,7 @@ using entity = SpendingReportEntity4;
 
 namespace Services.Helpers
 {
-    public static class Converters
+    public static class TransactionConverter
     {
         public static TransactionCategoriesModel EntityToModel(this entity.TransactionCategory entity)
         {

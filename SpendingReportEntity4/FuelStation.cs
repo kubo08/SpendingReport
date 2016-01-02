@@ -17,7 +17,7 @@ namespace SpendingReportEntity4
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public FuelStation()
         {
-            this.Fuelings = new HashSet<Fueling>();
+            this.Purchases = new HashSet<Purchase>();
         }
     
         public int Id { get; set; }
@@ -26,6 +26,6 @@ namespace SpendingReportEntity4
         public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Fueling> Fuelings { get; set; }
+        public virtual ICollection<Purchase> Purchases { get; set; }
     }
 }

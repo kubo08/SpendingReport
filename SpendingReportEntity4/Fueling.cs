@@ -15,13 +15,10 @@ namespace SpendingReportEntity4
     public partial class Fueling
     {
         public int Id { get; set; }
-        public int CarId { get; set; }
         public double Value { get; set; }
-        public double Price { get; set; }
-        public Nullable<int> StationId { get; set; }
+        public double FuelPrice { get; set; }
     
-        public virtual Car Car { get; set; }
-        public virtual FuelStation FuelStation { get; set; }
+        public virtual Purchase Purchase { get; set; }
         public virtual TankStatus TankStatus { get; set; }
     }
 }

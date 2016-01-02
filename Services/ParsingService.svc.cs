@@ -141,7 +141,7 @@ namespace Services
             }
             catch (Exception e)
             {
-                throw (e);
+                throw new Exception("Nastala chyba pri ukladani importu!", e);
             }
             return ImportWithPocessedTransactions;
         }
