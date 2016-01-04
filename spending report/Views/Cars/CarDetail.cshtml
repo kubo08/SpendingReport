@@ -1,7 +1,60 @@
-﻿@model SpendingReport.Models.Cars.Car
+﻿@using System.Linq
+@model SpendingReport.Models.Cars.Car
 
 @{
     ViewBag.Title = "CarDetail";
     Layout = "~/Views/Shared/SpendingMaster.cshtml";
+
+    var trip = Model.Trips.FirstOrDefault();
+    var purchase = Model.Purchases.FirstOrDefault();
 }
 
+<div class="car-detail">
+    <span>
+        Car name:
+        @Html.DisplayTextFor(i => i.Name)
+    </span>
+    <span>
+        Car description:
+        @Html.DisplayTextFor(i => i.Description)
+    </span>
+    <span>
+        Takn size:
+        @Html.DisplayTextFor(i => i.TankSize)
+    </span>
+    <span>
+        Car color:
+        @Html.DisplayTextFor(i => i.Color)
+    </span>
+</div>
+<div class="trips">
+    Last Trip:
+    @if (trip != null)
+    {
+        @Html.DisplayText(trip.Date.ToShortDateString())
+        @Html.DisplayText(trip.From)
+        @Html.DisplayText(trip.To)
+        @Html.DisplayText(trip.DistanceStart.ToString())
+        @Html.DisplayText(trip.DistanceEnd.ToString())
+        @Html.DisplayText((trip.DistanceEnd - trip.DistanceEnd).ToString())
+        @Html.ActionLink("Get all trips", "AllTrips", new{id=Model.Id})
+    }
+    @Html.ActionLink("Add new trip", "AddTrip", new {id=Model.Id})
+</div>
+<div class="fuelings">
+    Last Purchase:
+    @if (purchase != null)
+    {
+        @Html.DisplayText(purchase.Date.ToShortDateString())
+        @Html.DisplayText(purchase.Name)
+        @Html.DisplayText(purchase.Description)
+        @Html.DisplayText(purchase.Price.ToString())
+        if (purchase.Station != null)
+        {
+            @Html.DisplayText(purchase.Station.Name)
+            @Html.DisplayText(purchase.Station.Address)
+        }
+        @Html.ActionLink("Get all purchases", "AllPurchases", new { id = Model.Id })
+    }
+    @Html.ActionLink("Add new purchase", "AddPurchase", new { id = Model.Id })
+</div>

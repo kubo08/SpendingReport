@@ -31,6 +31,9 @@ namespace Services.Converters
             };
             foreach (var tankStatus in car.TankStatuses)
             {
+                if (tankStatus == null)
+                    continue;
+
                 var statusModel = new TankStatus
                 {
                     Id = tankStatus.Id,
@@ -43,6 +46,8 @@ namespace Services.Converters
             }
             foreach (var purchase in car.Purchases)
             {
+                if (purchase == null)
+                    continue;
                 var purchaseModel = new Purchase
                 {
                     Date = purchase.Date,
@@ -73,6 +78,8 @@ namespace Services.Converters
             }
             foreach (var trip in car.Trips)
             {
+                if (trip == null)
+                    continue;
                 var tripModel = new Trip
                 {
                     Date = trip.Date,

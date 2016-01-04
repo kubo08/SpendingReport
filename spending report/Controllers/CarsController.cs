@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using SpendingReport.Helpers;
 using SpendingReport.Models.Cars;
 using SpendingReport.remote.DriveService;
+using SpendingReport.ViewModels.Cars;
 
 namespace SpendingReport.Controllers
 {
@@ -13,12 +14,12 @@ namespace SpendingReport.Controllers
 
         public ActionResult Index()
         {
-            IList<Car> cars;
+            var viewModel = new CarsViewModel();
             using (var svc = new DriveServiceClient())
             {
-                cars = svc.GetCarsByUserId(UserHelpers.GetCurrentUser());
+                viewModel.Cars = svc.GetCarsByUserId(UserHelpers.GetCurrentUser());
             }
-            return View(cars);
+            return View(viewModel);
         }
 
         [HttpGet]

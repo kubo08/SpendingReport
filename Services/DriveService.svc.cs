@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
 using Services.Converters;
 using Services.Helpers;
 using SpendingReportEntity4;
@@ -60,7 +57,10 @@ namespace Services
             {
                 using (var context = new SpendingReportEntities())
                 {
-                    var car = context.Cars.Include("Trips").Include("TankStatuses").Include("Purchases").Include("Fuelings").Include("FuelStations").SingleOrDefault(i => i.Id == Id);
+                    var car = context.Cars.SingleOrDefault(i => i.Id == Id);
+                    car.Trips.Add(context.Trips.Where(i => i.CarId == Id).OrderBy(i => i.Date).FirstOrDefault());
+                    car.TankStatuses.Add(context.TankStatuses.Include("Fueling").Include("Fueling.Purchase").Include("Fueling.Purchase.FuelStation").Where(i => i.CarId == Id).OrderBy(i => i.Date).FirstOrDefault());
+                    car.Purchases.Add(context.Purchases.Include("Fueling").Include("Fueling.TankStatus").Include("FuelStation").Where(i => i.CarId == Id).OrderBy(i => i.Date).FirstOrDefault());
                     return car.EntityToModel();
                 }
             }
