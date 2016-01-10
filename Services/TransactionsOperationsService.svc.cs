@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using Services.Helpers;
-using SpendingReport.Models;
+using SpendingReport.Service.Models;
 using SpendingReportEntity4;
-using BankAccount = SpendingReport.Models.BankAccount;
 
 namespace Services
 {

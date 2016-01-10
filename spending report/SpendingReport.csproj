@@ -150,6 +150,8 @@
     <Compile Include="Controllers\ListController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
+    <Compile Include="Converter\CarConverter.cs" />
+    <Compile Include="Converter\CategoriesConverter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -165,6 +167,12 @@
     <Compile Include="Models\BankAccountImportedPayments.cs" />
     <Compile Include="Helpers\Filter.cs" />
     <Compile Include="Helpers\Pager\Pager.cs" />
+    <Compile Include="Models\CategoryNameModel.cs" />
+    <Compile Include="Models\List\BankAccount.cs" />
+    <Compile Include="Models\List\Transaction.cs" />
+    <Compile Include="Models\List\TransactionAmount.cs" />
+    <Compile Include="Models\List\TransactionsModel.cs" />
+    <Compile Include="Models\TransactionCategoriesModel.cs" />
     <Compile Include="Service References\remote.DriveService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -180,12 +188,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Cars\CarsViewModel.cs" />
+    <Compile Include="ViewModels\CarDetailViewModel.cs" />
+    <Compile Include="Models\Cars\Fueling.cs" />
+    <Compile Include="Models\Cars\FuelStation.cs" />
+    <Compile Include="Models\Cars\Purchase.cs" />
+    <Compile Include="Models\Cars\TankStatus.cs" />
+    <Compile Include="Models\Cars\Trip.cs" />
     <Compile Include="ViewModels\ReportsViewModel.cs" />
     <Compile Include="ViewModels\SingleCategoryViewModel.cs" />
     <Compile Include="ViewModels\TransactionCategoriesViewModel.cs" />
     <Compile Include="ViewModels\TransactionfilterViewModel.cs" />
-    <Compile Include="ViewModels\TransactionsModel.cs" />
+    <Compile Include="Models\TransactionsModel.cs" />
     <Compile Include="Service References\remote.TransactionsOperationsService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -267,6 +280,8 @@
     <Content Include="Properties\DataSources\SpendingReport.Models.CategoryBase.datasource" />
     <Content Include="Properties\DataSources\parser.Data.Import.datasource" />
     <Content Include="Properties\DataSources\SpendingReport.Models.Cars.Car.datasource" />
+    <Content Include="Properties\DataSources\SpendingReport.Service.Models.TransactionCategoriesModel.datasource" />
+    <Content Include="Properties\DataSources\SpendingReport.Service.Models.Cars.Car.datasource" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\Filter.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
@@ -410,9 +425,9 @@
       <Project>{11503e12-6e83-475f-9baf-4a96aaa686fe}</Project>
       <Name>Parser.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SpendingReport.Models\SpendingReport.Models.csproj">
+    <ProjectReference Include="..\SpendingReport.Models\SpendingReport.Service.Models.csproj">
       <Project>{ad3b9b8e-7217-44af-8657-58cddab915dc}</Project>
-      <Name>SpendingReport.Models</Name>
+      <Name>SpendingReport.Service.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\XMLParser\Parser.csproj">
       <Project>{449c6283-cdff-4083-94b5-7b7b199d1ee6}</Project>

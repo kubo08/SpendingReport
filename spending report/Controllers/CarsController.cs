@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using SpendingReport.Converter;
 using SpendingReport.Helpers;
-using SpendingReport.Models.Cars;
 using SpendingReport.remote.DriveService;
+using SpendingReport.Service.Models.Cars;
 using SpendingReport.ViewModels.Cars;
 
 namespace SpendingReport.Controllers
@@ -14,10 +15,11 @@ namespace SpendingReport.Controllers
 
         public ActionResult Index()
         {
-            var viewModel = new CarsViewModel();
+            IList<CarDetailViewModel> viewModel = new List<CarDetailViewModel>();
             using (var svc = new DriveServiceClient())
             {
-                viewModel.Cars = svc.GetCarsByUserId(UserHelpers.GetCurrentUser());
+                var car = svc.GetCarsByUserId(UserHelpers.GetCurrentUser());
+                viewModel = car.EntityToModel();
             }
             return View(viewModel);
         }
@@ -30,11 +32,11 @@ namespace SpendingReport.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult NewCar(Car newCar)
+        public ActionResult NewCar(CarAttributes newCarAttributes)
         {
             using (var svc = new DriveServiceClient())
             {
-                svc.AddNewCar(UserHelpers.GetCurrentUser(), newCar);
+                svc.AddNewCar(UserHelpers.GetCurrentUser(), newCarAttributes);
             }
             return RedirectToAction("Index");
         }
@@ -42,12 +44,12 @@ namespace SpendingReport.Controllers
         [HttpGet]
         public ActionResult CarDetail(int Id)
         {
-            Car car;
+            CarDetailViewModel carViewModel;
             using (var svc = new DriveServiceClient())
             {
-                car = svc.GetCarById(Id);
+                carViewModel = svc.GetCarById(Id).EntityToModel();
             }
-            return View(car);
+            return View(carViewModel);
         }
     }
 }

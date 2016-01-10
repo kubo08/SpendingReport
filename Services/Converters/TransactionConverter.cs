@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using SpendingReport.Models;
+using SpendingReport.Service.Models;
 using entity = SpendingReportEntity4;
 
 namespace Services.Helpers

@@ -1,12 +1,12 @@
-﻿@model SpendingReport.ViewModels.Cars.CarsViewModel
+﻿@model System.Collections.Generic.List<SpendingReport.ViewModels.Cars.CarDetailViewModel>
 @{
-    ViewBag.Title = "NewCar";
+    ViewBag.Title = "NewCarAttributes";
     Layout = "~/Views/Shared/SpendingMaster.cshtml";
 }
 
-@Html.ActionLink("Add new car", "NewCar")
+@Html.ActionLink("Add new car", "NewCarAttributes")
 
-Cars:
+CarAttributess:
 <table>
     <tr>
         <th>
@@ -25,7 +25,7 @@ Cars:
             
         </th>
     </tr>
-    @foreach (var car in Model.Cars)
+    @foreach (var car in Model)
     {
         <tr>
             <td>
@@ -41,7 +41,7 @@ Cars:
                 @car.Color
             </td>
             <td>
-                @Html.ActionLink("Detail", "CarDetail",new{id=car.Id})
+                @Html.ActionLink("Detail", "CarAttributesDetail",new{id=car.Id})
             </td>
         </tr>
     }

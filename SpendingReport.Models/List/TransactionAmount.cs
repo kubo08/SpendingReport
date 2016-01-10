@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SpendingReport.Models
+namespace SpendingReport.Service.Models
 {
     public class TransactionAmount
     {

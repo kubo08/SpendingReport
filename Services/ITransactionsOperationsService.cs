@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.ServiceModel;
-using SpendingReport.Models;
+using SpendingReport.Service.Models;
 
 namespace Services
 {

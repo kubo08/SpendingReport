@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using SpendingReport.Models;
 using SpendingReport.remote.TransactionDescriptionService;
 using SpendingReport.ViewModels;
+using SpendingReport.Service.Models;
+using Model = SpendingReport.Service.Models;
 
 namespace SpendingReport.Controllers
 {
@@ -79,7 +80,7 @@ namespace SpendingReport.Controllers
         {
             var model = new TransactionCategoriesViewModel
             {
-                Categories = new List<TransactionCategoriesModel>()
+                Categories = new List<Model.TransactionCategoriesModel>()
             };
             var descriptions = svc.GetAllTransactionCategories(true);
             model.Categories = descriptions;

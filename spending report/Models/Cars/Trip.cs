@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SpendingReport.Service.Models.Cars
+namespace SpendingReport.Models.Cars
 {
     public class Trip
     {

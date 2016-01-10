@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Servic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpendingReportEntity4", "SpendingReportEntity4\SpendingReportEntity4.csproj", "{8CE47E95-F001-4CBC-82ED-C875695FBB4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpendingReport.Models", "SpendingReport.Models\SpendingReport.Models.csproj", "{AD3B9B8E-7217-44AF-8657-58CDDAB915DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpendingReport.Service.Models", "SpendingReport.Models\SpendingReport.Service.Models.csproj", "{AD3B9B8E-7217-44AF-8657-58CDDAB915DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

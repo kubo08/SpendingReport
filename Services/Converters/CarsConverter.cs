@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using SpendingReport.Models.Cars;
+using SpendingReport.Service.Models.Cars;
 
 namespace Services.Converters
 {
@@ -20,14 +20,17 @@ namespace Services.Converters
         {
             var carModel = new Car
             {
-                Id = car.Id,
-                Name = car.Name,
-                TankSize = car.TankSize,
-                Description = car.Description,
-                Color = car.Color,
                 Purchases = new List<Purchase>(),
                 TankStatuses = new List<TankStatus>(),
-                Trips = new List<Trip>()
+                Trips = new List<Trip>(),
+                CarDetails = new CarAttributes
+                {
+                    Id = car.Id,
+                    Name = car.Name,
+                    TankSize = car.TankSize,
+                    Description = car.Description,
+                    Color = car.Color,
+                }
             };
             foreach (var tankStatus in car.TankStatuses)
             {

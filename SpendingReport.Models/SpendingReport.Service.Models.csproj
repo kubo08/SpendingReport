@@ -7,8 +7,8 @@
     <ProjectGuid>{AD3B9B8E-7217-44AF-8657-58CDDAB915DC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SpendingReport.Models</RootNamespace>
-    <AssemblyName>SpendingReport.Models</AssemblyName>
+    <RootNamespace>SpendingReport.Service.Models</RootNamespace>
+    <AssemblyName>SpendingReport.Service.Models</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,6 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cars\Car.cs" />
+    <Compile Include="Cars\CarAttributes.cs" />
+    <Compile Include="Cars\CarDetails.cs" />
     <Compile Include="Cars\Fueling.cs" />
     <Compile Include="Cars\Purchase.cs" />
     <Compile Include="Cars\FuelStation.cs" />
@@ -47,9 +49,9 @@
     <Compile Include="Cars\Trip.cs" />
     <Compile Include="List\BankAccount.cs" />
     <Compile Include="List\Transaction.cs" />
+    <Compile Include="List\TransactionAmount.cs" />
     <Compile Include="List\TransactionsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="List\TransactionAmount.cs" />
     <Compile Include="Reports\CategoryBase.cs" />
     <Compile Include="Reports\CategoryModel.cs" />
     <Compile Include="Reports\CategoryNameModel.cs" />

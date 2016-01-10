@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SpendingReport.Service.Models
+namespace SpendingReport.Models
 {
     public class TransactionsModel
     {

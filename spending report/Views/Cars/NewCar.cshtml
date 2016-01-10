@@ -1,9 +1,9 @@
-﻿@model SpendingReport.Models.Cars.Car
-    ViewBag.Title = "NewCar";
+﻿@model SpendingReport.Models.Cars.CarAttributes
+    ViewBag.Title = "NewCarAttributes";
     Layout = "~/Views/Shared/SpendingMaster.cshtml";
 }
 
-@using(Html.BeginForm("NewCar"))
+@using(Html.BeginForm("NewCarAttributes"))
 {
 @Html.AntiForgeryToken()
 @Html.LabelFor(i => i.Name)

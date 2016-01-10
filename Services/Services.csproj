@@ -111,9 +111,9 @@
       <Project>{11503e12-6e83-475f-9baf-4a96aaa686fe}</Project>
       <Name>Parser.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SpendingReport.Models\SpendingReport.Models.csproj">
+    <ProjectReference Include="..\SpendingReport.Models\SpendingReport.Service.Models.csproj">
       <Project>{ad3b9b8e-7217-44af-8657-58cddab915dc}</Project>
-      <Name>SpendingReport.Models</Name>
+      <Name>SpendingReport.Service.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\SpendingReportEntity4\SpendingReportEntity4.csproj">
       <Project>{8ce47e95-f001-4cbc-82ed-c875695fbb4c}</Project>

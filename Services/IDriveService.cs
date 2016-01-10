@@ -8,12 +8,12 @@ namespace Services
     public interface IDriveService
     {
         [OperationContract]
-        void AddNewCar(int userId, SpendingReport.Models.Cars.Car car);
+        void AddNewCar(int userId, SpendingReport.Service.Models.Cars.CarAttributes carAttributes);
 
         [OperationContract]
-        IList<SpendingReport.Models.Cars.Car> GetCarsByUserId(int userId);
+        IList<SpendingReport.Service.Models.Cars.Car> GetCarsByUserId(int userId);
 
         [OperationContract]
-        SpendingReport.Models.Cars.Car GetCarById(int Id);
+        SpendingReport.Service.Models.Cars.Car GetCarById(int Id);
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using SpendingReport.Models;
+using SpendingReport.Service.Models;
 
 namespace SpendingReport.ViewModels
 {

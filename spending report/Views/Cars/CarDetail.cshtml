@@ -1,21 +1,19 @@
 ﻿@using System.Linq
-@model SpendingReport.Models.Cars.Car
+@model SpendingReport.ViewModels.Cars.CarDetailViewModel
 
 @{
-    ViewBag.Title = "CarDetail";
+    ViewBag.Title = "CarAttributesDetail";
     Layout = "~/Views/Shared/SpendingMaster.cshtml";
 
-    var trip = Model.Trips.FirstOrDefault();
-    var purchase = Model.Purchases.FirstOrDefault();
 }
 
 <div class="car-detail">
     <span>
-        Car name:
+        CarAttributes name:
         @Html.DisplayTextFor(i => i.Name)
     </span>
     <span>
-        Car description:
+        CarAttributes description:
         @Html.DisplayTextFor(i => i.Description)
     </span>
     <span>
@@ -23,38 +21,62 @@
         @Html.DisplayTextFor(i => i.TankSize)
     </span>
     <span>
-        Car color:
+        CarAttributes color:
         @Html.DisplayTextFor(i => i.Color)
     </span>
 </div>
 <div class="trips">
     Last Trip:
-    @if (trip != null)
+    @if (Model.LastTrip != null)
     {
-        @Html.DisplayText(trip.Date.ToShortDateString())
-        @Html.DisplayText(trip.From)
-        @Html.DisplayText(trip.To)
-        @Html.DisplayText(trip.DistanceStart.ToString())
-        @Html.DisplayText(trip.DistanceEnd.ToString())
-        @Html.DisplayText((trip.DistanceEnd - trip.DistanceEnd).ToString())
-        @Html.ActionLink("Get all trips", "AllTrips", new{id=Model.Id})
+        @Html.DisplayTextFor(i=>i.LastTrip.Date.ToShortDateString())
+        @Html.DisplayTextFor(i => i.LastTrip.From)
+        @Html.DisplayTextFor(i => i.LastTrip.To)
+        @Html.DisplayTextFor(i => i.LastTrip.DistanceStart.ToString())
+        @Html.DisplayTextFor(i => i.LastTrip.DistanceEnd.ToString())
+        @Html.DisplayText((Model.LastTrip.DistanceEnd - Model.LastTrip.DistanceEnd).ToString())
+        @Html.ActionLink("Get all trips", "AllTrips", new { id = Model.Id })
     }
-    @Html.ActionLink("Add new trip", "AddTrip", new {id=Model.Id})
+    @Html.ActionLink("Add new trip", "AddTrip", new { id = Model.Id })
 </div>
-<div class="fuelings">
+<div class="purchase">
     Last Purchase:
-    @if (purchase != null)
+    @if (Model.LastPurchase != null)
     {
-        @Html.DisplayText(purchase.Date.ToShortDateString())
-        @Html.DisplayText(purchase.Name)
-        @Html.DisplayText(purchase.Description)
-        @Html.DisplayText(purchase.Price.ToString())
-        if (purchase.Station != null)
+        @Html.DisplayTextFor(i=>i.LastPurchase.Date.ToShortDateString())
+        @Html.DisplayTextFor(i => i.LastPurchase.Name)
+        @Html.DisplayTextFor(i => i.LastPurchase.Description)
+        @Html.DisplayTextFor(i => i.LastPurchase.Price.ToString())
+        if (Model.LastPurchase.Station != null)
         {
-            @Html.DisplayText(purchase.Station.Name)
-            @Html.DisplayText(purchase.Station.Address)
+            @Html.DisplayTextFor(i => i.LastPurchase.Station.Name)
+            @Html.DisplayTextFor(i => i.LastPurchase.Station.Address)
         }
         @Html.ActionLink("Get all purchases", "AllPurchases", new { id = Model.Id })
     }
     @Html.ActionLink("Add new purchase", "AddPurchase", new { id = Model.Id })
+</div>
+
+<div class="tank-status">
+    Last Purchase:
+    @if (Model.LastTankStatus != null)
+    {
+        @Html.DisplayTextFor(i => i.LastTankStatus.Date.ToShortDateString())
+        @Html.DisplayTextFor(i => i.LastTankStatus.TotalDistance)
+        @Html.DisplayTextFor(i => i.LastTankStatus.Percentage)
+        @Html.DisplayTextFor(i => i.LastTankStatus.IsEmpty)
+        @Html.ActionLink("Get all tank statuses", "AllTankStatuses", new { id = Model.Id })
+    }
+    @Html.ActionLink("Add new tank status", "AddTankStatus", new { id = Model.Id })
+</div>
+
+<div class="fueling">
+    Last Purchase:
+    @if (Model.LastFueling != null)
+    {
+        @Html.DisplayTextFor(i => i.LastFueling.FuelPrice)
+        @Html.DisplayTextFor(i => i.LastFueling.Value)
+        @Html.ActionLink("Get all Fuelings", "AllFuelings", new { id = Model.Id })
+    }
+    @Html.ActionLink("Add new fueling", "AddFueling", new { id = Model.Id })
 </div>

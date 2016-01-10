@@ -16,22 +16,22 @@ namespace SpendingReport.remote.DriveService {
     public interface IDriveService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDriveService/AddNewCar", ReplyAction="http://tempuri.org/IDriveService/AddNewCarResponse")]
-        void AddNewCar(int userId, SpendingReport.Models.Cars.Car car);
+        void AddNewCar(int userId, SpendingReport.Service.Models.Cars.CarAttributes carAttributes);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDriveService/AddNewCar", ReplyAction="http://tempuri.org/IDriveService/AddNewCarResponse")]
-        System.Threading.Tasks.Task AddNewCarAsync(int userId, SpendingReport.Models.Cars.Car car);
+        System.Threading.Tasks.Task AddNewCarAsync(int userId, SpendingReport.Service.Models.Cars.CarAttributes carAttributes);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDriveService/GetCarsByUserId", ReplyAction="http://tempuri.org/IDriveService/GetCarsByUserIdResponse")]
-        SpendingReport.Models.Cars.Car[] GetCarsByUserId(int userId);
+        SpendingReport.Service.Models.Cars.Car[] GetCarsByUserId(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDriveService/GetCarsByUserId", ReplyAction="http://tempuri.org/IDriveService/GetCarsByUserIdResponse")]
-        System.Threading.Tasks.Task<SpendingReport.Models.Cars.Car[]> GetCarsByUserIdAsync(int userId);
+        System.Threading.Tasks.Task<SpendingReport.Service.Models.Cars.Car[]> GetCarsByUserIdAsync(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDriveService/GetCarById", ReplyAction="http://tempuri.org/IDriveService/GetCarByIdResponse")]
-        SpendingReport.Models.Cars.Car GetCarById(int Id);
+        SpendingReport.Service.Models.Cars.Car GetCarById(int Id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDriveService/GetCarById", ReplyAction="http://tempuri.org/IDriveService/GetCarByIdResponse")]
-        System.Threading.Tasks.Task<SpendingReport.Models.Cars.Car> GetCarByIdAsync(int Id);
+        System.Threading.Tasks.Task<SpendingReport.Service.Models.Cars.Car> GetCarByIdAsync(int Id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -61,27 +61,27 @@ namespace SpendingReport.remote.DriveService {
                 base(binding, remoteAddress) {
         }
         
-        public void AddNewCar(int userId, SpendingReport.Models.Cars.Car car) {
-            base.Channel.AddNewCar(userId, car);
+        public void AddNewCar(int userId, SpendingReport.Service.Models.Cars.CarAttributes carAttributes) {
+            base.Channel.AddNewCar(userId, carAttributes);
         }
         
-        public System.Threading.Tasks.Task AddNewCarAsync(int userId, SpendingReport.Models.Cars.Car car) {
-            return base.Channel.AddNewCarAsync(userId, car);
+        public System.Threading.Tasks.Task AddNewCarAsync(int userId, SpendingReport.Service.Models.Cars.CarAttributes carAttributes) {
+            return base.Channel.AddNewCarAsync(userId, carAttributes);
         }
         
-        public SpendingReport.Models.Cars.Car[] GetCarsByUserId(int userId) {
+        public SpendingReport.Service.Models.Cars.Car[] GetCarsByUserId(int userId) {
             return base.Channel.GetCarsByUserId(userId);
         }
         
-        public System.Threading.Tasks.Task<SpendingReport.Models.Cars.Car[]> GetCarsByUserIdAsync(int userId) {
+        public System.Threading.Tasks.Task<SpendingReport.Service.Models.Cars.Car[]> GetCarsByUserIdAsync(int userId) {
             return base.Channel.GetCarsByUserIdAsync(userId);
         }
         
-        public SpendingReport.Models.Cars.Car GetCarById(int Id) {
+        public SpendingReport.Service.Models.Cars.Car GetCarById(int Id) {
             return base.Channel.GetCarById(Id);
         }
         
-        public System.Threading.Tasks.Task<SpendingReport.Models.Cars.Car> GetCarByIdAsync(int Id) {
+        public System.Threading.Tasks.Task<SpendingReport.Service.Models.Cars.Car> GetCarByIdAsync(int Id) {
             return base.Channel.GetCarByIdAsync(Id);
         }
     }

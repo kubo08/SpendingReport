@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
-using SpendingReport.Models;
+using SpendingReport.Service.Models;
 
 namespace Services
 {

@@ -1,4 +1,4 @@
-﻿namespace SpendingReport.Service.Models.Cars
+﻿namespace SpendingReport.Models.Cars
 {
     public class Fueling
     {

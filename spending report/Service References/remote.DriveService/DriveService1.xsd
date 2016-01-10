@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/SpendingReport.Models.Cars" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/SpendingReport.Models.Cars" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="Car">
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/SpendingReport.Service.Models.Cars" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/SpendingReport.Service.Models.Cars" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="CarAttributes">
     <xs:sequence>
       <xs:element minOccurs="0" name="Color" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
@@ -9,11 +9,86 @@
       <xs:element minOccurs="0" name="TankSize" nillable="true" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="Car" nillable="true" type="tns:Car" />
+  <xs:element name="CarAttributes" nillable="true" type="tns:CarAttributes" />
   <xs:complexType name="ArrayOfCar">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Car" nillable="true" type="tns:Car" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfCar" nillable="true" type="tns:ArrayOfCar" />
+  <xs:complexType name="Car">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CarDetails" nillable="true" type="tns:CarAttributes" />
+      <xs:element minOccurs="0" name="Purchases" nillable="true" type="tns:ArrayOfPurchase" />
+      <xs:element minOccurs="0" name="TankStatuses" nillable="true" type="tns:ArrayOfTankStatus" />
+      <xs:element minOccurs="0" name="Trips" nillable="true" type="tns:ArrayOfTrip" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Car" nillable="true" type="tns:Car" />
+  <xs:complexType name="ArrayOfPurchase">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Purchase" nillable="true" type="tns:Purchase" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPurchase" nillable="true" type="tns:ArrayOfPurchase" />
+  <xs:complexType name="Purchase">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Fueling" nillable="true" type="tns:Fueling" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" type="xs:double" />
+      <xs:element minOccurs="0" name="Station" nillable="true" type="tns:FuelStation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Purchase" nillable="true" type="tns:Purchase" />
+  <xs:complexType name="Fueling">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FuelPrice" type="xs:double" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="TankStatus" nillable="true" type="tns:TankStatus" />
+      <xs:element minOccurs="0" name="Value" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Fueling" nillable="true" type="tns:Fueling" />
+  <xs:complexType name="TankStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IsEmpty" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Percentage" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TotalDistance" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TankStatus" nillable="true" type="tns:TankStatus" />
+  <xs:complexType name="FuelStation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FuelStation" nillable="true" type="tns:FuelStation" />
+  <xs:complexType name="ArrayOfTankStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TankStatus" nillable="true" type="tns:TankStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTankStatus" nillable="true" type="tns:ArrayOfTankStatus" />
+  <xs:complexType name="ArrayOfTrip">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Trip" nillable="true" type="tns:Trip" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTrip" nillable="true" type="tns:ArrayOfTrip" />
+  <xs:complexType name="Trip">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DistanceEnd" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="DistanceStart" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="From" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="To" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Trip" nillable="true" type="tns:Trip" />
 </xs:schema>

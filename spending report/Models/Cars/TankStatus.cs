@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SpendingReport.Service.Models.Cars
+namespace SpendingReport.Models.Cars
 {
     public class TankStatus
     {
@@ -13,6 +13,5 @@ namespace SpendingReport.Service.Models.Cars
         public DateTime Date { get; set; }
 
         public int? Percentage { get; set; }
-
     }
 }

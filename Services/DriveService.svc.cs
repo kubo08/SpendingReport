@@ -11,7 +11,7 @@ namespace Services
     // NOTE: In order to launch WCF Test Client for testing this service, please select DriveService.svc or DriveService.svc.cs at the Solution Explorer and start debugging.
     public class DriveService : IDriveService
     {
-        public void AddNewCar(int userId, SpendingReport.Models.Cars.Car car)
+        public void AddNewCar(int userId, SpendingReport.Service.Models.Cars.CarAttributes carAttributes)
         {
             try
             {
@@ -22,8 +22,8 @@ namespace Services
                         throw new Exception("Používateľ nebol nájdený!");
                     var newCar = new Car
                     {
-                        Name = car.Name,
-                        TankSize = car.TankSize
+                        Name = carAttributes.Name,
+                        TankSize = carAttributes.TankSize
                     };
                     currentUser.Cars.Add(newCar);
                     context.SaveChanges();
@@ -35,7 +35,7 @@ namespace Services
             }
         }
 
-        public IList<SpendingReport.Models.Cars.Car> GetCarsByUserId(int userId)
+        public IList<SpendingReport.Service.Models.Cars.Car> GetCarsByUserId(int userId)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace Services
             }
         }
 
-        public SpendingReport.Models.Cars.Car GetCarById(int Id)
+        public SpendingReport.Service.Models.Cars.Car GetCarById(int Id)
         {
             try
             {
@@ -61,12 +61,13 @@ namespace Services
                     car.Trips.Add(context.Trips.Where(i => i.CarId == Id).OrderBy(i => i.Date).FirstOrDefault());
                     car.TankStatuses.Add(context.TankStatuses.Include("Fueling").Include("Fueling.Purchase").Include("Fueling.Purchase.FuelStation").Where(i => i.CarId == Id).OrderBy(i => i.Date).FirstOrDefault());
                     car.Purchases.Add(context.Purchases.Include("Fueling").Include("Fueling.TankStatus").Include("FuelStation").Where(i => i.CarId == Id).OrderBy(i => i.Date).FirstOrDefault());
+                    car.Purchases.Add(context.Purchases.Include("Fueling").Include("Fueling.TankStatus").Include("FuelStation").Where(i => i.CarId == Id).Where(i => i.Fueling != null).OrderBy(i => i.Date).FirstOrDefault());
                     return car.EntityToModel();
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception(string.Format("Error occured in getting car with Id: {0}!", Id), ex);
+                throw new Exception(string.Format("Error occured in getting CarAttributes with Id: {0}!", Id), ex);
             }
         }
     }
