@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser", "XMLParser\Parser.csproj", "{449C6283-CDFF-4083-94B5-7B7B199D1EE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpendingReportEntity", "SpendingReportEntity\SpendingReportEntity.csproj", "{32AABC0B-40F7-4486-89A5-B8813FD809E8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpendingReport", "spending report\SpendingReport.csproj", "{93D0DEB2-71F4-421D-BDF9-9896FAB5D11C}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F84B6DA6-1801-4B0B-A043-F50D39791082} = {F84B6DA6-1801-4B0B-A043-F50D39791082}
@@ -41,10 +39,6 @@ Global
 		{449C6283-CDFF-4083-94B5-7B7B199D1EE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{449C6283-CDFF-4083-94B5-7B7B199D1EE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{449C6283-CDFF-4083-94B5-7B7B199D1EE6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{32AABC0B-40F7-4486-89A5-B8813FD809E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{32AABC0B-40F7-4486-89A5-B8813FD809E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{32AABC0B-40F7-4486-89A5-B8813FD809E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{32AABC0B-40F7-4486-89A5-B8813FD809E8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{93D0DEB2-71F4-421D-BDF9-9896FAB5D11C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{93D0DEB2-71F4-421D-BDF9-9896FAB5D11C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93D0DEB2-71F4-421D-BDF9-9896FAB5D11C}.Release|Any CPU.ActiveCfg = Release|Any CPU
