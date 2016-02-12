@@ -2,26 +2,26 @@
 @model SpendingReport.ViewModels.Cars.CarDetailViewModel
 
 @{
-    ViewBag.Title = "CarAttributesDetail";
+    ViewBag.Title = "Car Detail";
     Layout = "~/Views/Shared/SpendingMaster.cshtml";
 
 }
 
 <div class="car-detail">
     <span>
-        CarAttributes name:
+        Car name:
         @Html.DisplayTextFor(i => i.Name)
     </span>
     <span>
-        CarAttributes description:
+        Car description:
         @Html.DisplayTextFor(i => i.Description)
     </span>
     <span>
-        Takn size:
+        Tank size:
         @Html.DisplayTextFor(i => i.TankSize)
     </span>
     <span>
-        CarAttributes color:
+        Car color:
         @Html.DisplayTextFor(i => i.Color)
     </span>
 </div>
