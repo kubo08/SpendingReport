@@ -43,10 +43,10 @@ namespace SpendingReportEntity
             //    .WithRequired(e => e.Type)
             //    .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.BankAccounts)
-                .WithRequired(e => e.User)
-                .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<User>()
+            //    .HasMany(e => e.BankAccounts)
+            //    .WithRequired(e => e.User)
+            //    .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<BankAccount>()
                 .HasMany(e => e.Entries)
