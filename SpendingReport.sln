@@ -7,7 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser", "XMLParser\Parser.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpendingReport", "spending report\SpendingReport.csproj", "{93D0DEB2-71F4-421D-BDF9-9896FAB5D11C}"
 	ProjectSection(ProjectDependencies) = postProject
-		{F84B6DA6-1801-4B0B-A043-F50D39791082} = {F84B6DA6-1801-4B0B-A043-F50D39791082}
 		{3537A5BB-502F-4174-AD6E-FC85B5BE4E6C} = {3537A5BB-502F-4174-AD6E-FC85B5BE4E6C}
 	EndProjectSection
 EndProject
@@ -20,8 +19,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tb", "tb", "{A9F73FEC-80A8-
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser.Data", "Parser_Data\Parser.Data.csproj", "{11503E12-6E83-475F-9BAF-4A96AAA686FE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpendingReportEntity3", "SpendingReportEntity3\SpendingReportEntity3.csproj", "{F84B6DA6-1801-4B0B-A043-F50D39791082}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{3537A5BB-502F-4174-AD6E-FC85B5BE4E6C}"
 EndProject
@@ -47,10 +44,6 @@ Global
 		{11503E12-6E83-475F-9BAF-4A96AAA686FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11503E12-6E83-475F-9BAF-4A96AAA686FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11503E12-6E83-475F-9BAF-4A96AAA686FE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F84B6DA6-1801-4B0B-A043-F50D39791082}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F84B6DA6-1801-4B0B-A043-F50D39791082}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F84B6DA6-1801-4B0B-A043-F50D39791082}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F84B6DA6-1801-4B0B-A043-F50D39791082}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3537A5BB-502F-4174-AD6E-FC85B5BE4E6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3537A5BB-502F-4174-AD6E-FC85B5BE4E6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3537A5BB-502F-4174-AD6E-FC85B5BE4E6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
