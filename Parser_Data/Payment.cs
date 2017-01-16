@@ -29,7 +29,7 @@ namespace parser.Data
 
         public string Reference
         {
-            get { return String.Format("/VS{0}/SS{1}/KS{2}", VariableSymbol, SpecificSymbol, ConstantSymbol); }
+            get { return $"/VS{VariableSymbol}/SS{SpecificSymbol}/KS{ConstantSymbol}"; }
 
             set
             {

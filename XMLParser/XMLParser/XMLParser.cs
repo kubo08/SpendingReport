@@ -14,26 +14,21 @@ namespace parser
     {
         private XmlDocument _report;
 
-        private readonly IBankParser _parser;
-
-        private readonly Stream stream;
 
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Parser"/> class and process the xml file.
         /// </summary>
         /// <param name="path">The path.</param>
-        public XMLParser(Stream stream)
+        public XMLParser(Stream stream) : base(stream)
         {
-            this.stream = stream;
-            _parser = GetParser();
+            //_parser = GetParser();
         }
 
         public override Import GetData()
         {
             return _parser.GetPayments();
         }
-
 
         /// <summary>
         /// Reads the XML file.

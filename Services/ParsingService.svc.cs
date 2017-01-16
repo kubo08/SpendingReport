@@ -44,9 +44,11 @@ namespace Services
                         SourceAccount.Bank =
                             context.Banks.FirstOrDefault(t => t.BankCode == bankPayments.Account.Bank.BankID) ?? new entity.Bank
                             {
-                                BankCode = (short)bankPayments.Account.Bank.BankID
+                                BankCode = (short)bankPayments.Account.Bank.BankID,
+                                Name=String.Empty
                             };
                         currentUser.BankAccounts.Add(SourceAccount);
+                        context.BankAccounts.Add(SourceAccount);
                     }
 
                     ImportWithPocessedTransactions = new Import
@@ -63,80 +65,86 @@ namespace Services
                     };
 
                     //entity.Bank bank = context.Banks.FirstOrDefault(t => t.BankCode == bankPayments.Account.Bank.BankID);
-                    foreach (Payment transaction in bankPayments.Account.Payments)
+                    using (var dbTransaction = context.Database.BeginTransaction())
                     {
+                        foreach (Payment transaction in bankPayments.Account.Payments)
+                        {
 
-                        if (IsTransactionExist(context, transaction))
-                        {
-                            //ImportedPayment tr = new ImportedPayment(false);
-                            //tr.VariableSymbol = transaction.VariableSymbol;
-                            //ImportWithPocessedTransactions.Account.Payments.Add(tr);
-                            ImportedPayment tr = transaction as ImportedPayment;
-                            tr.Imported = false;
-                            ImportWithPocessedTransactions.Account.Payments.Add(tr);
-                            continue;
-                        }
-                        entity.Entry newTransaction = new entity.Entry
-                        {
-                            ConstantSymbol = transaction.ConstantSymbol,
-                            VariableSymbol = transaction.VariableSymbol,
-                            SpecificSymbol = transaction.SpecificSymbol,
-                            Reference = transaction.Reference,
-                            DateAvailable = transaction.DateAvailable,
-                            DatePosted = transaction.DatePosted,
-                            Memo = transaction.Description,
-                            Name = transaction.TransactionName,
-                            DateAdded = DateTime.Now,
-                            AmountInfo = new entity.AmountInfo
+                            if (IsTransactionExist(context, transaction))
                             {
-                                Amount = Math.Abs(transaction.TransactionAmount.Amount),
-                                Currency = transaction.TransactionAmount.Currency
-                            },
-                            //Bank = GetBank(context, transaction.BankName.Localise())
-                        };
-                        var account = context.BankAccounts.FirstOrDefault(t => t.IBAN == transaction.BankAccount.IBan);
-                        if (account != null)
-                        {
-                            newTransaction.DestinationAccountId = account.Id;
-                        }
-                        else
-                        {
-                            newTransaction.DestinationAccount = new entity.BankAccount
+                                //ImportedPayment tr = new ImportedPayment(false);
+                                //tr.VariableSymbol = transaction.VariableSymbol;
+                                //ImportWithPocessedTransactions.Account.Payments.Add(tr);
+                                ImportedPayment tr = transaction as ImportedPayment;
+                                tr.Imported = false;
+                                ImportWithPocessedTransactions.Account.Payments.Add(tr);
+                                continue;
+                            }
+                            entity.Entry newTransaction = new entity.Entry
                             {
-                                AccountNumber = (long?)transaction.BankAccount.AccountID,
-                                //BankCode = (short?) transaction.BankAccount.BankID,
-                                IBAN = transaction.BankAccount.IBan,
-                                Bank =
-                                    transaction.BankAccount.Bank.BankID.HasValue
-                                        ? GetBank(context, transaction.BankAccount.Bank.BankID.Value)
-                                        : null,
-                                UserId = null
+                                ConstantSymbol = transaction.ConstantSymbol,
+                                VariableSymbol = transaction.VariableSymbol,
+                                SpecificSymbol = transaction.SpecificSymbol,
+                                Reference = transaction.Reference,
+                                DateAvailable = transaction.DateAvailable,
+                                DatePosted = transaction.DatePosted,
+                                Memo = transaction.Description,
+                                Name = transaction.TransactionName,
+                                DateAdded = DateTime.Now,
+                                AmountInfo = new entity.AmountInfo
+                                {
+                                    Amount = Math.Abs(transaction.TransactionAmount.Amount),
+                                    Currency = transaction.TransactionAmount.Currency
+                                },
+                                //Bank = GetBank(context, transaction.BankName.Localise())
                             };
-                        }
-                        if (transaction.TransactionAmount.Type != AmountType.NotDefined)
-                        {
-                            newTransaction.AmountInfo.Type = transaction.TransactionAmount.Type == AmountType.Credit
-                                ? GetTransactionType(context, "Credit")
-                                : GetTransactionType(context, "Debit");
-                        }
-                        else
-                        {
-                            newTransaction.AmountInfo.Type = transaction.TransactionAmount.Amount < 0
-                                ? GetTransactionType(context, "Debit")
-                                : GetTransactionType(context, "Credit");
-                        }
-                        SourceAccount.Entries.Add(newTransaction);
-                        ImportedPayment importedTr = transaction as ImportedPayment;//new ImportedPayment(true);
-                        importedTr.Imported = true;
+                            var account =
+                                context.BankAccounts.FirstOrDefault(t => t.IBAN == transaction.BankAccount.IBan);
+                            if (account != null)
+                            {
+                                newTransaction.DestinationAccountId = account.Id;
+                            }
+                            else
+                            {
+                                newTransaction.DestinationAccount = new entity.BankAccount
+                                {
+                                    AccountNumber = (long?) transaction.BankAccount.AccountID,
+                                    //BankCode = (short?) transaction.BankAccount.BankID,
+                                    IBAN = transaction.BankAccount.IBan,
+                                    Bank =
+                                        (transaction?.BankAccount?.Bank?.BankID.HasValue != null &&
+                                         transaction.BankAccount.Bank.BankID.HasValue)
+                                            ? GetBank(context, transaction.BankAccount.Bank.BankID.Value)
+                                            : null,
+                                    UserId = null
+                                };
+                            }
+                            if (transaction.TransactionAmount.Type != AmountType.NotDefined)
+                            {
+                                newTransaction.AmountInfo.Type = transaction.TransactionAmount.Type == AmountType.Credit
+                                    ? GetTransactionType(context, "Credit")
+                                    : GetTransactionType(context, "Debit");
+                            }
+                            else
+                            {
+                                newTransaction.AmountInfo.Type = transaction.TransactionAmount.Amount < 0
+                                    ? GetTransactionType(context, "Debit")
+                                    : GetTransactionType(context, "Credit");
+                            }
+                            SourceAccount.Entries.Add(newTransaction);
+                            ImportedPayment importedTr = transaction as ImportedPayment; //new ImportedPayment(true);
+                            importedTr.Imported = true;
 
-                        //importedTr.VariableSymbol = transaction.VariableSymbol;
-                        ImportWithPocessedTransactions.Account.Payments.Add(importedTr);
-                        //Payment tran = new Payment();
-                        //tran.VariableSymbol = transaction.VariableSymbol;
-                        //ImportWithPocessedTransactions.Account.Payments.Add(tran);
-                        //break;
+                            //importedTr.VariableSymbol = transaction.VariableSymbol;
+                            ImportWithPocessedTransactions.Account.Payments.Add(importedTr);
+                            //Payment tran = new Payment();
+                            //tran.VariableSymbol = transaction.VariableSymbol;
+                            //ImportWithPocessedTransactions.Account.Payments.Add(tran);
+                            //break;
+                            context.SaveChanges();
+                        }
+                        dbTransaction.Commit();
                     }
-                    context.SaveChanges();
                 }
             }
             catch (Exception e)

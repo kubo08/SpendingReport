@@ -4,484 +4,485 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SpendingReportModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
-          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
-          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AmountInfos">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Amount" Type="decimal" Precision="8" Scale="2" Nullable="false" />
-          <Property Name="Currency" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="TypeId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="BankAccounts">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="AccountNumber" Type="bigint" />
-          <Property Name="IBAN" Type="nvarchar(max)" />
-          <Property Name="Name" Type="nvarchar(max)" />
-          <Property Name="BankId" Type="int" />
-          <Property Name="UserId" Type="int" />
-        </EntityType>
-        <EntityType Name="Banks">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="BankCode" Type="smallint" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Cars">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="TankSize" Type="int" />
-          <Property Name="Color" Type="nvarchar" MaxLength="50" />
-          <Property Name="Description" Type="nchar" MaxLength="10" />
-        </EntityType>
-        <EntityType Name="CategoryNames">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TransactionDescriptionId" Type="int" Nullable="false" />
-          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Entries">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" />
-          <Property Name="DatePosted" Type="datetime" />
-          <Property Name="Memo" Type="nvarchar(max)" />
-          <Property Name="DateAvailable" Type="datetime" />
-          <Property Name="VariableSymbol" Type="bigint" />
-          <Property Name="ConstantSymbol" Type="smallint" />
-          <Property Name="SpecificSymbol" Type="bigint" />
-          <Property Name="Reference" Type="nvarchar(max)" />
-          <Property Name="PaymentTypeId" Type="int" />
-          <Property Name="BankId" Type="int" Nullable="false" />
-          <Property Name="DateAdded" Type="datetime" Nullable="false" />
-          <Property Name="AmountInfoId" Type="int" Nullable="false" />
-          <Property Name="SourceAccountId" Type="int" />
-          <Property Name="DestinationAccountId" Type="int" />
-        </EntityType>
-        <EntityType Name="EntryTansactionCategory">
-          <Key>
-            <PropertyRef Name="EntryID" />
-            <PropertyRef Name="TransactionCategoryID" />
-          </Key>
-          <Property Name="EntryID" Type="int" Nullable="false" />
-          <Property Name="TransactionCategoryID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Fuelings">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Value" Type="float" Nullable="false" />
-          <Property Name="FuelPrice" Type="float" Nullable="false" />
-        </EntityType>
-        <EntityType Name="FuelStations">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Address" Type="nvarchar" MaxLength="50" />
-          <Property Name="Description" Type="nvarchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="PaymentTypes">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Purchases">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Price" Type="float" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CarId" Type="int" />
-          <Property Name="Description" Type="nvarchar" MaxLength="50" />
-          <Property Name="StationId" Type="int" />
-          <Property Name="Date" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="TankStatuses">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="TotalDistance" Type="int" Nullable="false" />
-          <Property Name="Empty" Type="bit" Nullable="false" />
-          <Property Name="CarId" Type="int" Nullable="false" />
-          <Property Name="Date" Type="datetime" Nullable="false" />
-          <Property Name="Percentage" Type="int" />
-        </EntityType>
-        <EntityType Name="TransactionCategory">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Trips">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Distance" Type="int" Nullable="false" />
-          <Property Name="From" Type="nvarchar" MaxLength="50" />
-          <Property Name="To" Type="nvarchar" MaxLength="50" />
-          <Property Name="Date" Type="datetime" Nullable="false" />
-          <Property Name="CarId" Type="int" Nullable="false" />
-          <Property Name="DistanceStart" Type="int" />
-          <Property Name="DistanceEnd" Type="int" />
-        </EntityType>
-        <EntityType Name="Types">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TypeName" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Users">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_Cars_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Cars">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CategoryNames_TransactionDescription">
-          <End Role="TransactionCategory" Type="Self.TransactionCategory" Multiplicity="1" />
-          <End Role="CategoryNames" Type="Self.CategoryNames" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TransactionCategory">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CategoryNames">
-              <PropertyRef Name="TransactionDescriptionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AmountInfos_dbo_Types_TypeId">
-          <End Role="Types" Type="Self.Types" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AmountInfos" Type="Self.AmountInfos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Types">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AmountInfos">
-              <PropertyRef Name="TypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_BankAccounts_dbo_Banks_BankId">
-          <End Role="Banks" Type="Self.Banks" Multiplicity="0..1" />
-          <End Role="BankAccounts" Type="Self.BankAccounts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Banks">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="BankAccounts">
-              <PropertyRef Name="BankId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_BankAccounts_dbo_Users_UserId">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
-          <End Role="BankAccounts" Type="Self.BankAccounts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="BankAccounts">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_Entries_dbo_AmountInfos_AmountInfoId">
-          <End Role="AmountInfos" Type="Self.AmountInfos" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Entries" Type="Self.Entries" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AmountInfos">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Entries">
-              <PropertyRef Name="AmountInfoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_Entries_dbo_BankAccounts_BankAccountID">
-          <End Role="BankAccounts" Type="Self.BankAccounts" Multiplicity="0..1" />
-          <End Role="Entries" Type="Self.Entries" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BankAccounts">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Entries">
-              <PropertyRef Name="SourceAccountId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_Entries_dbo_BankAccounts_DestinationAccountId">
-          <End Role="BankAccounts" Type="Self.BankAccounts" Multiplicity="0..1" />
-          <End Role="Entries" Type="Self.Entries" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BankAccounts">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Entries">
-              <PropertyRef Name="DestinationAccountId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_Entries_dbo_PaymentTypes_PaymentTypeId">
-          <End Role="PaymentTypes" Type="Self.PaymentTypes" Multiplicity="0..1" />
-          <End Role="Entries" Type="Self.Entries" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PaymentTypes">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Entries">
-              <PropertyRef Name="PaymentTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_EntryTansactionCategory_dbo_EntryTansactionCategory_EntryID">
-          <End Role="Entries" Type="Self.Entries" Multiplicity="1" />
-          <End Role="EntryTansactionCategory" Type="Self.EntryTansactionCategory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Entries">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="EntryTansactionCategory">
-              <PropertyRef Name="EntryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_EntryTansactionCategory_dbo_EntryTansactionCategory_TransactionCategoryID">
-          <End Role="TransactionCategory" Type="Self.TransactionCategory" Multiplicity="1" />
-          <End Role="EntryTansactionCategory" Type="Self.EntryTansactionCategory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TransactionCategory">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="EntryTansactionCategory">
-              <PropertyRef Name="TransactionCategoryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Entries_AmountInfos">
-          <End Role="AmountInfos" Type="Self.AmountInfos" Multiplicity="1" />
-          <End Role="Entries" Type="Self.Entries" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AmountInfos">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Entries">
-              <PropertyRef Name="AmountInfoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Fuelings_FuelStations">
-          <End Role="FuelStations" Type="Self.FuelStations" Multiplicity="0..1" />
-          <End Role="Purchases" Type="Self.Purchases" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FuelStations">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Purchases">
-              <PropertyRef Name="StationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Fuelings_TankStatuses">
-          <End Role="TankStatuses" Type="Self.TankStatuses" Multiplicity="1" />
-          <End Role="Fuelings" Type="Self.Fuelings" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="TankStatuses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Fuelings">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Fuelings_ToTable">
-          <End Role="Purchases" Type="Self.Purchases" Multiplicity="1" />
-          <End Role="Fuelings" Type="Self.Fuelings" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Purchases">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Fuelings">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Purchases_Cars">
-          <End Role="Cars" Type="Self.Cars" Multiplicity="0..1" />
-          <End Role="Purchases" Type="Self.Purchases" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cars">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Purchases">
-              <PropertyRef Name="CarId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TankStatuses_Cars">
-          <End Role="Cars" Type="Self.Cars" Multiplicity="1" />
-          <End Role="TankStatuses" Type="Self.TankStatuses" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cars">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TankStatuses">
-              <PropertyRef Name="CarId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Trips_Cars">
-          <End Role="Cars" Type="Self.Cars" Multiplicity="1" />
-          <End Role="Trips" Type="Self.Trips" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cars">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Trips">
-              <PropertyRef Name="CarId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="SpendingReportModelStoreContainer">
-          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AmountInfos" EntityType="Self.AmountInfos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BankAccounts" EntityType="Self.BankAccounts" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Banks" EntityType="Self.Banks" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Cars" EntityType="Self.Cars" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CategoryNames" EntityType="Self.CategoryNames" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Entries" EntityType="Self.Entries" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="EntryTansactionCategory" EntityType="Self.EntryTansactionCategory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Fuelings" EntityType="Self.Fuelings" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FuelStations" EntityType="Self.FuelStations" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PaymentTypes" EntityType="Self.PaymentTypes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Purchases" EntityType="Self.Purchases" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TankStatuses" EntityType="Self.TankStatuses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TransactionCategory" EntityType="Self.TransactionCategory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Trips" EntityType="Self.Trips" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Types" EntityType="Self.Types" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Cars_Users" Association="Self.FK_Cars_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Cars" EntitySet="Cars" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CategoryNames_TransactionDescription" Association="Self.FK_CategoryNames_TransactionDescription">
-            <End Role="TransactionCategory" EntitySet="TransactionCategory" />
-            <End Role="CategoryNames" EntitySet="CategoryNames" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AmountInfos_dbo_Types_TypeId" Association="Self.FK_dbo_AmountInfos_dbo_Types_TypeId">
-            <End Role="Types" EntitySet="Types" />
-            <End Role="AmountInfos" EntitySet="AmountInfos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_BankAccounts_dbo_Banks_BankId" Association="Self.FK_dbo_BankAccounts_dbo_Banks_BankId">
-            <End Role="Banks" EntitySet="Banks" />
-            <End Role="BankAccounts" EntitySet="BankAccounts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_BankAccounts_dbo_Users_UserId" Association="Self.FK_dbo_BankAccounts_dbo_Users_UserId">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="BankAccounts" EntitySet="BankAccounts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Entries_dbo_AmountInfos_AmountInfoId" Association="Self.FK_dbo_Entries_dbo_AmountInfos_AmountInfoId">
-            <End Role="AmountInfos" EntitySet="AmountInfos" />
-            <End Role="Entries" EntitySet="Entries" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Entries_dbo_BankAccounts_BankAccountID" Association="Self.FK_dbo_Entries_dbo_BankAccounts_BankAccountID">
-            <End Role="BankAccounts" EntitySet="BankAccounts" />
-            <End Role="Entries" EntitySet="Entries" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Entries_dbo_BankAccounts_DestinationAccountId" Association="Self.FK_dbo_Entries_dbo_BankAccounts_DestinationAccountId">
-            <End Role="BankAccounts" EntitySet="BankAccounts" />
-            <End Role="Entries" EntitySet="Entries" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Entries_dbo_PaymentTypes_PaymentTypeId" Association="Self.FK_dbo_Entries_dbo_PaymentTypes_PaymentTypeId">
-            <End Role="PaymentTypes" EntitySet="PaymentTypes" />
-            <End Role="Entries" EntitySet="Entries" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_EntryTansactionCategory_dbo_EntryTansactionCategory_EntryID" Association="Self.FK_dbo_EntryTansactionCategory_dbo_EntryTansactionCategory_EntryID">
-            <End Role="Entries" EntitySet="Entries" />
-            <End Role="EntryTansactionCategory" EntitySet="EntryTansactionCategory" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_EntryTansactionCategory_dbo_EntryTansactionCategory_TransactionCategoryID" Association="Self.FK_dbo_EntryTansactionCategory_dbo_EntryTansactionCategory_TransactionCategoryID">
-            <End Role="TransactionCategory" EntitySet="TransactionCategory" />
-            <End Role="EntryTansactionCategory" EntitySet="EntryTansactionCategory" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Entries_AmountInfos" Association="Self.FK_Entries_AmountInfos">
-            <End Role="AmountInfos" EntitySet="AmountInfos" />
-            <End Role="Entries" EntitySet="Entries" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Fuelings_FuelStations" Association="Self.FK_Fuelings_FuelStations">
-            <End Role="FuelStations" EntitySet="FuelStations" />
-            <End Role="Purchases" EntitySet="Purchases" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Fuelings_TankStatuses" Association="Self.FK_Fuelings_TankStatuses">
-            <End Role="TankStatuses" EntitySet="TankStatuses" />
-            <End Role="Fuelings" EntitySet="Fuelings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Fuelings_ToTable" Association="Self.FK_Fuelings_ToTable">
-            <End Role="Purchases" EntitySet="Purchases" />
-            <End Role="Fuelings" EntitySet="Fuelings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Purchases_Cars" Association="Self.FK_Purchases_Cars">
-            <End Role="Cars" EntitySet="Cars" />
-            <End Role="Purchases" EntitySet="Purchases" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TankStatuses_Cars" Association="Self.FK_TankStatuses_Cars">
-            <End Role="Cars" EntitySet="Cars" />
-            <End Role="TankStatuses" EntitySet="TankStatuses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Trips_Cars" Association="Self.FK_Trips_Cars">
-            <End Role="Cars" EntitySet="Cars" />
-            <End Role="Trips" EntitySet="Trips" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
+    <Schema Namespace="SpendingReportModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="SpendingReportModelStoreContainer">
+    <EntitySet Name="C__MigrationHistory" EntityType="SpendingReportModel.Store.C__MigrationHistory" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AmountInfos" EntityType="SpendingReportModel.Store.AmountInfos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BankAccounts" EntityType="SpendingReportModel.Store.BankAccounts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Banks" EntityType="SpendingReportModel.Store.Banks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Entries" EntityType="SpendingReportModel.Store.Entries" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PaymentTypes" EntityType="SpendingReportModel.Store.PaymentTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Types" EntityType="SpendingReportModel.Store.Types" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="SpendingReportModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CategoryNames" EntityType="SpendingReportModel.Store.CategoryNames" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TransactionCategories" EntityType="SpendingReportModel.Store.TransactionCategories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Cars" EntityType="SpendingReportModel.Store.Cars" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FuelStations" EntityType="SpendingReportModel.Store.FuelStations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Trips" EntityType="SpendingReportModel.Store.Trips" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Fuelings" EntityType="SpendingReportModel.Store.Fuelings" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Purchases" EntityType="SpendingReportModel.Store.Purchases" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TankStatuses" EntityType="SpendingReportModel.Store.TankStatuses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EntryTansactionCategory" EntityType="SpendingReportModel.Store.EntryTansactionCategory" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_dbo_AmountInfos_dbo_Types_TypeId" Association="SpendingReportModel.Store.FK_dbo_AmountInfos_dbo_Types_TypeId">
+      <End Role="Types" EntitySet="Types" />
+      <End Role="AmountInfos" EntitySet="AmountInfos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Entries_dbo_AmountInfos_AmountInfoId" Association="SpendingReportModel.Store.FK_dbo_Entries_dbo_AmountInfos_AmountInfoId">
+      <End Role="AmountInfos" EntitySet="AmountInfos" />
+      <End Role="Entries" EntitySet="Entries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Entries_AmountInfos" Association="SpendingReportModel.Store.FK_Entries_AmountInfos">
+      <End Role="AmountInfos" EntitySet="AmountInfos" />
+      <End Role="Entries" EntitySet="Entries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_BankAccounts_dbo_Banks_BankId" Association="SpendingReportModel.Store.FK_dbo_BankAccounts_dbo_Banks_BankId">
+      <End Role="Banks" EntitySet="Banks" />
+      <End Role="BankAccounts" EntitySet="BankAccounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_BankAccounts_dbo_Users_UserId" Association="SpendingReportModel.Store.FK_dbo_BankAccounts_dbo_Users_UserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="BankAccounts" EntitySet="BankAccounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Entries_dbo_BankAccounts_BankAccountID" Association="SpendingReportModel.Store.FK_dbo_Entries_dbo_BankAccounts_BankAccountID">
+      <End Role="BankAccounts" EntitySet="BankAccounts" />
+      <End Role="Entries" EntitySet="Entries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Entries_dbo_BankAccounts_DestinationAccountId" Association="SpendingReportModel.Store.FK_dbo_Entries_dbo_BankAccounts_DestinationAccountId">
+      <End Role="BankAccounts" EntitySet="BankAccounts" />
+      <End Role="Entries" EntitySet="Entries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Entries_dbo_PaymentTypes_PaymentTypeId" Association="SpendingReportModel.Store.FK_dbo_Entries_dbo_PaymentTypes_PaymentTypeId">
+      <End Role="PaymentTypes" EntitySet="PaymentTypes" />
+      <End Role="Entries" EntitySet="Entries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntryTansactionCategory_Entry" Association="SpendingReportModel.Store.FK_EntryTansactionCategory_Entry">
+      <End Role="Entry" EntitySet="Entries" />
+      <End Role="EntryTansactionCategory" EntitySet="EntryTansactionCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntryTansactionCategory_TransactionCategory" Association="SpendingReportModel.Store.FK_EntryTansactionCategory_TransactionCategory">
+      <End Role="TransactionCategory" EntitySet="TransactionCategories" />
+      <End Role="EntryTansactionCategory" EntitySet="EntryTansactionCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CategoryNames_TransactionDescription" Association="SpendingReportModel.Store.FK_CategoryNames_TransactionDescription">
+      <End Role="TransactionCategory" EntitySet="TransactionCategories" />
+      <End Role="CategoryName" EntitySet="CategoryNames" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cars_Users" Association="SpendingReportModel.Store.FK_Cars_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Car" EntitySet="Cars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Trips_Cars" Association="SpendingReportModel.Store.FK_Trips_Cars">
+      <End Role="Car" EntitySet="Cars" />
+      <End Role="Trip" EntitySet="Trips" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Purchases_Cars" Association="SpendingReportModel.Store.FK_Purchases_Cars">
+      <End Role="Car" EntitySet="Cars" />
+      <End Role="Purchase" EntitySet="Purchases" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Fuelings_ToTable" Association="SpendingReportModel.Store.FK_Fuelings_ToTable">
+      <End Role="Purchase" EntitySet="Purchases" />
+      <End Role="Fueling" EntitySet="Fuelings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Fuelings_FuelStations" Association="SpendingReportModel.Store.FK_Fuelings_FuelStations">
+      <End Role="FuelStation" EntitySet="FuelStations" />
+      <End Role="Purchase" EntitySet="Purchases" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TankStatuses_Cars" Association="SpendingReportModel.Store.FK_TankStatuses_Cars">
+      <End Role="Car" EntitySet="Cars" />
+      <End Role="TankStatus" EntitySet="TankStatuses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Fuelings_TankStatuses" Association="SpendingReportModel.Store.FK_Fuelings_TankStatuses">
+      <End Role="TankStatus" EntitySet="TankStatuses" />
+      <End Role="Fueling" EntitySet="Fuelings" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" Nullable="false" MaxLength="150" />
+    <Property Name="ContextKey" Type="nvarchar" Nullable="false" MaxLength="300" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" Nullable="false" MaxLength="32" />
+  </EntityType>
+  <EntityType Name="AmountInfos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Nullable="false" Precision="8" Scale="2" />
+    <Property Name="Currency" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TypeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BankAccounts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AccountNumber" Type="bigint" Nullable="true" />
+    <Property Name="IBAN" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="BankId" Type="int" Nullable="true" />
+    <Property Name="UserId" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Banks">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BankCode" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Entries">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="DatePosted" Type="datetime" Nullable="true" />
+    <Property Name="Memo" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="DateAvailable" Type="datetime" Nullable="true" />
+    <Property Name="VariableSymbol" Type="bigint" Nullable="true" />
+    <Property Name="ConstantSymbol" Type="smallint" Nullable="true" />
+    <Property Name="SpecificSymbol" Type="bigint" Nullable="true" />
+    <Property Name="Reference" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PaymentTypeId" Type="int" Nullable="true" />
+    <Property Name="BankId" Type="int" Nullable="false" />
+    <Property Name="DateAdded" Type="datetime" Nullable="false" />
+    <Property Name="AmountInfoId" Type="int" Nullable="false" />
+    <Property Name="SourceAccountId" Type="int" Nullable="true" />
+    <Property Name="DestinationAccountId" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="PaymentTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Types">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CategoryNames">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TransactionDescriptionId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TransactionCategories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Cars">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="TankSize" Type="int" Nullable="true" />
+    <Property Name="Color" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Description" Type="nchar" Nullable="true" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="FuelStations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Trips">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Distance" Type="int" Nullable="false" />
+    <Property Name="From" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="To" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="CarId" Type="int" Nullable="false" />
+    <Property Name="DistanceStart" Type="int" Nullable="true" />
+    <Property Name="DistanceEnd" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Fuelings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Value" Type="float" Nullable="false" />
+    <Property Name="FuelPrice" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Purchases">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="CarId" Type="int" Nullable="true" />
+    <Property Name="Description" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="StationId" Type="int" Nullable="true" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TankStatuses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="TotalDistance" Type="int" Nullable="false" />
+    <Property Name="Empty" Type="bit" Nullable="false" />
+    <Property Name="CarId" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Percentage" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="EntryTansactionCategory">
+    <Key>
+      <PropertyRef Name="Entries_ID" />
+      <PropertyRef Name="TransactionCategories_Id" />
+    </Key>
+    <Property Name="Entries_ID" Type="int" Nullable="false" />
+    <Property Name="TransactionCategories_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_dbo_AmountInfos_dbo_Types_TypeId">
+    <End Role="Types" Type="SpendingReportModel.Store.Types" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AmountInfos" Type="SpendingReportModel.Store.AmountInfos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Types">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AmountInfos">
+        <PropertyRef Name="TypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Entries_dbo_AmountInfos_AmountInfoId">
+    <End Role="AmountInfos" Type="SpendingReportModel.Store.AmountInfos" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Entries" Type="SpendingReportModel.Store.Entries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AmountInfos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Entries">
+        <PropertyRef Name="AmountInfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Entries_AmountInfos">
+    <End Role="AmountInfos" Type="SpendingReportModel.Store.AmountInfos" Multiplicity="1" />
+    <End Role="Entries" Type="SpendingReportModel.Store.Entries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AmountInfos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Entries">
+        <PropertyRef Name="AmountInfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_BankAccounts_dbo_Banks_BankId">
+    <End Role="Banks" Type="SpendingReportModel.Store.Banks" Multiplicity="0..1" />
+    <End Role="BankAccounts" Type="SpendingReportModel.Store.BankAccounts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Banks">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BankAccounts">
+        <PropertyRef Name="BankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_BankAccounts_dbo_Users_UserId">
+    <End Role="Users" Type="SpendingReportModel.Store.Users" Multiplicity="0..1" />
+    <End Role="BankAccounts" Type="SpendingReportModel.Store.BankAccounts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BankAccounts">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Entries_dbo_BankAccounts_BankAccountID">
+    <End Role="BankAccounts" Type="SpendingReportModel.Store.BankAccounts" Multiplicity="0..1" />
+    <End Role="Entries" Type="SpendingReportModel.Store.Entries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BankAccounts">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Entries">
+        <PropertyRef Name="SourceAccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Entries_dbo_BankAccounts_DestinationAccountId">
+    <End Role="BankAccounts" Type="SpendingReportModel.Store.BankAccounts" Multiplicity="0..1" />
+    <End Role="Entries" Type="SpendingReportModel.Store.Entries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BankAccounts">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Entries">
+        <PropertyRef Name="DestinationAccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Entries_dbo_PaymentTypes_PaymentTypeId">
+    <End Role="PaymentTypes" Type="SpendingReportModel.Store.PaymentTypes" Multiplicity="0..1" />
+    <End Role="Entries" Type="SpendingReportModel.Store.Entries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Entries">
+        <PropertyRef Name="PaymentTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CategoryNames_TransactionDescription">
+    <End Role="TransactionCategory" Type="SpendingReportModel.Store.TransactionCategories" Multiplicity="1" />
+    <End Role="CategoryName" Type="SpendingReportModel.Store.CategoryNames" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TransactionCategory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CategoryName">
+        <PropertyRef Name="TransactionDescriptionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cars_Users">
+    <End Role="User" Type="SpendingReportModel.Store.Users" Multiplicity="1" />
+    <End Role="Car" Type="SpendingReportModel.Store.Cars" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Car">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Trips_Cars">
+    <End Role="Car" Type="SpendingReportModel.Store.Cars" Multiplicity="1" />
+    <End Role="Trip" Type="SpendingReportModel.Store.Trips" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Car">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Trip">
+        <PropertyRef Name="CarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Purchases_Cars">
+    <End Role="Car" Type="SpendingReportModel.Store.Cars" Multiplicity="0..1" />
+    <End Role="Purchase" Type="SpendingReportModel.Store.Purchases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Car">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Purchase">
+        <PropertyRef Name="CarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Fuelings_ToTable">
+    <End Role="Purchase" Type="SpendingReportModel.Store.Purchases" Multiplicity="1" />
+    <End Role="Fueling" Type="SpendingReportModel.Store.Fuelings" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Purchase">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Fueling">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Fuelings_FuelStations">
+    <End Role="FuelStation" Type="SpendingReportModel.Store.FuelStations" Multiplicity="0..1" />
+    <End Role="Purchase" Type="SpendingReportModel.Store.Purchases" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FuelStation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Purchase">
+        <PropertyRef Name="StationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TankStatuses_Cars">
+    <End Role="Car" Type="SpendingReportModel.Store.Cars" Multiplicity="1" />
+    <End Role="TankStatus" Type="SpendingReportModel.Store.TankStatuses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Car">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TankStatus">
+        <PropertyRef Name="CarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Fuelings_TankStatuses">
+    <End Role="TankStatus" Type="SpendingReportModel.Store.TankStatuses" Multiplicity="1" />
+    <End Role="Fueling" Type="SpendingReportModel.Store.Fuelings" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TankStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Fueling">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntryTansactionCategory_Entry">
+    <End Role="Entry" Type="SpendingReportModel.Store.Entries" Multiplicity="1" />
+    <End Role="EntryTansactionCategory" Type="SpendingReportModel.Store.EntryTansactionCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entry">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EntryTansactionCategory">
+        <PropertyRef Name="Entries_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntryTansactionCategory_TransactionCategory">
+    <End Role="EntryTansactionCategory" Type="SpendingReportModel.Store.EntryTansactionCategory" Multiplicity="*" />
+    <End Role="TransactionCategory" Type="SpendingReportModel.Store.TransactionCategories" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="TransactionCategory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EntryTansactionCategory">
+        <PropertyRef Name="TransactionCategories_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SpendingReportModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -580,6 +581,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="BankAccounts" Relationship="Self.FK_dbo_BankAccounts_dbo_Users_UserId" FromRole="Users" ToRole="BankAccounts" />
           <NavigationProperty Name="Cars" Relationship="SpendingReportModel.FK_Cars_Users" FromRole="User" ToRole="Car" />
+          <Property Name="Name" Type="String" Nullable="false" />
         </EntityType>
         <Association Name="FK_dbo_AmountInfos_dbo_Types_TypeId">
           <End Role="Types" Type="Self.Type" Multiplicity="1">
@@ -966,191 +968,191 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SpendingReportModelStoreContainer" CdmEntityContainer="SpendingReportEntities">
-          <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="SpendingReportModel.C__MigrationHistory">
-              <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AmountInfos">
-            <EntityTypeMapping TypeName="SpendingReportModel.AmountInfo">
-              <MappingFragment StoreEntitySet="AmountInfos">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Currency" ColumnName="Currency" />
-                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BankAccounts">
-            <EntityTypeMapping TypeName="SpendingReportModel.BankAccount">
-              <MappingFragment StoreEntitySet="BankAccounts">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
-                <ScalarProperty Name="IBAN" ColumnName="IBAN" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="BankId" ColumnName="BankId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Banks">
-            <EntityTypeMapping TypeName="SpendingReportModel.Bank">
-              <MappingFragment StoreEntitySet="Banks">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="BankCode" ColumnName="BankCode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Entries">
-            <EntityTypeMapping TypeName="SpendingReportModel.Entry">
-              <MappingFragment StoreEntitySet="Entries">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="DatePosted" ColumnName="DatePosted" />
-                <ScalarProperty Name="Memo" ColumnName="Memo" />
-                <ScalarProperty Name="DateAvailable" ColumnName="DateAvailable" />
-                <ScalarProperty Name="VariableSymbol" ColumnName="VariableSymbol" />
-                <ScalarProperty Name="ConstantSymbol" ColumnName="ConstantSymbol" />
-                <ScalarProperty Name="SpecificSymbol" ColumnName="SpecificSymbol" />
-                <ScalarProperty Name="Reference" ColumnName="Reference" />
-                <ScalarProperty Name="PaymentTypeId" ColumnName="PaymentTypeId" />
-                <ScalarProperty Name="BankId" ColumnName="BankId" />
-                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
-                <ScalarProperty Name="AmountInfoId" ColumnName="AmountInfoId" />
-                <ScalarProperty Name="SourceAccountId" ColumnName="SourceAccountId" />
-                <ScalarProperty Name="DestinationAccountId" ColumnName="DestinationAccountId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PaymentTypes">
-            <EntityTypeMapping TypeName="SpendingReportModel.PaymentType">
-              <MappingFragment StoreEntitySet="PaymentTypes">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Types">
-            <EntityTypeMapping TypeName="SpendingReportModel.Type">
-              <MappingFragment StoreEntitySet="Types">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="SpendingReportModel.User">
-              <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CategoryNames">
-            <EntityTypeMapping TypeName="SpendingReportModel.CategoryName">
-              <MappingFragment StoreEntitySet="CategoryNames">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="TransactionDescriptionId" ColumnName="TransactionDescriptionId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TransactionCategories">
-            <EntityTypeMapping TypeName="SpendingReportModel.TransactionCategory">
-              <MappingFragment StoreEntitySet="TransactionCategory">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="EntryTansactionCategory" TypeName="SpendingReportModel.EntryTansactionCategory" StoreEntitySet="EntryTansactionCategory">
-            <EndProperty Name="TransactionCategory">
-              <ScalarProperty Name="Id" ColumnName="TransactionCategoryID" />
-            </EndProperty>
-            <EndProperty Name="Entry">
-              <ScalarProperty Name="ID" ColumnName="EntryID" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <EntitySetMapping Name="Cars">
-            <EntityTypeMapping TypeName="SpendingReportModel.Car">
-              <MappingFragment StoreEntitySet="Cars">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Color" ColumnName="Color" />
-                <ScalarProperty Name="TankSize" ColumnName="TankSize" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FuelStations">
-            <EntityTypeMapping TypeName="SpendingReportModel.FuelStation">
-              <MappingFragment StoreEntitySet="FuelStations">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Trips">
-            <EntityTypeMapping TypeName="SpendingReportModel.Trip">
-              <MappingFragment StoreEntitySet="Trips">
-                <ScalarProperty Name="DistanceEnd" ColumnName="DistanceEnd" />
-                <ScalarProperty Name="DistanceStart" ColumnName="DistanceStart" />
-                <ScalarProperty Name="CarId" ColumnName="CarId" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="To" ColumnName="To" />
-                <ScalarProperty Name="From" ColumnName="From" />
-                <ScalarProperty Name="Distance" ColumnName="Distance" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Fuelings">
-            <EntityTypeMapping TypeName="SpendingReportModel.Fueling">
-              <MappingFragment StoreEntitySet="Fuelings">
-                <ScalarProperty Name="FuelPrice" ColumnName="FuelPrice" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Purchases">
-            <EntityTypeMapping TypeName="SpendingReportModel.Purchase">
-              <MappingFragment StoreEntitySet="Purchases">
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="StationId" ColumnName="StationId" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="CarId" ColumnName="CarId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TankStatuses">
-            <EntityTypeMapping TypeName="SpendingReportModel.TankStatus">
-              <MappingFragment StoreEntitySet="TankStatuses">
-                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="CarId" ColumnName="CarId" />
-                <ScalarProperty Name="Empty" ColumnName="Empty" />
-                <ScalarProperty Name="TotalDistance" ColumnName="TotalDistance" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SpendingReportModelStoreContainer" CdmEntityContainer="SpendingReportEntities">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="IsTypeOf(SpendingReportModel.C__MigrationHistory)">
+        <MappingFragment StoreEntitySet="C__MigrationHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AmountInfos">
+      <EntityTypeMapping TypeName="IsTypeOf(SpendingReportModel.AmountInfo)">
+        <MappingFragment StoreEntitySet="AmountInfos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Currency" ColumnName="Currency" />
+          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BankAccounts">
+      <EntityTypeMapping TypeName="IsTypeOf(SpendingReportModel.BankAccount)">
+        <MappingFragment StoreEntitySet="BankAccounts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+          <ScalarProperty Name="IBAN" ColumnName="IBAN" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="BankId" ColumnName="BankId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Banks">
+      <EntityTypeMapping TypeName="IsTypeOf(SpendingReportModel.Bank)">
+        <MappingFragment StoreEntitySet="Banks">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="BankCode" ColumnName="BankCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Entries">
+      <EntityTypeMapping TypeName="IsTypeOf(SpendingReportModel.Entry)">
+        <MappingFragment StoreEntitySet="Entries">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DatePosted" ColumnName="DatePosted" />
+          <ScalarProperty Name="Memo" ColumnName="Memo" />
+          <ScalarProperty Name="DateAvailable" ColumnName="DateAvailable" />
+          <ScalarProperty Name="VariableSymbol" ColumnName="VariableSymbol" />
+          <ScalarProperty Name="ConstantSymbol" ColumnName="ConstantSymbol" />
+          <ScalarProperty Name="SpecificSymbol" ColumnName="SpecificSymbol" />
+          <ScalarProperty Name="Reference" ColumnName="Reference" />
+          <ScalarProperty Name="PaymentTypeId" ColumnName="PaymentTypeId" />
+          <ScalarProperty Name="BankId" ColumnName="BankId" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="AmountInfoId" ColumnName="AmountInfoId" />
+          <ScalarProperty Name="SourceAccountId" ColumnName="SourceAccountId" />
+          <ScalarProperty Name="DestinationAccountId" ColumnName="DestinationAccountId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(SpendingReportModel.PaymentType)">
+        <MappingFragment StoreEntitySet="PaymentTypes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Types">
+      <EntityTypeMapping TypeName="IsTypeOf(SpendingReportModel.Type)">
+        <MappingFragment StoreEntitySet="Types">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(SpendingReportModel.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CategoryNames">
+      <EntityTypeMapping TypeName="IsTypeOf(SpendingReportModel.CategoryName)">
+        <MappingFragment StoreEntitySet="CategoryNames">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TransactionDescriptionId" ColumnName="TransactionDescriptionId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransactionCategories">
+      <EntityTypeMapping TypeName="IsTypeOf(SpendingReportModel.TransactionCategory)">
+        <MappingFragment StoreEntitySet="TransactionCategories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cars">
+      <EntityTypeMapping TypeName="IsTypeOf(SpendingReportModel.Car)">
+        <MappingFragment StoreEntitySet="Cars">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="TankSize" ColumnName="TankSize" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FuelStations">
+      <EntityTypeMapping TypeName="IsTypeOf(SpendingReportModel.FuelStation)">
+        <MappingFragment StoreEntitySet="FuelStations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Trips">
+      <EntityTypeMapping TypeName="IsTypeOf(SpendingReportModel.Trip)">
+        <MappingFragment StoreEntitySet="Trips">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Distance" ColumnName="Distance" />
+          <ScalarProperty Name="From" ColumnName="From" />
+          <ScalarProperty Name="To" ColumnName="To" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+          <ScalarProperty Name="DistanceStart" ColumnName="DistanceStart" />
+          <ScalarProperty Name="DistanceEnd" ColumnName="DistanceEnd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fuelings">
+      <EntityTypeMapping TypeName="IsTypeOf(SpendingReportModel.Fueling)">
+        <MappingFragment StoreEntitySet="Fuelings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="FuelPrice" ColumnName="FuelPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Purchases">
+      <EntityTypeMapping TypeName="IsTypeOf(SpendingReportModel.Purchase)">
+        <MappingFragment StoreEntitySet="Purchases">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="StationId" ColumnName="StationId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TankStatuses">
+      <EntityTypeMapping TypeName="IsTypeOf(SpendingReportModel.TankStatus)">
+        <MappingFragment StoreEntitySet="TankStatuses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TotalDistance" ColumnName="TotalDistance" />
+          <ScalarProperty Name="Empty" ColumnName="Empty" />
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="EntryTansactionCategory" TypeName="SpendingReportModel.EntryTansactionCategory" StoreEntitySet="EntryTansactionCategory">
+      <EndProperty Name="Entry">
+        <ScalarProperty Name="ID" ColumnName="Entries_ID" />
+      </EndProperty>
+      <EndProperty Name="TransactionCategory">
+        <ScalarProperty Name="Id" ColumnName="TransactionCategories_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -1164,7 +1166,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

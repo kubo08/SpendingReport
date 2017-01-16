@@ -135,6 +135,7 @@
       <DependentUpon>SpendingContext.edmx</DependentUpon>
       <LastGenOutput>SpendingContext.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="SpendingContext.edmx.sql" />
     <Content Include="SpendingContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SpendingContext.edmx</DependentUpon>

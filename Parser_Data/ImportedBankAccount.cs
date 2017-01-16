@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace parser.Data
 {
@@ -12,14 +9,8 @@ namespace parser.Data
             return new ImportedBankAccount(accountID, iBan, bankID);
         }
 
-        List<ImportedPayment> _payments = new List<ImportedPayment>();
 
-
-        public List<ImportedPayment> Payments
-        {
-            get { return _payments; }
-            set { _payments = value; }
-        }
+        public List<ImportedPayment> Payments { get; set; } = new List<ImportedPayment>();
 
 
         private ImportedBankAccount(ulong? accountID, string iBan, ushort? bankID)

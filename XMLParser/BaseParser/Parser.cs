@@ -2,6 +2,7 @@
 using System.IO;
 using parser;
 using parser.Data;
+using Parser.CSV_Parser;
 
 
 namespace Parser.BaseParser
@@ -19,7 +20,7 @@ namespace Parser.BaseParser
 
         private ParserBase GetParser()
         {
-            parser.XMLParser parser;
+            ParserBase parser;
             var file =
                 new System.IO.StreamReader(stream);
             var line = file.ReadLine();
@@ -28,10 +29,13 @@ namespace Parser.BaseParser
             if (line.Contains("xml"))
             {
                 parser = new parser.XMLParser(stream);
-                return parser;
             }
             //csv
-            throw new NotSupportedException();
+            else
+            {
+                parser = new CSVParser(stream);
+            }
+            return parser;
         }
 
         public Import GetData()
