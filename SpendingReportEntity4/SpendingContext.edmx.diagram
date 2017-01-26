@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c354d20ae49a4337ac96caa32a65fb3d" Name="Diagram1">
+      <Diagram DiagramId="c354d20ae49a4337ac96caa32a65fb3d" Name="Diagram1" ZoomLevel="98">
         <EntityTypeShape EntityType="SpendingReportModel.C__MigrationHistory" Width="1.5" PointX="11.25" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SpendingReportModel.AmountInfo" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SpendingReportModel.BankAccount" Width="1.5" PointX="3.125" PointY="7.5" IsExpanded="true" />
@@ -38,6 +38,9 @@
         <EntityTypeShape EntityType="SpendingReportModel.TankStatus" Width="1.5" PointX="7.625" PointY="14.375" />
         <AssociationConnector Association="SpendingReportModel.FK_TankStatuses_Cars" />
         <AssociationConnector Association="SpendingReportModel.FK_Fuelings_TankStatuses" />
+        <EntityTypeShape EntityType="SpendingReportModel.Saving" Width="1.5" PointX="13.875" PointY="10.375" />
+        <EntityTypeShape EntityType="SpendingReportModel.SavingTransactions" Width="1.5" PointX="16.75" PointY="10.25" />
+        <AssociationConnector Association="SpendingReportModel.SavingSavingTransactions" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

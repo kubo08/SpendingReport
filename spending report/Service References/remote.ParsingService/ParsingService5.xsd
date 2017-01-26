@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/SpendingReportEntity4" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/SpendingReportEntity4" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfEntry">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Entry" nillable="true" type="tns:Entry" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEntry" nillable="true" type="tns:ArrayOfEntry" />
+  <xs:complexType name="Entry">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AmountInfo" nillable="true" type="tns:AmountInfo" />
+      <xs:element minOccurs="0" name="AmountInfo1" nillable="true" type="tns:AmountInfo" />
+      <xs:element minOccurs="0" name="AmountInfoId" type="xs:int" />
+      <xs:element minOccurs="0" name="BankId" type="xs:int" />
+      <xs:element minOccurs="0" name="ConstantSymbol" nillable="true" type="xs:short" />
+      <xs:element minOccurs="0" name="DateAdded" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DateAvailable" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DatePosted" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DestinationAccount" nillable="true" type="tns:BankAccount" />
+      <xs:element minOccurs="0" name="DestinationAccountId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Memo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PaymentType" nillable="true" type="tns:PaymentType" />
+      <xs:element minOccurs="0" name="PaymentTypeId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Reference" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SourceAccount" nillable="true" type="tns:BankAccount" />
+      <xs:element minOccurs="0" name="SourceAccountId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SpecificSymbol" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="TransactionCategories" nillable="true" type="tns:ArrayOfTransactionCategory" />
+      <xs:element minOccurs="0" name="VariableSymbol" nillable="true" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Entry" nillable="true" type="tns:Entry" />
+  <xs:complexType name="AmountInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Currency" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Entries" nillable="true" type="tns:ArrayOfEntry" />
+      <xs:element minOccurs="0" name="Entries1" nillable="true" type="tns:ArrayOfEntry" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="tns:Type" />
+      <xs:element minOccurs="0" name="TypeId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AmountInfo" nillable="true" type="tns:AmountInfo" />
+  <xs:complexType name="Type">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AmountInfos" nillable="true" type="tns:ArrayOfAmountInfo" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="TypeName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Type" nillable="true" type="tns:Type" />
+  <xs:complexType name="ArrayOfAmountInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AmountInfo" nillable="true" type="tns:AmountInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAmountInfo" nillable="true" type="tns:ArrayOfAmountInfo" />
+  <xs:complexType name="BankAccount">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountNumber" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="Bank" nillable="true" type="tns:Bank" />
+      <xs:element minOccurs="0" name="BankId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Entries" nillable="true" type="tns:ArrayOfEntry" />
+      <xs:element minOccurs="0" name="Entries1" nillable="true" type="tns:ArrayOfEntry" />
+      <xs:element minOccurs="0" name="IBAN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="UserId" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BankAccount" nillable="true" type="tns:BankAccount" />
+  <xs:complexType name="Bank">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BankAccounts" nillable="true" type="tns:ArrayOfBankAccount" />
+      <xs:element minOccurs="0" name="BankCode" type="xs:short" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Bank" nillable="true" type="tns:Bank" />
+  <xs:complexType name="ArrayOfBankAccount">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BankAccount" nillable="true" type="tns:BankAccount" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBankAccount" nillable="true" type="tns:ArrayOfBankAccount" />
+  <xs:complexType name="User">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BankAccounts" nillable="true" type="tns:ArrayOfBankAccount" />
+      <xs:element minOccurs="0" name="Cars" nillable="true" type="tns:ArrayOfCar" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="User" nillable="true" type="tns:User" />
+  <xs:complexType name="ArrayOfCar">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Car" nillable="true" type="tns:Car" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCar" nillable="true" type="tns:ArrayOfCar" />
+  <xs:complexType name="Car">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Color" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Purchases" nillable="true" type="tns:ArrayOfPurchase" />
+      <xs:element minOccurs="0" name="TankSize" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TankStatuses" nillable="true" type="tns:ArrayOfTankStatus" />
+      <xs:element minOccurs="0" name="Trips" nillable="true" type="tns:ArrayOfTrip" />
+      <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="UserId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Car" nillable="true" type="tns:Car" />
+  <xs:complexType name="ArrayOfPurchase">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Purchase" nillable="true" type="tns:Purchase" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPurchase" nillable="true" type="tns:ArrayOfPurchase" />
+  <xs:complexType name="Purchase">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Car" nillable="true" type="tns:Car" />
+      <xs:element minOccurs="0" name="CarId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FuelStation" nillable="true" type="tns:FuelStation" />
+      <xs:element minOccurs="0" name="Fueling" nillable="true" type="tns:Fueling" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" type="xs:double" />
+      <xs:element minOccurs="0" name="StationId" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Purchase" nillable="true" type="tns:Purchase" />
+  <xs:complexType name="FuelStation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Purchases" nillable="true" type="tns:ArrayOfPurchase" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FuelStation" nillable="true" type="tns:FuelStation" />
+  <xs:complexType name="Fueling">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FuelPrice" type="xs:double" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Purchase" nillable="true" type="tns:Purchase" />
+      <xs:element minOccurs="0" name="TankStatus" nillable="true" type="tns:TankStatus" />
+      <xs:element minOccurs="0" name="Value" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Fueling" nillable="true" type="tns:Fueling" />
+  <xs:complexType name="TankStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Car" nillable="true" type="tns:Car" />
+      <xs:element minOccurs="0" name="CarId" type="xs:int" />
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Empty" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Fueling" nillable="true" type="tns:Fueling" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Percentage" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TotalDistance" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TankStatus" nillable="true" type="tns:TankStatus" />
+  <xs:complexType name="ArrayOfTankStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TankStatus" nillable="true" type="tns:TankStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTankStatus" nillable="true" type="tns:ArrayOfTankStatus" />
+  <xs:complexType name="ArrayOfTrip">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Trip" nillable="true" type="tns:Trip" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTrip" nillable="true" type="tns:ArrayOfTrip" />
+  <xs:complexType name="Trip">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Car" nillable="true" type="tns:Car" />
+      <xs:element minOccurs="0" name="CarId" type="xs:int" />
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Distance" type="xs:int" />
+      <xs:element minOccurs="0" name="DistanceEnd" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="DistanceStart" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="From" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="To" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Trip" nillable="true" type="tns:Trip" />
+  <xs:complexType name="PaymentType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Entries" nillable="true" type="tns:ArrayOfEntry" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PaymentType" nillable="true" type="tns:PaymentType" />
+  <xs:complexType name="ArrayOfTransactionCategory">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TransactionCategory" nillable="true" type="tns:TransactionCategory" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTransactionCategory" nillable="true" type="tns:ArrayOfTransactionCategory" />
+  <xs:complexType name="TransactionCategory">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CategoryNames" nillable="true" type="tns:ArrayOfCategoryName" />
+      <xs:element minOccurs="0" name="Entries" nillable="true" type="tns:ArrayOfEntry" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TransactionCategory" nillable="true" type="tns:TransactionCategory" />
+  <xs:complexType name="ArrayOfCategoryName">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CategoryName" nillable="true" type="tns:CategoryName" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCategoryName" nillable="true" type="tns:ArrayOfCategoryName" />
+  <xs:complexType name="CategoryName">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="TransactionCategory" nillable="true" type="tns:TransactionCategory" />
+      <xs:element minOccurs="0" name="TransactionDescriptionId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CategoryName" nillable="true" type="tns:CategoryName" />
+</xs:schema>

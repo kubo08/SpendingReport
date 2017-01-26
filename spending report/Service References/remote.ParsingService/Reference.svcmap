@@ -29,6 +29,7 @@
     <MetadataFile FileName="ParsingService.disco" MetadataType="Disco" ID="5806e037-3033-452e-9eb2-f79a6aba53da" SourceId="1" SourceUrl="http://localhost:64737/ParsingService.svc?disco" />
     <MetadataFile FileName="ParsingService2.xsd" MetadataType="Schema" ID="ee4242d5-b02c-4210-8e6e-c5598d778a31" SourceId="1" SourceUrl="http://localhost:64737/ParsingService.svc?xsd=xsd4" />
     <MetadataFile FileName="ParsingService.wsdl" MetadataType="Wsdl" ID="02136073-3a13-41b8-917e-7d912296fa84" SourceId="1" SourceUrl="http://localhost:64737/ParsingService.svc?wsdl" />
+    <MetadataFile FileName="ParsingService5.xsd" MetadataType="Schema" ID="45ecfafd-af68-43cf-9094-44a830692a69" SourceId="1" SourceUrl="http://localhost:64737/ParsingService.svc?xsd=xsd5" />
     <MetadataFile FileName="ParsingService3.xsd" MetadataType="Schema" ID="361e8bf2-0b37-450c-a5e4-3e19dcc0f6b3" SourceId="1" SourceUrl="http://localhost:64737/ParsingService.svc?xsd=xsd0" />
     <MetadataFile FileName="ParsingService4.xsd" MetadataType="Schema" ID="f866cd59-bd37-48a6-a8a5-ff68e013417b" SourceId="1" SourceUrl="http://localhost:64737/ParsingService.svc?xsd=xsd1" />
   </Metadata>

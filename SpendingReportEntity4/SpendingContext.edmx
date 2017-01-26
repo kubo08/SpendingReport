@@ -22,6 +22,8 @@
     <EntitySet Name="Fuelings" EntityType="SpendingReportModel.Store.Fuelings" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Purchases" EntityType="SpendingReportModel.Store.Purchases" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TankStatuses" EntityType="SpendingReportModel.Store.TankStatuses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Savings" EntityType="SpendingReportModel.Store.Savings" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SavingTransactions" EntityType="SpendingReportModel.Store.SavingTransactions" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="EntryTansactionCategory" EntityType="SpendingReportModel.Store.EntryTansactionCategory" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_dbo_AmountInfos_dbo_Types_TypeId" Association="SpendingReportModel.Store.FK_dbo_AmountInfos_dbo_Types_TypeId">
       <End Role="Types" EntitySet="Types" />
@@ -94,6 +96,10 @@
     <AssociationSet Name="FK_Fuelings_TankStatuses" Association="SpendingReportModel.Store.FK_Fuelings_TankStatuses">
       <End Role="TankStatus" EntitySet="TankStatuses" />
       <End Role="Fueling" EntitySet="Fuelings" />
+    </AssociationSet>
+    <AssociationSet Name="SavingSavingTransactions" Association="SpendingReportModel.Store.SavingSavingTransactions">
+      <End Role="Saving" EntitySet="Savings" />
+      <End Role="SavingTransactions" EntitySet="SavingTransactions" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="C__MigrationHistory">
@@ -253,6 +259,25 @@
     <Property Name="CarId" Type="int" Nullable="false" />
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="Percentage" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Savings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SavingTransactions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="HighestPrice" Type="float" Nullable="false" />
+    <Property Name="PayedPrice" Type="float" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Saving_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="EntryTansactionCategory">
     <Key>
@@ -455,6 +480,18 @@
       </Principal>
       <Dependent Role="Fueling">
         <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SavingSavingTransactions">
+    <End Role="Saving" Type="SpendingReportModel.Store.Savings" Multiplicity="1" />
+    <End Role="SavingTransactions" Type="SpendingReportModel.Store.SavingTransactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Saving">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SavingTransactions">
+        <PropertyRef Name="Saving_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -768,6 +805,12 @@
             <End Role="TankStatus" EntitySet="TankStatuses" />
             <End Role="Fueling" EntitySet="Fuelings" />
           </AssociationSet>
+          <EntitySet Name="Savings" EntityType="SpendingReportModel.Saving" />
+          <EntitySet Name="SavingTransactions" EntityType="SpendingReportModel.SavingTransactions" />
+          <AssociationSet Name="SavingSavingTransactions" Association="SpendingReportModel.SavingSavingTransactions">
+            <End Role="Saving" EntitySet="Savings" />
+            <End Role="SavingTransactions" EntitySet="SavingTransactions" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="CategoryName">
           <Key>
@@ -964,6 +1007,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Saving">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="SavingTransactions" Relationship="SpendingReportModel.SavingSavingTransactions" FromRole="Saving" ToRole="SavingTransactions" />
+        </EntityType>
+        <EntityType Name="SavingTransactions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="HighestPrice" Type="Double" Nullable="false" />
+          <Property Name="PayedPrice" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Saving" Relationship="SpendingReportModel.SavingSavingTransactions" FromRole="SavingTransactions" ToRole="Saving" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <Association Name="SavingSavingTransactions">
+          <End Type="SpendingReportModel.Saving" Role="Saving" Multiplicity="1" />
+          <End Type="SpendingReportModel.SavingTransactions" Role="SavingTransactions" Multiplicity="*" />
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1143,12 +1210,40 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Savings">
+      <EntityTypeMapping TypeName="IsTypeOf(SpendingReportModel.Saving)">
+        <MappingFragment StoreEntitySet="Savings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SavingTransactions">
+      <EntityTypeMapping TypeName="IsTypeOf(SpendingReportModel.SavingTransactions)">
+        <MappingFragment StoreEntitySet="SavingTransactions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="HighestPrice" ColumnName="HighestPrice" />
+          <ScalarProperty Name="PayedPrice" ColumnName="PayedPrice" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="EntryTansactionCategory" TypeName="SpendingReportModel.EntryTansactionCategory" StoreEntitySet="EntryTansactionCategory">
       <EndProperty Name="Entry">
         <ScalarProperty Name="ID" ColumnName="Entries_ID" />
       </EndProperty>
       <EndProperty Name="TransactionCategory">
         <ScalarProperty Name="Id" ColumnName="TransactionCategories_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="SavingSavingTransactions" TypeName="SpendingReportModel.SavingSavingTransactions" StoreEntitySet="SavingTransactions">
+      <EndProperty Name="Saving">
+        <ScalarProperty Name="Id" ColumnName="Saving_Id" />
+      </EndProperty>
+      <EndProperty Name="SavingTransactions">
+        <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

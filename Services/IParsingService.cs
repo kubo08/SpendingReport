@@ -7,6 +7,7 @@ using System.ServiceModel.Web;
 using System.Text;
 using SpendingReportEntity4;
 using parser.Data;
+using Parser.Data;
 
 namespace Services
 {
@@ -14,6 +15,9 @@ namespace Services
     [ServiceContract]
     public interface IParsingService
     {
+        [OperationContract]
+        IList<SavingTransaction> SaveSavingTransactions(IList<SavingTransaction> savingTransactions, string savingName);
+
         [OperationContract]
         Import SaveData(Import bankPayments, int UserId);
 

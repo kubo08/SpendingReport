@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/16/2017 02:23:34
+-- Date Created: 01/26/2017 00:13:25
 -- Generated from EDMX file: C:\Users\dev\Source\Repos\SpendingReport\SpendingReportEntity4\SpendingContext.edmx
 -- --------------------------------------------------
 
@@ -71,6 +71,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_Fuelings_TankStatuses]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Fuelings] DROP CONSTRAINT [FK_Fuelings_TankStatuses];
 GO
+IF OBJECT_ID(N'[dbo].[FK_SavingSavingTransactions]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SavingTransactions] DROP CONSTRAINT [FK_SavingSavingTransactions];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -123,6 +126,12 @@ IF OBJECT_ID(N'[dbo].[Purchases]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[TankStatuses]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TankStatuses];
+GO
+IF OBJECT_ID(N'[dbo].[Savings]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Savings];
+GO
+IF OBJECT_ID(N'[dbo].[SavingTransactions]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SavingTransactions];
 GO
 IF OBJECT_ID(N'[dbo].[EntryTansactionCategory]', 'U') IS NOT NULL
     DROP TABLE [dbo].[EntryTansactionCategory];
@@ -289,6 +298,25 @@ CREATE TABLE [dbo].[TankStatuses] (
 );
 GO
 
+-- Creating table 'Savings'
+CREATE TABLE [dbo].[Savings] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'SavingTransactions'
+CREATE TABLE [dbo].[SavingTransactions] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Amount] float  NOT NULL,
+    [Price] float  NOT NULL,
+    [HighestPrice] float  NOT NULL,
+    [PayedPrice] float  NOT NULL,
+    [Date] datetime  NOT NULL,
+    [Saving_Id] int  NOT NULL
+);
+GO
+
 -- Creating table 'EntryTansactionCategory'
 CREATE TABLE [dbo].[EntryTansactionCategory] (
     [Entries_ID] int  NOT NULL,
@@ -393,6 +421,18 @@ GO
 -- Creating primary key on [Id] in table 'TankStatuses'
 ALTER TABLE [dbo].[TankStatuses]
 ADD CONSTRAINT [PK_TankStatuses]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Savings'
+ALTER TABLE [dbo].[Savings]
+ADD CONSTRAINT [PK_Savings]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'SavingTransactions'
+ALTER TABLE [dbo].[SavingTransactions]
+ADD CONSTRAINT [PK_SavingTransactions]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -656,6 +696,21 @@ ADD CONSTRAINT [FK_Fuelings_TankStatuses]
     REFERENCES [dbo].[TankStatuses]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Saving_Id] in table 'SavingTransactions'
+ALTER TABLE [dbo].[SavingTransactions]
+ADD CONSTRAINT [FK_SavingSavingTransactions]
+    FOREIGN KEY ([Saving_Id])
+    REFERENCES [dbo].[Savings]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_SavingSavingTransactions'
+CREATE INDEX [IX_FK_SavingSavingTransactions]
+ON [dbo].[SavingTransactions]
+    ([Saving_Id]);
 GO
 
 -- --------------------------------------------------

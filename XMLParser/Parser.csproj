@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\TBConverter.cs" />
+    <Compile Include="CSV Parser\AtlantikParser.cs" />
     <Compile Include="CSV Parser\CSVParser.cs" />
     <Compile Include="CSV Parser\UniCreditParser.cs" />
     <Compile Include="Helpers\ParseHelpers.cs" />

@@ -7,6 +7,7 @@ using System.ServiceModel.Web;
 using System.Text;
 using SpendingReportEntity4;
 using parser.Data;
+using Parser.Data;
 using entity = SpendingReportEntity4;
 using data = parser.Data;
 
@@ -17,6 +18,41 @@ namespace Services
     // NOTE: In order to launch WCF Test Client for testing this service, please select ParsingService.svc or ParsingService.svc.cs at the Solution Explorer and start debugging.
     public class ParsingService : IParsingService
     {
+
+        public IList<SavingTransaction> SaveSavingTransactions(IList<SavingTransaction> savingTransactions, string savingName)
+        {
+            try
+            {
+                using (var context = new SpendingReportEntities())
+                {
+                    var saving = context.Savings.FirstOrDefault(a => a.Name == savingName);
+                    using (var dbTransaction = context.Database.BeginTransaction())
+                    {
+                        foreach (var transaction in savingTransactions)
+                        {
+                            var item = new SavingTransactions()
+                            {
+                                Amount = transaction.Amount,
+                                Date = transaction.Date,
+                                PayedPrice = transaction.PayedPrice,
+                                Price = transaction.Price
+                            };
+                            saving.SavingTransactions.Add(item);
+                            context.SaveChanges();
+                        }
+                        dbTransaction.Commit();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //todo:
+            }
+
+            return savingTransactions;
+        }
+
+
         public Import SaveData(Import bankPayments, int UserId)
         {
             Import ImportWithPocessedTransactions;

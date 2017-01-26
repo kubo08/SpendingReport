@@ -1061,7 +1061,13 @@ namespace SpendingReport.remote.ParsingService {
         private SpendingReport.remote.ParsingService.BankAccount[] BankAccountsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SpendingReport.remote.ParsingService.Car[] CarsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1087,6 +1093,19 @@ namespace SpendingReport.remote.ParsingService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public SpendingReport.remote.ParsingService.Car[] Cars {
+            get {
+                return this.CarsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CarsField, value) != true)) {
+                    this.CarsField = value;
+                    this.RaisePropertyChanged("Cars");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int Id {
             get {
                 return this.IdField;
@@ -1095,6 +1114,945 @@ namespace SpendingReport.remote.ParsingService {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Car", Namespace="http://schemas.datacontract.org/2004/07/SpendingReportEntity4")]
+    [System.SerializableAttribute()]
+    public partial class Car : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ColorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SpendingReport.remote.ParsingService.Purchase[] PurchasesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> TankSizeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SpendingReport.remote.ParsingService.TankStatus[] TankStatusesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SpendingReport.remote.ParsingService.Trip[] TripsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SpendingReport.remote.ParsingService.User UserField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UserIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Color {
+            get {
+                return this.ColorField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ColorField, value) != true)) {
+                    this.ColorField = value;
+                    this.RaisePropertyChanged("Color");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SpendingReport.remote.ParsingService.Purchase[] Purchases {
+            get {
+                return this.PurchasesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PurchasesField, value) != true)) {
+                    this.PurchasesField = value;
+                    this.RaisePropertyChanged("Purchases");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> TankSize {
+            get {
+                return this.TankSizeField;
+            }
+            set {
+                if ((this.TankSizeField.Equals(value) != true)) {
+                    this.TankSizeField = value;
+                    this.RaisePropertyChanged("TankSize");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SpendingReport.remote.ParsingService.TankStatus[] TankStatuses {
+            get {
+                return this.TankStatusesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TankStatusesField, value) != true)) {
+                    this.TankStatusesField = value;
+                    this.RaisePropertyChanged("TankStatuses");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SpendingReport.remote.ParsingService.Trip[] Trips {
+            get {
+                return this.TripsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TripsField, value) != true)) {
+                    this.TripsField = value;
+                    this.RaisePropertyChanged("Trips");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SpendingReport.remote.ParsingService.User User {
+            get {
+                return this.UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserField, value) != true)) {
+                    this.UserField = value;
+                    this.RaisePropertyChanged("User");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UserId {
+            get {
+                return this.UserIdField;
+            }
+            set {
+                if ((this.UserIdField.Equals(value) != true)) {
+                    this.UserIdField = value;
+                    this.RaisePropertyChanged("UserId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Purchase", Namespace="http://schemas.datacontract.org/2004/07/SpendingReportEntity4")]
+    [System.SerializableAttribute()]
+    public partial class Purchase : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SpendingReport.remote.ParsingService.Car CarField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> CarIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime DateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SpendingReport.remote.ParsingService.FuelStation FuelStationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SpendingReport.remote.ParsingService.Fueling FuelingField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double PriceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> StationIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SpendingReport.remote.ParsingService.Car Car {
+            get {
+                return this.CarField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CarField, value) != true)) {
+                    this.CarField = value;
+                    this.RaisePropertyChanged("Car");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> CarId {
+            get {
+                return this.CarIdField;
+            }
+            set {
+                if ((this.CarIdField.Equals(value) != true)) {
+                    this.CarIdField = value;
+                    this.RaisePropertyChanged("CarId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime Date {
+            get {
+                return this.DateField;
+            }
+            set {
+                if ((this.DateField.Equals(value) != true)) {
+                    this.DateField = value;
+                    this.RaisePropertyChanged("Date");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SpendingReport.remote.ParsingService.FuelStation FuelStation {
+            get {
+                return this.FuelStationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FuelStationField, value) != true)) {
+                    this.FuelStationField = value;
+                    this.RaisePropertyChanged("FuelStation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SpendingReport.remote.ParsingService.Fueling Fueling {
+            get {
+                return this.FuelingField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FuelingField, value) != true)) {
+                    this.FuelingField = value;
+                    this.RaisePropertyChanged("Fueling");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Price {
+            get {
+                return this.PriceField;
+            }
+            set {
+                if ((this.PriceField.Equals(value) != true)) {
+                    this.PriceField = value;
+                    this.RaisePropertyChanged("Price");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> StationId {
+            get {
+                return this.StationIdField;
+            }
+            set {
+                if ((this.StationIdField.Equals(value) != true)) {
+                    this.StationIdField = value;
+                    this.RaisePropertyChanged("StationId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TankStatus", Namespace="http://schemas.datacontract.org/2004/07/SpendingReportEntity4")]
+    [System.SerializableAttribute()]
+    public partial class TankStatus : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SpendingReport.remote.ParsingService.Car CarField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CarIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime DateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool EmptyField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SpendingReport.remote.ParsingService.Fueling FuelingField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> PercentageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int TotalDistanceField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SpendingReport.remote.ParsingService.Car Car {
+            get {
+                return this.CarField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CarField, value) != true)) {
+                    this.CarField = value;
+                    this.RaisePropertyChanged("Car");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CarId {
+            get {
+                return this.CarIdField;
+            }
+            set {
+                if ((this.CarIdField.Equals(value) != true)) {
+                    this.CarIdField = value;
+                    this.RaisePropertyChanged("CarId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime Date {
+            get {
+                return this.DateField;
+            }
+            set {
+                if ((this.DateField.Equals(value) != true)) {
+                    this.DateField = value;
+                    this.RaisePropertyChanged("Date");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Empty {
+            get {
+                return this.EmptyField;
+            }
+            set {
+                if ((this.EmptyField.Equals(value) != true)) {
+                    this.EmptyField = value;
+                    this.RaisePropertyChanged("Empty");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SpendingReport.remote.ParsingService.Fueling Fueling {
+            get {
+                return this.FuelingField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FuelingField, value) != true)) {
+                    this.FuelingField = value;
+                    this.RaisePropertyChanged("Fueling");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> Percentage {
+            get {
+                return this.PercentageField;
+            }
+            set {
+                if ((this.PercentageField.Equals(value) != true)) {
+                    this.PercentageField = value;
+                    this.RaisePropertyChanged("Percentage");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int TotalDistance {
+            get {
+                return this.TotalDistanceField;
+            }
+            set {
+                if ((this.TotalDistanceField.Equals(value) != true)) {
+                    this.TotalDistanceField = value;
+                    this.RaisePropertyChanged("TotalDistance");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Trip", Namespace="http://schemas.datacontract.org/2004/07/SpendingReportEntity4")]
+    [System.SerializableAttribute()]
+    public partial class Trip : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SpendingReport.remote.ParsingService.Car CarField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CarIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime DateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int DistanceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> DistanceEndField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> DistanceStartField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FromField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ToField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SpendingReport.remote.ParsingService.Car Car {
+            get {
+                return this.CarField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CarField, value) != true)) {
+                    this.CarField = value;
+                    this.RaisePropertyChanged("Car");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CarId {
+            get {
+                return this.CarIdField;
+            }
+            set {
+                if ((this.CarIdField.Equals(value) != true)) {
+                    this.CarIdField = value;
+                    this.RaisePropertyChanged("CarId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime Date {
+            get {
+                return this.DateField;
+            }
+            set {
+                if ((this.DateField.Equals(value) != true)) {
+                    this.DateField = value;
+                    this.RaisePropertyChanged("Date");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Distance {
+            get {
+                return this.DistanceField;
+            }
+            set {
+                if ((this.DistanceField.Equals(value) != true)) {
+                    this.DistanceField = value;
+                    this.RaisePropertyChanged("Distance");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> DistanceEnd {
+            get {
+                return this.DistanceEndField;
+            }
+            set {
+                if ((this.DistanceEndField.Equals(value) != true)) {
+                    this.DistanceEndField = value;
+                    this.RaisePropertyChanged("DistanceEnd");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> DistanceStart {
+            get {
+                return this.DistanceStartField;
+            }
+            set {
+                if ((this.DistanceStartField.Equals(value) != true)) {
+                    this.DistanceStartField = value;
+                    this.RaisePropertyChanged("DistanceStart");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string From {
+            get {
+                return this.FromField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FromField, value) != true)) {
+                    this.FromField = value;
+                    this.RaisePropertyChanged("From");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string To {
+            get {
+                return this.ToField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ToField, value) != true)) {
+                    this.ToField = value;
+                    this.RaisePropertyChanged("To");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FuelStation", Namespace="http://schemas.datacontract.org/2004/07/SpendingReportEntity4")]
+    [System.SerializableAttribute()]
+    public partial class FuelStation : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SpendingReport.remote.ParsingService.Purchase[] PurchasesField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Address {
+            get {
+                return this.AddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AddressField, value) != true)) {
+                    this.AddressField = value;
+                    this.RaisePropertyChanged("Address");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SpendingReport.remote.ParsingService.Purchase[] Purchases {
+            get {
+                return this.PurchasesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PurchasesField, value) != true)) {
+                    this.PurchasesField = value;
+                    this.RaisePropertyChanged("Purchases");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Fueling", Namespace="http://schemas.datacontract.org/2004/07/SpendingReportEntity4")]
+    [System.SerializableAttribute()]
+    public partial class Fueling : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double FuelPriceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SpendingReport.remote.ParsingService.Purchase PurchaseField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private SpendingReport.remote.ParsingService.TankStatus TankStatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double ValueField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double FuelPrice {
+            get {
+                return this.FuelPriceField;
+            }
+            set {
+                if ((this.FuelPriceField.Equals(value) != true)) {
+                    this.FuelPriceField = value;
+                    this.RaisePropertyChanged("FuelPrice");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SpendingReport.remote.ParsingService.Purchase Purchase {
+            get {
+                return this.PurchaseField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PurchaseField, value) != true)) {
+                    this.PurchaseField = value;
+                    this.RaisePropertyChanged("Purchase");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public SpendingReport.remote.ParsingService.TankStatus TankStatus {
+            get {
+                return this.TankStatusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TankStatusField, value) != true)) {
+                    this.TankStatusField = value;
+                    this.RaisePropertyChanged("TankStatus");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Value {
+            get {
+                return this.ValueField;
+            }
+            set {
+                if ((this.ValueField.Equals(value) != true)) {
+                    this.ValueField = value;
+                    this.RaisePropertyChanged("Value");
                 }
             }
         }
@@ -1206,6 +2164,12 @@ namespace SpendingReport.remote.ParsingService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="remote.ParsingService.IParsingService")]
     public interface IParsingService {
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IParsingService/SaveSavingTransactions", ReplyAction="http://tempuri.org/IParsingService/SaveSavingTransactionsResponse")]
+        Parser.Data.SavingTransaction[] SaveSavingTransactions(Parser.Data.SavingTransaction[] savingTransactions, string savingName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IParsingService/SaveSavingTransactions", ReplyAction="http://tempuri.org/IParsingService/SaveSavingTransactionsResponse")]
+        System.Threading.Tasks.Task<Parser.Data.SavingTransaction[]> SaveSavingTransactionsAsync(Parser.Data.SavingTransaction[] savingTransactions, string savingName);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IParsingService/SaveData", ReplyAction="http://tempuri.org/IParsingService/SaveDataResponse")]
         parser.Data.Import SaveData(parser.Data.Import bankPayments, int UserId);
         
@@ -1244,6 +2208,14 @@ namespace SpendingReport.remote.ParsingService {
         
         public ParsingServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        public Parser.Data.SavingTransaction[] SaveSavingTransactions(Parser.Data.SavingTransaction[] savingTransactions, string savingName) {
+            return base.Channel.SaveSavingTransactions(savingTransactions, savingName);
+        }
+        
+        public System.Threading.Tasks.Task<Parser.Data.SavingTransaction[]> SaveSavingTransactionsAsync(Parser.Data.SavingTransaction[] savingTransactions, string savingName) {
+            return base.Channel.SaveSavingTransactionsAsync(savingTransactions, savingName);
         }
         
         public parser.Data.Import SaveData(parser.Data.Import bankPayments, int UserId) {

@@ -84,6 +84,12 @@
     <Compile Include="Purchase.cs">
       <DependentUpon>SpendingContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Saving.cs">
+      <DependentUpon>SpendingContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SavingTransactions.cs">
+      <DependentUpon>SpendingContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="SpendingContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
