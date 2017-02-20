@@ -2164,11 +2164,29 @@ namespace SpendingReport.remote.ParsingService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="remote.ParsingService.IParsingService")]
     public interface IParsingService {
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IParsingService/Getsavings", ReplyAction="http://tempuri.org/IParsingService/GetsavingsResponse")]
+        Parser.Data.SavingList[] Getsavings();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IParsingService/Getsavings", ReplyAction="http://tempuri.org/IParsingService/GetsavingsResponse")]
+        System.Threading.Tasks.Task<Parser.Data.SavingList[]> GetsavingsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IParsingService/GetSavingDetail", ReplyAction="http://tempuri.org/IParsingService/GetSavingDetailResponse")]
+        Parser.Data.SavingDetail GetSavingDetail(int SavingId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IParsingService/GetSavingDetail", ReplyAction="http://tempuri.org/IParsingService/GetSavingDetailResponse")]
+        System.Threading.Tasks.Task<Parser.Data.SavingDetail> GetSavingDetailAsync(int SavingId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IParsingService/SaveSavingTransactions", ReplyAction="http://tempuri.org/IParsingService/SaveSavingTransactionsResponse")]
         Parser.Data.SavingTransaction[] SaveSavingTransactions(Parser.Data.SavingTransaction[] savingTransactions, string savingName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IParsingService/SaveSavingTransactions", ReplyAction="http://tempuri.org/IParsingService/SaveSavingTransactionsResponse")]
         System.Threading.Tasks.Task<Parser.Data.SavingTransaction[]> SaveSavingTransactionsAsync(Parser.Data.SavingTransaction[] savingTransactions, string savingName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IParsingService/FillHistoricalData", ReplyAction="http://tempuri.org/IParsingService/FillHistoricalDataResponse")]
+        bool FillHistoricalData(Parser.Data.ConseqData[] data, string savingName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IParsingService/FillHistoricalData", ReplyAction="http://tempuri.org/IParsingService/FillHistoricalDataResponse")]
+        System.Threading.Tasks.Task<bool> FillHistoricalDataAsync(Parser.Data.ConseqData[] data, string savingName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IParsingService/SaveData", ReplyAction="http://tempuri.org/IParsingService/SaveDataResponse")]
         parser.Data.Import SaveData(parser.Data.Import bankPayments, int UserId);
@@ -2210,12 +2228,36 @@ namespace SpendingReport.remote.ParsingService {
                 base(binding, remoteAddress) {
         }
         
+        public Parser.Data.SavingList[] Getsavings() {
+            return base.Channel.Getsavings();
+        }
+        
+        public System.Threading.Tasks.Task<Parser.Data.SavingList[]> GetsavingsAsync() {
+            return base.Channel.GetsavingsAsync();
+        }
+        
+        public Parser.Data.SavingDetail GetSavingDetail(int SavingId) {
+            return base.Channel.GetSavingDetail(SavingId);
+        }
+        
+        public System.Threading.Tasks.Task<Parser.Data.SavingDetail> GetSavingDetailAsync(int SavingId) {
+            return base.Channel.GetSavingDetailAsync(SavingId);
+        }
+        
         public Parser.Data.SavingTransaction[] SaveSavingTransactions(Parser.Data.SavingTransaction[] savingTransactions, string savingName) {
             return base.Channel.SaveSavingTransactions(savingTransactions, savingName);
         }
         
         public System.Threading.Tasks.Task<Parser.Data.SavingTransaction[]> SaveSavingTransactionsAsync(Parser.Data.SavingTransaction[] savingTransactions, string savingName) {
             return base.Channel.SaveSavingTransactionsAsync(savingTransactions, savingName);
+        }
+        
+        public bool FillHistoricalData(Parser.Data.ConseqData[] data, string savingName) {
+            return base.Channel.FillHistoricalData(data, savingName);
+        }
+        
+        public System.Threading.Tasks.Task<bool> FillHistoricalDataAsync(Parser.Data.ConseqData[] data, string savingName) {
+            return base.Channel.FillHistoricalDataAsync(data, savingName);
         }
         
         public parser.Data.Import SaveData(parser.Data.Import bankPayments, int UserId) {

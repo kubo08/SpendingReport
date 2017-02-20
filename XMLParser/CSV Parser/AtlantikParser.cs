@@ -28,38 +28,35 @@ namespace Parser.CSV_Parser
             var i = 0;
             while (!reader.EndOfStream)
             {
-                while (!reader.EndOfStream)
+                var line = reader.ReadLine();
+
+                if (i < 1)
                 {
-                    var line = reader.ReadLine();
+                    i++;
+                    continue;
+                }
 
-                    if (i < 1 )
-                    {
-                        i++;
-                        continue;
-                    }
+                var values = line.Split(';');
+                if (values[9] != "BNP PARIBAS Plan EASY FUTURE 2021" || values[13] != "N")
+                {
+                    continue;
+                }
 
-                    var values = line.Split(';');
-                    if (values[9] != "BNP PARIBAS Plan EASY FUTURE 2021" || values[13] != "N")
+                try
+                {
+                    var transaction = new SavingTransaction
                     {
-                        continue;
-                    }
+                        Price = double.Parse(values[19], CultureInfo.InvariantCulture),
+                        PayedPrice = Math.Abs(double.Parse(values[20], CultureInfo.InvariantCulture)),
+                        Date = DateTime.Parse(values[15]),
+                        Amount = double.Parse(values[18], CultureInfo.InvariantCulture)
+                    };
 
-                    try
-                    {
-                        var transaction = new SavingTransaction
-                        {
-                            Price=double.Parse(values[19], CultureInfo.InvariantCulture),
-                            PayedPrice=Math.Abs(double.Parse(values[20], CultureInfo.InvariantCulture)),
-                            Date= DateTime.Parse(values[15]),
-                            Amount=double.Parse(values[18], CultureInfo.InvariantCulture)
-                        };
-
-                        result.Add(transaction);
-                    }
-                    catch (Exception ex)
-                    {
-                        //todo:
-                    }
+                    result.Add(transaction);
+                }
+                catch (Exception ex)
+                {
+                    //todo:
                 }
             }
 

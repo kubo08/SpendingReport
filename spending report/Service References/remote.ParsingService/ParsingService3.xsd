@@ -3,10 +3,36 @@
   <xs:import schemaLocation="http://localhost:64737/ParsingService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Parser.Data" />
   <xs:import schemaLocation="http://localhost:64737/ParsingService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/parser.Data" />
   <xs:import schemaLocation="http://localhost:64737/ParsingService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/SpendingReportEntity4" />
+  <xs:element name="Getsavings">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetsavingsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Parser.Data" minOccurs="0" name="GetsavingsResult" nillable="true" type="q1:ArrayOfSavingList" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSavingDetail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SavingId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSavingDetailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Parser.Data" minOccurs="0" name="GetSavingDetailResult" nillable="true" type="q2:SavingDetail" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="SaveSavingTransactions">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Parser.Data" minOccurs="0" name="savingTransactions" nillable="true" type="q1:ArrayOfSavingTransaction" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Parser.Data" minOccurs="0" name="savingTransactions" nillable="true" type="q3:ArrayOfSavingTransaction" />
         <xs:element minOccurs="0" name="savingName" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -14,14 +40,29 @@
   <xs:element name="SaveSavingTransactionsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Parser.Data" minOccurs="0" name="SaveSavingTransactionsResult" nillable="true" type="q2:ArrayOfSavingTransaction" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Parser.Data" minOccurs="0" name="SaveSavingTransactionsResult" nillable="true" type="q4:ArrayOfSavingTransaction" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FillHistoricalData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Parser.Data" minOccurs="0" name="data" nillable="true" type="q5:ArrayOfConseqData" />
+        <xs:element minOccurs="0" name="savingName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FillHistoricalDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FillHistoricalDataResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SaveData">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/parser.Data" minOccurs="0" name="bankPayments" nillable="true" type="q3:Import" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/parser.Data" minOccurs="0" name="bankPayments" nillable="true" type="q6:Import" />
         <xs:element minOccurs="0" name="UserId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -29,7 +70,7 @@
   <xs:element name="SaveDataResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/parser.Data" minOccurs="0" name="SaveDataResult" nillable="true" type="q4:Import" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/parser.Data" minOccurs="0" name="SaveDataResult" nillable="true" type="q7:Import" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -41,7 +82,7 @@
   <xs:element name="GetTransactionsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/SpendingReportEntity4" minOccurs="0" name="GetTransactionsResult" nillable="true" type="q5:ArrayOfEntry" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/SpendingReportEntity4" minOccurs="0" name="GetTransactionsResult" nillable="true" type="q8:ArrayOfEntry" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

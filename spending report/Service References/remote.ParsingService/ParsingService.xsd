@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Parser.Data" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Parser.Data" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfSavingList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SavingList" nillable="true" type="tns:SavingList" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSavingList" nillable="true" type="tns:ArrayOfSavingList" />
+  <xs:complexType name="SavingList">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SavingList" nillable="true" type="tns:SavingList" />
+  <xs:complexType name="SavingDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AmountIn" type="xs:double" />
+      <xs:element minOccurs="0" name="MyPrice" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SavingDetail" nillable="true" type="tns:SavingDetail" />
   <xs:complexType name="ArrayOfSavingTransaction">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="SavingTransaction" nillable="true" type="tns:SavingTransaction" />
@@ -15,4 +35,17 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SavingTransaction" nillable="true" type="tns:SavingTransaction" />
+  <xs:complexType name="ArrayOfConseqData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ConseqData" nillable="true" type="tns:ConseqData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfConseqData" nillable="true" type="tns:ArrayOfConseqData" />
+  <xs:complexType name="ConseqData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Price" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ConseqData" nillable="true" type="tns:ConseqData" />
 </xs:schema>

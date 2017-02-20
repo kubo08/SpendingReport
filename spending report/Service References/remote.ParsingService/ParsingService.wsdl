@@ -10,11 +10,29 @@
       <xsd:import schemaLocation="http://localhost:64737/ParsingService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/SpendingReportEntity4" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IParsingService_Getsavings_InputMessage">
+    <wsdl:part name="parameters" element="tns:Getsavings" />
+  </wsdl:message>
+  <wsdl:message name="IParsingService_Getsavings_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetsavingsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IParsingService_GetSavingDetail_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSavingDetail" />
+  </wsdl:message>
+  <wsdl:message name="IParsingService_GetSavingDetail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSavingDetailResponse" />
+  </wsdl:message>
   <wsdl:message name="IParsingService_SaveSavingTransactions_InputMessage">
     <wsdl:part name="parameters" element="tns:SaveSavingTransactions" />
   </wsdl:message>
   <wsdl:message name="IParsingService_SaveSavingTransactions_OutputMessage">
     <wsdl:part name="parameters" element="tns:SaveSavingTransactionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IParsingService_FillHistoricalData_InputMessage">
+    <wsdl:part name="parameters" element="tns:FillHistoricalData" />
+  </wsdl:message>
+  <wsdl:message name="IParsingService_FillHistoricalData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FillHistoricalDataResponse" />
   </wsdl:message>
   <wsdl:message name="IParsingService_SaveData_InputMessage">
     <wsdl:part name="parameters" element="tns:SaveData" />
@@ -29,9 +47,21 @@
     <wsdl:part name="parameters" element="tns:GetTransactionsResponse" />
   </wsdl:message>
   <wsdl:portType name="IParsingService">
+    <wsdl:operation name="Getsavings">
+      <wsdl:input wsaw:Action="http://tempuri.org/IParsingService/Getsavings" message="tns:IParsingService_Getsavings_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IParsingService/GetsavingsResponse" message="tns:IParsingService_Getsavings_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSavingDetail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IParsingService/GetSavingDetail" message="tns:IParsingService_GetSavingDetail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IParsingService/GetSavingDetailResponse" message="tns:IParsingService_GetSavingDetail_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="SaveSavingTransactions">
       <wsdl:input wsaw:Action="http://tempuri.org/IParsingService/SaveSavingTransactions" message="tns:IParsingService_SaveSavingTransactions_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IParsingService/SaveSavingTransactionsResponse" message="tns:IParsingService_SaveSavingTransactions_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FillHistoricalData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IParsingService/FillHistoricalData" message="tns:IParsingService_FillHistoricalData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IParsingService/FillHistoricalDataResponse" message="tns:IParsingService_FillHistoricalData_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SaveData">
       <wsdl:input wsaw:Action="http://tempuri.org/IParsingService/SaveData" message="tns:IParsingService_SaveData_InputMessage" />
@@ -44,8 +74,35 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IParsingService" type="tns:IParsingService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Getsavings">
+      <soap:operation soapAction="http://tempuri.org/IParsingService/Getsavings" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSavingDetail">
+      <soap:operation soapAction="http://tempuri.org/IParsingService/GetSavingDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="SaveSavingTransactions">
       <soap:operation soapAction="http://tempuri.org/IParsingService/SaveSavingTransactions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FillHistoricalData">
+      <soap:operation soapAction="http://tempuri.org/IParsingService/FillHistoricalData" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -1,9 +1,15 @@
-﻿
+﻿@model List<SpendingReport.ViewModels.SavingListViewModel>
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/SpendingMaster.cshtml";
 }
 
 <h2>Index</h2>
+
+    @foreach (var saving in Model)
+    {
+        @Html.ActionLink(saving.Name, "Detail","Saving", new {savingId=saving.Id},null)
+    }
 
 @Html.Partial("Upload")

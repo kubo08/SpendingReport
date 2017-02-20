@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser", "XMLParser\Parser.csproj", "{449C6283-CDFF-4083-94B5-7B7B199D1EE6}"
 EndProject
@@ -25,6 +25,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpendingReportEntity4", "SpendingReportEntity4\SpendingReportEntity4.csproj", "{8CE47E95-F001-4CBC-82ED-C875695FBB4C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpendingReport.Service.Models", "SpendingReport.Models\SpendingReport.Service.Models.csproj", "{AD3B9B8E-7217-44AF-8657-58CDDAB915DC}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiService", "WebApiService\WebApiService.xproj", "{55904080-9963-4D9A-BE1D-5A804FB2DCCC}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Core.Entities", "Core.Entities\Core.Entities.xproj", "{63F0EABD-7F90-45B2-B365-E25801637948}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApiService.netFramework", "WebApiService.netFramework\WebApiService.netFramework.xproj", "{CF909667-1BF0-4FE3-A16A-D2DF0C6B436C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{7A39E2AE-1338-4A60-9B8A-5CD9D8BFF459}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +64,22 @@ Global
 		{AD3B9B8E-7217-44AF-8657-58CDDAB915DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD3B9B8E-7217-44AF-8657-58CDDAB915DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD3B9B8E-7217-44AF-8657-58CDDAB915DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55904080-9963-4D9A-BE1D-5A804FB2DCCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55904080-9963-4D9A-BE1D-5A804FB2DCCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55904080-9963-4D9A-BE1D-5A804FB2DCCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55904080-9963-4D9A-BE1D-5A804FB2DCCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63F0EABD-7F90-45B2-B365-E25801637948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63F0EABD-7F90-45B2-B365-E25801637948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63F0EABD-7F90-45B2-B365-E25801637948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63F0EABD-7F90-45B2-B365-E25801637948}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF909667-1BF0-4FE3-A16A-D2DF0C6B436C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF909667-1BF0-4FE3-A16A-D2DF0C6B436C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF909667-1BF0-4FE3-A16A-D2DF0C6B436C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF909667-1BF0-4FE3-A16A-D2DF0C6B436C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A39E2AE-1338-4A60-9B8A-5CD9D8BFF459}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A39E2AE-1338-4A60-9B8A-5CD9D8BFF459}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A39E2AE-1338-4A60-9B8A-5CD9D8BFF459}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A39E2AE-1338-4A60-9B8A-5CD9D8BFF459}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

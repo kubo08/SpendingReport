@@ -16,7 +16,16 @@ namespace Services
     public interface IParsingService
     {
         [OperationContract]
+        IList<SavingList> Getsavings();
+
+        [OperationContract]
+        SavingDetail GetSavingDetail(int SavingId);
+
+        [OperationContract]
         IList<SavingTransaction> SaveSavingTransactions(IList<SavingTransaction> savingTransactions, string savingName);
+
+        [OperationContract]
+        bool FillHistoricalData(IList<ConseqData> data, string savingName);
 
         [OperationContract]
         Import SaveData(Import bankPayments, int UserId);

@@ -52,8 +52,88 @@ namespace Services
             return savingTransactions;
         }
 
+        public bool FillHistoricalData(IList<ConseqData> data, string savingName)
+        {
+            try
+            {
+                data = data.OrderByDescending(a => a.Date).ToList();
+                using (var context = new SpendingReportEntities())
+                {
+                    var savingTransactions = context.Savings.FirstOrDefault(a => a.Name == savingName)?.SavingTransactions.OrderByDescending(a=>a.Date).ToList();
+                    var transactionPosition = 0;
+                    var highestPrice = 0.0;
+                    using (var dbTransaction = context.Database.BeginTransaction())
+                    {
+                        foreach (var histoicPrice in data)
+                        {
+                            if (highestPrice < histoicPrice.Price)
+                            {
+                                highestPrice = histoicPrice.Price;
+                            }
+                            if (savingTransactions.ElementAt(transactionPosition).Date.Date >= histoicPrice.Date.Date)
+                            {
+                                savingTransactions.ElementAt(transactionPosition).HighestPrice = highestPrice;
+                                transactionPosition++;
+                                if (savingTransactions.Count <= transactionPosition)
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                        context.SaveChanges();
+                        dbTransaction.Commit();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //todo:
+                return false;
+            }
+            return true;
+        }
 
-        public Import SaveData(Import bankPayments, int UserId)
+        public IList<SavingList> Getsavings()
+        {
+            var list = new List<SavingList>();
+            try
+            {
+                using (var context = new SpendingReportEntities())
+                {
+                    list = context.Savings.Select(a => new SavingList {Id = a.Id, Name = a.Name}).ToList();
+                }
+            }
+            catch(Exception ex)
+            {
+                //todo:
+            }
+            return list;
+        }
+
+        public SavingDetail GetSavingDetail(int SavingId)
+        {
+            var savingDetail = new SavingDetail();
+
+            try
+            {
+                using (var context = new SpendingReportEntities())
+                {
+                    var saving = context.Savings.FirstOrDefault(a => a.Id == SavingId);
+                    savingDetail.AmountIn = saving.SavingTransactions.Select(a => a.PayedPrice).Sum();
+                    savingDetail.MyPrice = saving.SavingTransactions.Select(a => a.Amount*a.HighestPrice).Sum();
+                }
+            }
+            catch (Exception ex)
+            {
+                //todo:
+            }
+
+            return savingDetail;
+        }
+
+
+        public
+            Import SaveData(Import bankPayments, int UserId)
         {
             Import ImportWithPocessedTransactions;
 
@@ -239,5 +319,7 @@ namespace Services
                 return context.Entries.ToList();
             }
         }
+
+        //public void Update
     }
 }

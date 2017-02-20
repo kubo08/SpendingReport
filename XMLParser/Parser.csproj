@@ -56,6 +56,7 @@
     <Compile Include="XMLParser\TBParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="xml objects\tatra banka.cs" />
+    <Compile Include="XSL Parser\ConseqParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Parser_Data\Parser.Data.csproj">
